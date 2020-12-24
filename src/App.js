@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 //import PrivateRoutes
 import PrivateRoute from 'Routes/PrivateRoute'
-// import PrivateMerchantRoute from 'Routes/PrivateMerchantRoute'
 
 //import pages admin
 import Login from 'pages/login'
