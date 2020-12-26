@@ -9,20 +9,19 @@ const instance = axios.create({
 const UNAUTHORIZED = 401;
 
 instance.interceptors.request.use(function (config) {
-    let token = (localStorage.getItem('PITO:token')) ? localStorage.getItem('PITO:token') : localStorage.getItem('PITO:merchant-token');
+    debugger;
+    let token = localStorage.getItem('PITO:token');
     config.headers.common["x-access-token"] = token
 
     return config;
 })
 instance.interceptors.response.use((response) => response.data, error => {
     const { status } = error.response;
+    debugger;
     if (status === UNAUTHORIZED) {
         if (localStorage.getItem('PITO:token')) {
             localStorage.removeItem('PITO:token')
-            window.location.href = "/login"
-        } else {
-            localStorage.removeItem('PITO:merchant-token')
-            window.location.href = "/merchant/login"
+            window.location.href = "/"
         }
     } else {
         MySwal.fire('Error!', error?.response?.data?.message, 'error');

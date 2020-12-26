@@ -52,7 +52,8 @@ const Login = ({ history }) => {
             password
         }).then((res) => {
             setAuthorizationHeader(res.token);
-            localStorage.setItem('PITO:token', JSON.stringify(res.token))
+            debugger;
+            localStorage.setItem('PITO:token', res.token)
             localStorage.setItem('PITO:img', res.image) 
             localStorage.setItem('PITO:name', res.name) 
             toast.success("you have successfully logged in !")
