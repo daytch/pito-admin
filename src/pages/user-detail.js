@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from 'components/SideNavbar'
 
 import userAvatarDummy from 'assets/images/user-avatar.jpg'
@@ -9,7 +9,9 @@ import { ReactComponent as AvatarDummy } from 'assets/images/avatar-dummy.svg'
 
 import Dropdown from 'components/forms/dropdown'
 import UserLivestreamVideos from 'components/view-video/user-livestream'
-const UserDetail = ({ match }) => {
+const UserDetail = ({ match,location }) => {
+    console.log(location.query)
+    const [data, setData] = useState(location.query)
     const tableBodyUser = [
         {
             id: '10111',
@@ -64,12 +66,10 @@ const UserDetail = ({ match }) => {
                     <div className="w-full xl:w-3/5 xxl:w-3/5 px-4">
                         <div className="flex flex-col xl:flex-row xl:items-center">
                             <img src={userAvatarDummy} draggable={false} className="rounded-full w-4/5 xl:w-1/3 border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt="" />
-                            {
-                                tableBodyUser.filter(x => x.id === match.params.id).map(x => {
-                                    return (
-                                        <div key={x.id} className="md:px-8">
-                                            <h4 className="text-red-600 md:text-2xl font-bold">{x.username}</h4>
-                                            <p className="md:text-lg mt-4">{x.email}</p>
+                            
+                                        <div className="md:px-8">
+                                            <h4 className="text-red-600 md:text-2xl font-bold">{data.name}</h4>
+                                            <p className="md:text-lg mt-4">{data.email}</p>
                                             <div className="md:flex flex-wrap hidden ">
                                                 <button className="flex items-center text-sm md:text-base shadow-md mr-1 px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
                                                     <FbIcon className="mr-3" /> Connected
@@ -90,9 +90,7 @@ const UserDetail = ({ match }) => {
                                                 </button>
                                             </div>
                                         </div>
-                                    )
-                                })
-                            }
+                                    
                         </div>
                         <div className="user-detail flex flex-wrap xl:flex-no-wrap md:hidden ">
                             <button className="flex items-center text-sm md:text-base shadow-md mr-4 px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
@@ -112,8 +110,8 @@ const UserDetail = ({ match }) => {
                                     <Dropdown title="Most Recent" items={MostList} />
                                 </div>
                                 <div className="px-2">
-                                    <UserLivestreamVideos />
-                                    <UserLivestreamVideos />
+                                    {/* <UserLivestreamVideos />
+                                    <UserLivestreamVideos /> */}
                                 </div>
                             </div>
                             <div className="pt-6 px-4 block md:hidden">

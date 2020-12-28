@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from 'components/SideNavbar'
 import Searchbar from 'components/forms/search'
 import Table from 'components/table/index'
 import { ReactComponent as Hamburger } from 'assets/images/hamburger.svg'
+import axios from '../configs/axios'
 
 const Tickets = () => {
     const tableHeadTickets = [
@@ -47,6 +48,25 @@ const Tickets = () => {
         },
 
     ]
+
+    
+    const [ticket, setTicket] = useState([])
+
+    useEffect(() => {
+       axios.get('/merchant/listTicket').then(e=>{
+           console.log(e.data)
+           const a = e.data.map(e=>{
+               return {
+                   ticketNumber: e.id,
+                   tittle: e.title,
+                   status: e.status,
+                   lastUpdated: e.last_session
+               }
+           })
+
+           setTicket(a)
+       });
+    }, [])
     return (
         <>
             <section className="flex flex-col xl:flex-row ">
@@ -57,7 +77,7 @@ const Tickets = () => {
                         <Searchbar />
                     </div>
                     <div className="flex pt-10 overflow-x-auto">
-                        <Table itemHead={tableHeadTickets} itemBodyTickets={tableBodyTickets} />
+                        <Table itemHead={tableHeadTickets} itemBodyTickets={ticket} />
                     </div>
                 </div>
 

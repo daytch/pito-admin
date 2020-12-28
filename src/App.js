@@ -18,8 +18,10 @@ import Analytic from 'pages/analytic'
 import userDetail from 'pages/user-detail'
 import NotFound404 from 'pages/404'
 
+
 //style from tailwindcss
 import 'assets/css/main.css';
+import TicketDetail from 'pages/ticketDetail';
 
 function App() {
   return (
@@ -44,6 +46,7 @@ function App() {
             </>
           )} />
         <PrivateRoute path="/tickets" component={Tickets} />
+        <PrivateRoute path="/ticket/:id" component={TicketDetail} />
         <PrivateRoute path="/categories" component={Categories} />
         <PrivateRoute path="/analytic" component={Analytic} />
        

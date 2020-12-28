@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from 'components/SideNavbar'
 
 import userAvatarDummy from 'assets/images/user-avatar.jpg'
@@ -9,8 +9,11 @@ import { ReactComponent as TtIcon } from 'assets/images/tiktok-icon.svg'
 import Dropdown from 'components/forms/dropdown'
 import LineCustom from 'components/graphic-chart/LineCustom'
 import HistoryLivestreams from 'components/view-video/user-livestream'
+import axios from '../configs/axios'
 
-const MerchantDetail = ({ match }) => {
+const MerchantDetail = ({ match,location }) => {
+    console.log(location)
+    const [data, setData] = useState(location.query)
     const tableBodyUser = [
         {
             id: '10111',
@@ -21,7 +24,7 @@ const MerchantDetail = ({ match }) => {
             joinedDate: "01/09/2020 (00:18)"
         },
         {
-            id: '10112',
+            id: '12',
             username: 'Gundy A.S',
             device: 'Android/Ios',
             email: 'example@gmail.com',
@@ -54,6 +57,13 @@ const MerchantDetail = ({ match }) => {
             value: 'Shares'
         }
     ]
+
+    useEffect(() => {
+        axios.get('/admin/merchantList/12').then(e=>{
+            console.log(e)})
+            
+    }, [])
+    
     return (
         <>
             <section className="flex flex-col xl:flex-row">
@@ -63,11 +73,9 @@ const MerchantDetail = ({ match }) => {
                     <div className="w-full md:w-3/5 xxl:w-1/2 px-4">
                         <div className="flex flex-col xl:flex-row xl:items-center">
                             <img src={userAvatarDummy} draggable={false} className="rounded-full w-4/5 xl:w-1/3 border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt="" />
-                            {
-                                tableBodyUser.filter(x => x.id === match.params.id).map(x => {
-                                    return (
-                                        <div key={x.id} className="xl:px-8 w-auto">
-                                            <h4 className="text-red-600 text-2xl font-bold">{x.username}</h4>
+                            
+                                        <div className="xl:px-8 w-auto">
+                                            <h4 className="text-red-600 text-2xl font-bold">{data.name}</h4>
                                             <p className="text-sm mt-1 font-light text-justify">
                                                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                             </p>
@@ -78,22 +86,20 @@ const MerchantDetail = ({ match }) => {
                                             </div>
                                             <div className="flex flex-wrap mt-4 md:mt-2">
                                                 <div className="flex flex-col mr-8 text-center">
-                                                    <h4 className="font-bold text-2xl text-red-600">53.240</h4>
+                                                    <h4 className="font-bold text-2xl text-red-600">{data.total_view}</h4>
                                                     <p className="font-light text-sm text-gray-300">Views</p>
                                                 </div>
                                                 <div className="flex flex-col mr-8 text-center">
-                                                    <h4 className="font-bold text-2xl text-red-600">2.300</h4>
+                                                    <h4 className="font-bold text-2xl text-red-600">0</h4>
                                                     <p className="font-light text-sm text-gray-300">Subscriber</p>
                                                 </div>
                                                 <div className="flex flex-col text-center">
-                                                    <h4 className="font-bold text-2xl text-red-600">489</h4>
+                                                    <h4 className="font-bold text-2xl text-red-600">{data.total_share}</h4>
                                                     <p className="font-light text-sm text-gray-300">Shared</p>
                                                 </div>
                                             </div>
                                         </div>
-                                    )
-                                })
-                            }
+                                    
                             <div className="w-1/5 hidden xl:flex flex-col">
                                 <FbIcon className="mb-4" />
                                 <IgIcon className="mb-4" />
@@ -116,9 +122,9 @@ const MerchantDetail = ({ match }) => {
                                 <Dropdown title="Date" items={MostRecent2} />
                             </div>
                             <div className="pt-6">
+                                {/* <HistoryLivestreams />
                                 <HistoryLivestreams />
-                                <HistoryLivestreams />
-                                <HistoryLivestreams />
+                                <HistoryLivestreams /> */}
                             </div>
                         </div>
                     </div>
