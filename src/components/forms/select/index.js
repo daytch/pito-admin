@@ -1,10 +1,10 @@
 import React from 'react'
 
-const SelectForm = ({ name, children }) => {
+const SelectForm = ({ name, children, change }) => {
     return (
         <div className="flex-col px-2 xxl:px-8">
             <div className="">
-                <select name={name} className="border border-gray-300 px-2 py-2 text-red-700 focus:outline-none cursor-pointer">
+                <select name={name} onChange={(e) => change(e)} className="border border-gray-300 px-2 py-2 text-red-700 focus:outline-none cursor-pointer">
                     {
                         children
                     }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const index = () => {
+const index = ({data}) => {
     const totalSearch = [{
         title: 'Lorem Ipsum',
         total: 3200
@@ -43,7 +43,7 @@ const index = () => {
     return (
         <>
             {
-                totalSearch.map((item, index) => {
+                data && data.map((item, index) => {
                     //membuat numbering dari array
                     const increment = index + 1
                     return (

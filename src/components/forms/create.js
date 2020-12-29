@@ -31,7 +31,6 @@ const Create = () => {
     useEffect(() => {
         
         livestream.getCategory().then((res) => {
-            console.log(res);
             const ListCategory = res.data.map((i) => {
                 return { "id": i.id, "value": i.text }
             })
@@ -131,7 +130,6 @@ const Create = () => {
 
         livestream.create(formData).then((res) => {
             setLoading(false)
-            console.log(res);
             MySwal.fire({
                 icon: 'success',
                 title: 'Success',

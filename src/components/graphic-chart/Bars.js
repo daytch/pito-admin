@@ -1,17 +1,17 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 
-const Bars = () => {
+const Bars = ({ label, data, total_merchant }) => {
     const state = {
-        labels: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
+        labels: label, //['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
         datasets: [
             {
-                label: 'Users Pito',
+                label: 'Merchants Pito',
                 background: 'linear-gradient(90deg, rgba(148,148,148,1) 0%, rgba(169,169,169,1) 2%, rgba(195,195,195,1) 5%, rgba(217,217,217,1) 11%, rgba(234,234,234,1) 18%, rgba(246,246,246,1) 25%, rgba(253,253,253,1) 32%, rgba(255,255,255,1) 70%, rgba(255,255,255,1) 100%)',
                 borderColor: '#324553',
                 borderWidth: 2,
                 lineTension: 0,
-                data: [200, 300, 500, 350, 400, 600, 500, 700]
+                data: data // [200, 300, 500, 350, 400, 600, 500, 700]
             }
         ]
     }
@@ -39,7 +39,7 @@ const Bars = () => {
                 <div className="mt-8 w-full flex flex-col lg:flex-row">
                     <div className="lg:w-1/2 text-right md:px-5">
                         <span className="font-semibold text-lg text-gray-400">TOTAL PITO USER</span>
-                        <h2 className="font-semibold text-5xl text-red-600">223.560</h2>
+                        <h2 className="font-semibold text-5xl text-red-600">{total_merchant}</h2>
                     </div>
                     <div className="lg:w-1/2 text-justify">
                         <p className="font-light text-xs">

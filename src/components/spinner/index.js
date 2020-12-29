@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from "@emotion/core";
-import CircleLoader from "react-spinners/CircleLoader";
+// import CircleLoader from "react-spinners/CircleLoader";
+import HashLoader from "react-spinners/HashLoader";
 import LoadingOverlay from 'react-loading-overlay';
 
 const override = css`
@@ -15,9 +16,9 @@ const Spinner = ({ isLoading, children }) => {
     return (
         <LoadingOverlay 
             active={isLoading}
-            spinner={<CircleLoader
+            spinner={<HashLoader
                 css={override}
-                size={150}
+                size={100}
                 color={"#C7FFFC"}
                 loading={isLoading}
             />}

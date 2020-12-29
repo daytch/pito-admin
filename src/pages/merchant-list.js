@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from 'components/SideNavbar'
 import Searchbar from 'components/forms/search'
 import Table from 'components/table/index'
-import axios from '../configs/axios'
 import { ReactComponent as IconSearch } from 'assets/images/icon-search.svg'
+import users from 'api/users'
 
 const tableHeadMerchant = [
     {
@@ -38,51 +38,12 @@ const tableHeadMerchant = [
     },
 ];
 
-const tableBodyMerchant = [
-    {
-        id: '10111',
-        merchantName: 'Tommy A.S',
-        email: 'example@gmail.com',
-        totalLivestream: '3.365',
-        totalUpcomingLivestream: 3,
-        totalFavourites: 222.323,
-        totalShare: 222.322,
-        totalViews: 222.235,
-        lastSession: "01/09/2020 (00:18)",
-        joinedDate: "01/09/2020 (00:18)"
-    },
-    {
-        id: '10112',
-        merchantName: 'Gundy A.S',
-        email: 'example@gmail.com',
-        totalLivestream: '3.365',
-        totalUpcomingLivestream: 3,
-        totalFavourites: 222.323,
-        totalShare: 222.322,
-        totalViews: 222.235,
-        lastSession: "01/09/2020 (00:18)",
-        joinedDate: "01/09/2020 (00:18)"
-    },
-    {
-        id: '10113',
-        merchantName: 'Trump A.S',
-        email: 'example@gmail.com',
-        totalLivestream: '3.365',
-        totalUpcomingLivestream: 3,
-        totalFavourites: 222.323,
-        totalShare: 222.322,
-        totalViews: 222.235,
-        lastSession: "01/09/2020 (00:18)",
-        joinedDate: "01/09/2020 (00:18)"
-    }
-]
-
 const MerchantListing = () => {
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('/admin/merchantList').then(e=>{
+        users.getMerchants().then(e=>{
             setData(e.data)
             console.log(e.data)
         })
@@ -90,17 +51,17 @@ const MerchantListing = () => {
 
     const handleChange = (input) =>{
         if(!input){
-            axios.get('/admin/merchantList').then(e=>{
+            users.getMerchants().then(e=>{
             setData(e.data)
         })
         }
        const c = data.filter(e=> e.name.toLowerCase().includes(input.toLowerCase()))
        setData(c)
-
     }
+    
     return (
         <>
-            <section className="flex flex-col xl:flex-row ">
+            <section className="min-h-screen flex flex-col xl:flex-row ">
                 <Sidebar />
                 <div className="py-20 px-5 w-full">
                     <div className="flex justify-between">

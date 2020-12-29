@@ -7,7 +7,7 @@ import RenderTBodyTickets from './RenderTBodyTickets'
 import RenderTBodyCategory from './RenderTBodyCategory'
 import { RenderTBodySupport } from './RenderTBodySupport'
 
-const index = ({ itemHead, itemBody, itemBodyUser, itemBodyTickets, itemBodyCategory, itemBodySupport }) => {
+const index = ({ itemHead, itemBody, itemBodyUser, itemBodyTickets, itemBodyCategory, itemBodySupport,DeleteButton }) => {
 
     return (
         <>
@@ -29,7 +29,7 @@ const index = ({ itemHead, itemBody, itemBodyUser, itemBodyTickets, itemBodyCate
                         itemBodyTickets && <RenderTBodyTickets itemBodyTickets={itemBodyTickets} />
                     }
                     {
-                        itemBodyCategory && <RenderTBodyCategory itemBodyCategory={itemBodyCategory} />
+                        itemBodyCategory && <RenderTBodyCategory itemBodyCategory={itemBodyCategory} DeleteButton={DeleteButton} />
                     }
                     {
                         itemBodySupport && <RenderTBodySupport itemBodySupport={itemBodySupport} />

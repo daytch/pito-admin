@@ -12,7 +12,6 @@ import HistoryLivestreams from 'components/view-video/user-livestream'
 import axios from '../configs/axios'
 
 const MerchantDetail = ({ match,location }) => {
-    console.log(location)
     const [data, setData] = useState(location.query)
     const tableBodyUser = [
         {

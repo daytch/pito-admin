@@ -1,9 +1,10 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2'
 
-const Lines = () => {
+const Lines = ({ label, data, total_user }) => {
+    
     const state = {
-        labels: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
+        labels: label,// ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
         datasets: [
             {
                 label: 'Users Pito',
@@ -11,7 +12,7 @@ const Lines = () => {
                 borderColor: '#324553',
                 borderWidth: 2,
                 lineTension: 0,
-                data: [200, 300, 500, 350, 400, 600, 500, 700]
+                data: data,//[200, 300, 500, 350, 400, 600, 500, 700]
             }
         ]
     }
@@ -39,7 +40,7 @@ const Lines = () => {
                 <div className="mt-8 w-full flex flex-col lg:flex-row">
                     <div className="lg:w-1/2 text-right md:px-5">
                         <span className="font-semibold text-lg text-gray-400">TOTAL PITO USER</span>
-                        <h2 className="font-semibold text-5xl text-red-600">223.560</h2>
+                        <h2 className="font-semibold text-5xl text-red-600">{total_user}</h2>
                     </div>
                     <div className="lg:w-1/2 text-justify">
                         <p className="font-light text-xs">

@@ -5,5 +5,6 @@ export default {
     merchantLogin: (credentials) => axios.post("/merchant/login", credentials),
     loginSosmed: (credentials) => axios.post("/merchant/loginSSO", credentials),
     forgotPassword: (email) => axios.post("/user/forgotPassword", email),
-    getProfile: ()=>axios.get("/merchant/getProfile")
+    getProfile: () => axios.get("/merchant/getProfile"),
+    getMerchants: () => axios.get('/admin/merchantList')
 }

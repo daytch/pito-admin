@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 const RenderTBodyTickets = ({ itemBodyTickets }) => {
     return (
@@ -13,7 +14,7 @@ const RenderTBodyTickets = ({ itemBodyTickets }) => {
                             <td className="text-center py-3 px-4 text-red-600 font-bold text-sm">{item.username}</td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.tittle}</td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.status}</td>
-                            <td className="text-center py-3 px-4 text-gray-400 font-light">{item.lastSession}</td>
+                            <td className="text-center py-3 px-4 text-gray-400 font-light">{ moment(item.b).format('DD/MM/YYYY')}</td>
                         </tr>
                     )
                 })

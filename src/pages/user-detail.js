@@ -59,9 +59,8 @@ const UserDetail = ({ match,location }) => {
     ]
     return (
         <>
-            <section className="flex flex-col xl:flex-row">
+            <section className="min-h-screen flex flex-col xl:flex-row">
                 <Sidebar />
-
                 <div className="py-10 md:py-20 flex flex-col xl:flex-row w-full xxl:px-6">
                     <div className="w-full xl:w-3/5 xxl:w-3/5 px-4">
                         <div className="flex flex-col xl:flex-row xl:items-center">

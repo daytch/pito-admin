@@ -52,7 +52,7 @@ const Login = ({ history }) => {
             password
         }).then((res) => {
             setAuthorizationHeader(res.token);
-            debugger;
+            
             localStorage.setItem('PITO:token', res.token)
             localStorage.setItem('PITO:img', res.image) 
             localStorage.setItem('PITO:name', res.name) 
