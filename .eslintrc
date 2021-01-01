@@ -1,0 +1,17 @@
+{
+    "extends": "eslint:recommended",
+    "rules": {
+        // enable additional rules
+        "indent": [
+            "off",
+            0,
+            {
+                "ignoredNodes": [
+                    "TemplateLiteral"
+                ]
+            }
+        ],
+        "index": "off",
+        "import/no-named-as-default": 0
+    }
+}

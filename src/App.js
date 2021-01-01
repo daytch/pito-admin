@@ -11,6 +11,7 @@ import Dashboard from 'pages/dashboard'
 import LivestreamList from 'pages/livestream-list'
 import MerchantList from 'pages/merchant-list'
 import MerchantDetail from 'pages/merchant-detail'
+import MerchantEdit from 'pages/merchant-edit'
 import UserListing from 'pages/user-list'
 import Tickets from 'pages/tickets'
 import Categories from 'pages/categories'
@@ -30,23 +31,29 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/livestream-list" component={LivestreamList} />
-        <Route path="/merchant-list"
+        <PrivateRoute path="/livestream" component={LivestreamList} />
+        <Route path="/merchant"
           render={({ match: { url } }) => (
             <>
               <PrivateRoute path={`${url}/`} component={MerchantList} exact />
-              <PrivateRoute path={`${url}/:id`} component={MerchantDetail} />
+              <PrivateRoute path={`${url}/:id`} component={MerchantDetail} exact />
+              <PrivateRoute path={`${url}/edit/:id`} component={MerchantEdit} exact />
             </>
           )} />
-        <Route path="/user-list"
+        <Route path="/user"
           render={({ match: { url } }) => (
             <>
               <PrivateRoute path={`${url}/`} component={UserListing} exact />
               <PrivateRoute path={`${url}/:id`} component={userDetail} />
             </>
           )} />
-        <PrivateRoute path="/tickets" component={Tickets} />
-        <PrivateRoute path="/ticket/:id" component={TicketDetail} />
+          <Route path="/ticket"
+            render={({ match: { url } }) => (
+              <>
+                <PrivateRoute path={`${url}/`} component={Tickets} exact />
+                <PrivateRoute path={`${url}/:id`} component={TicketDetail} />
+              </>
+            )} />
         <PrivateRoute path="/categories" component={Categories} />
         <PrivateRoute path="/analytic" component={Analytic} />
        

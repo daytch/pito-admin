@@ -2,7 +2,7 @@ import axios from 'configs/axios'
 
 export default {
     create: (data) => axios.post("/merchant/submitLivestream", data),
-    getCategory: () => axios.get("/admin/userList"),
+    getCategory: () => axios.get("/user/category"),
     getLivestreamDetail: (id) => axios.get("/merchant/getVideosDetail?videoId=" + id),
     getDashboard: () => axios.get("/admin/getDashboard"),
 }

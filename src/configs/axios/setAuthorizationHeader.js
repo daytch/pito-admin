@@ -1,6 +1,6 @@
 import axios from './index'
 
-export default (token = null) => {
+export default (token) => {
     if (token) {
         axios.defaults.headers.common["x-access-token"] = token
     }

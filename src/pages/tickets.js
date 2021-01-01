@@ -30,7 +30,6 @@ const Tickets = () => {
 
     useEffect(() => {
         ticketAPI.getListTicket().then(e => {
-            console.log(e.data)
             const a = e.data.map(e => {
                 return {
                     ticketNumber: e.id,

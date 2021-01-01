@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RenderTBodyCategory = ({ itemBodyCategory,DeleteButton }) => {
+const RenderTBodyCategory = ({ itemBodyCategory, DeleteButton }) => {
     return (
         <>
             {
@@ -19,7 +19,7 @@ const RenderTBodyCategory = ({ itemBodyCategory,DeleteButton }) => {
                             <td className="flex-col py-4">
                                 {/* <button className="py-2 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Edit</button>
                                 <button className="py-2 mt-2 w-full px-4 border border-red-600 font-medium text-red-600 rounded-3xl">Delete</button> */}
-                                <DeleteButton id={item.no} />
+                                <DeleteButton id={item.no} catName={item.name} />
                             </td>
                         </tr>
                     )

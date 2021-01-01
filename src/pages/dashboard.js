@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Sidebar from 'components/SideNavbar'
-import Graph from 'components/Graph'
+// import Graph from 'components/Graph'
 import live from 'api/livestream'
 import Spinner from 'components/spinner'
 
@@ -15,7 +15,7 @@ import FavMerchant from 'components/fav-merchant'
 
 const Dashboard = () => {
     const [isLoading, setLoading] = useState(true)
-    const [merchantYear, setMerchantYear] = useState()
+    // const [merchantYear, setMerchantYear] = useState()
     const [mostFav, setMostFav] = useState()
     const [mostFavMerchant, setMostFavMerchant] = useState()
     const [mostShared, setMostShared] = useState()
@@ -25,7 +25,7 @@ const Dashboard = () => {
     const [totalMerchant, setTotalMerchant] = useState()
     const [totalUpcoming, setTotalUpcoming] = useState()
     const [totalUser, setTotalUser] = useState()
-    const [userYear, setUserYear] = useState()
+    // const [userYear, setUserYear] = useState()
     const [searchKeyword, setSearchKeyword] = useState()
     const [searchCategory, setSearchCategory] = useState()
 
@@ -56,7 +56,7 @@ const Dashboard = () => {
         }
     }
 
-    const setToggleSearch = (e) => {
+    const setToggleSearch = () => {
         let tk = toggleKeyword ? false : true;
         setToggleKeyword(tk)
     }
@@ -64,7 +64,7 @@ const Dashboard = () => {
     useEffect(() => {
         setLoading(true)
         live.getDashboard().then((res) => {
-            setMerchantYear(res.merchant_year)
+            // setMerchantYear(res.merchant_year)
             setMostFav(res.mostfav)
             setMostFavMerchant(res.mostfavmerchant.map((item) => {
                 return {
@@ -86,7 +86,7 @@ const Dashboard = () => {
             setTotalMerchant(res.total_merchant)
             setTotalUpcoming(res.total_upcoming)
             setTotalUser(res.total_user)
-            setUserYear(res.user_year)
+            // setUserYear(res.user_year)
             setLabel(res.user_year.map((item) => { return item.year }))
             setDataLine(res.user_year.map((item) => { return item.total }))
             setLabelMerchant(res.merchant_year.map((item) => { return item.year }))
@@ -96,7 +96,7 @@ const Dashboard = () => {
     }, [])
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
-            <section className="flex flex-col xl:flex-row">
+            <section className="min-h-screen flex flex-col xl:flex-row">
                 <Sidebar />
                 <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 pb-10 lg:border-r-2 lg:border-gray-500">
                     <Lines label={labels} data={dataLine} total_user={totalUser} />

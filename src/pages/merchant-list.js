@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from 'components/SideNavbar'
-import Searchbar from 'components/forms/search'
+// import Searchbar from 'components/forms/search'
 import Table from 'components/table/index'
 import { ReactComponent as IconSearch } from 'assets/images/icon-search.svg'
-import users from 'api/users'
+import User from 'api/users'
+import Spinner from 'components/spinner'
 
 const tableHeadMerchant = [
     {
@@ -40,18 +41,19 @@ const tableHeadMerchant = [
 
 const MerchantListing = () => {
 
+    const [isLoading, setLoading] = useState(true)
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        users.getMerchants().then(e=>{
+        User.getMerchants().then(e=>{
             setData(e.data)
-            console.log(e.data)
+            setLoading(false)
         })
     }, []);
 
     const handleChange = (input) =>{
         if(!input){
-            users.getMerchants().then(e=>{
+            User.getMerchants().then(e=>{
             setData(e.data)
         })
         }
@@ -60,7 +62,7 @@ const MerchantListing = () => {
     }
     
     return (
-        <>
+        <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="min-h-screen flex flex-col xl:flex-row ">
                 <Sidebar />
                 <div className="py-20 px-5 w-full">
@@ -76,7 +78,7 @@ const MerchantListing = () => {
                 </div>
 
             </section>
-        </>
+        </Spinner>
     )
 }
 

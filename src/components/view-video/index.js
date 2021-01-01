@@ -2,19 +2,41 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 //import Component SVG and image
+import  DefaultImg from 'assets/images/default.svg'
 import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
 import { ReactComponent as EyeIcon } from 'assets/images/eye-icon.svg'
 import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
-import ReactHtmlParserfrom from 'react-html-parser';
+import ReactHtmlParserfrom from 'react-html-parser'
+import Modal from 'react-modal'
+Modal.setAppElement('*'); // suppresses modal-related test warnings.
 
 const MostviewsVideos = ({ no, thumbnail, views, likes, title, iframe, categories }) => {
-    const [showModal, setShowModal] = useState(false);
-    const [dataModal, setDataModal] = useState('');
 
-    const changeDataModal = (val, data) => {
-        setDataModal(data);
-        setShowModal(val)
+    const [dataModal, setDataModal] = useState('')
+    const [modalIsOpen, setIsOpen] = useState(false)
+    let subtitle;
+
+    const openModal = (data) => {
+        setIsOpen(true)
+        setDataModal(data)
     }
+    const closeModal = () => { setIsOpen(false) }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        subtitle.style.color = '#f00';
+    }
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
+        }
+    };
 
     return (
         <div className="px-2 lg:px-6 xxl:px-8">
@@ -25,8 +47,8 @@ const MostviewsVideos = ({ no, thumbnail, views, likes, title, iframe, categorie
                         <div className="item relative w-auto px-4 lg:px-2">
                             <figure className="item-image">
                                 <PlayIcon style={{ transition: "all .15s ease" }}
-                                    onClick={() => changeDataModal(true, iframe)} className="icon" />
-                                <img src={thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = "https://alppetro.co.id/dist/assets/images/default.jpg" }} alt={title} className="thumbnail-live" />
+                                    onClick={() => openModal(iframe)} className="icon" />
+                                <img src={thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
                             </figure>
                         </div>
                         <Link to="/" className="link-wrapped hidden"></Link>
@@ -54,49 +76,27 @@ const MostviewsVideos = ({ no, thumbnail, views, likes, title, iframe, categorie
                             </div>
                         }
 
-                        {showModal ? (
-                            <>
-                                <div
-                                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                                    onClick={() => setShowModal(false)}
-                                >
-                                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                                        {/*content*/}
-                                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                            {/*header*/}
-                                            <div className="flex items-start justify-between p-2 border-b border-solid border-gray-300 rounded-t">
-                                                <h6 className="text-2xl font-semibold">{title}</h6>
-                                                <button
-                                                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                                    onClick={() => setShowModal(false)} >
-                                                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
-                                                </button>
-                                            </div>
-                                            {/*body*/}
-                                            <div className="relative p-6 flex-auto">
-                                                {dataModal && ReactHtmlParserfrom(dataModal)}
-                                            </div>
-                                            {/*footer*/}
-                                            <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
-                                                <button
-                                                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                                                    type="button"
-                                                    style={{ transition: "all .15s ease" }}
-                                                    onClick={() => setShowModal(false)}
-                                                >Close</button>
-
-                                                <button
-                                                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                                                    type="button"
-                                                    onClick={() => setShowModal(false)}
-                                                >Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                            </>
-                        ) : null}
+                        <Modal
+                            isOpen={modalIsOpen}
+                            onAfterOpen={afterOpenModal}
+                            onRequestClose={closeModal}
+                            style={customStyles}
+                            contentLabel="Livestream Modal"
+                            shouldCloseOnOverlayClick={false}
+                        >
+                            <div className="flex items-start justify-between border-b border-solid border-gray-300 rounded-t">
+                                <h6 ref={_subtitle => (subtitle = _subtitle)}>{title}</h6>
+                                <button
+                                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                    onClick={closeModal}  >
+                                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                                </button>
+                            </div>
+                            {/*body*/}
+                            <div className="relative p-6 flex-auto">
+                                {ReactHtmlParserfrom(dataModal)}
+                            </div>
+                        </Modal>
                     </div>
                 </div>
             </div>

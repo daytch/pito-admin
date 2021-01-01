@@ -11,10 +11,10 @@ const RenderTBody = ({ itemBody }) => {
                         <tr key={index} className="border-b border-gray-50">
                             <td className="text-center py-3 px-4 text-red-600 font-bold text-sm">{item.id}</td>
                             <td className="text-center py-3 px-4 text-red-600 font-bold text-sm"><Link className="hover:text-blue-500" to={{
-                                pathname: `/merchant-list/${item.id}`,
+                                pathname: `/merchant/${item.id}`,
                                 query: item
-                                }}>{item.name}</Link></td>
-                            <td className="text-center py-3 px-4 text-gray-400 font-light"><Link className="hover:text-blue-500" to="mailto:jonsmith@mail.com">{item.email}</Link></td>
+                            }}>{item.name}</Link></td>
+                            <td className="text-center py-3 px-4 text-gray-400 font-light"><a className="hover:text-blue-500" href={"mailto:" + item.email}>{item.email}</a></td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.total_livestream}</td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.total_upcoming}</td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.total_favorites}</td>

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { ReactComponent as AvatarDummy } from 'assets/images/avatar-dummy.svg'
+// import { ReactComponent as AvatarDummy } from 'assets/images/avatar-dummy.svg'
 import { ReactComponent as SubscriberIcon } from 'assets/images/subscriber-icon.svg'
+import  DefaultImg from 'assets/images/default.svg'
 
 const index = ({ merchants }) => {
-    console.log(merchants)
     return (
         <div className="flex flex-wrap items-center">
             {
@@ -15,7 +15,7 @@ const index = ({ merchants }) => {
                             <div className="mt-3 flex items-center w-1/2 xxl:mx-0">
                                 <h6>{increment}.</h6>
                                 <div className="px-2">
-                                    <img src={item.avatar} onError={(e) => { e.target.onerror = null; e.target.src = "https://alppetro.co.id/dist/assets/images/default.jpg" }} />
+                                    <img alt="avatar" src={item.avatar} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} />
                                     {/* {item.avatar} */}
                                 </div>
                                 <div className="flex-col">

@@ -1,45 +1,45 @@
 import React from 'react'
 
 const index = ({data}) => {
-    const totalSearch = [{
-        title: 'Lorem Ipsum',
-        total: 3200
-    }, {
-        title: 'Lorem Ipsum',
-        total: 2300
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 1800
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 1500
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 1250
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 1000
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 898
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 989
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 789
-    },
-    {
-        title: 'Lorem Ipsum',
-        total: 787
-    }];
+    // const totalSearch = [{
+    //     title: 'Lorem Ipsum',
+    //     total: 3200
+    // }, {
+    //     title: 'Lorem Ipsum',
+    //     total: 2300
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 1800
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 1500
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 1250
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 1000
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 898
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 989
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 789
+    // },
+    // {
+    //     title: 'Lorem Ipsum',
+    //     total: 787
+    // }];
     return (
         <>
             {

@@ -40,6 +40,7 @@ const Login = ({ history }) => {
         if (token) {
             history.push('/dashboard')
         }
+         // eslint-disable-next-line
     },[])
 
     //on submit Login

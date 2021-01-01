@@ -11,8 +11,9 @@ import { ReactComponent as EyeIcon } from 'assets/images/eye-icon.svg'
 import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
 import { ReactComponent as CalendarIcon } from 'assets/images/calendar-icon.svg'
 import iconLive from 'assets/images/live-icon.png'
+import  DefaultImg from 'assets/images/default.svg'
 
-const FullWidth = ({ linkVideo, actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, category, buttons }) => {
+const FullWidth = ({ actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, category, buttons }) => {
     return (
         <>
             {
@@ -37,7 +38,7 @@ const FullWidth = ({ linkVideo, actionLinks, viewsElement, actions, dataVideos, 
                                                 ) : null
                                             }
                                             <PlayIcon className="icon" />
-                                            <img src={item.thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = "https://alppetro.co.id/dist/assets/images/default.jpg" }} alt={title} className="thumbnail-live" />
+                                            <img src={item.thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
                                         </figure>
                                     </Link>
                                 </div>
@@ -114,12 +115,12 @@ const FullWidth = ({ linkVideo, actionLinks, viewsElement, actions, dataVideos, 
                                         }
                                         {
                                             category && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
-                                                {
+                                                {/* {
                                                     category.map((item, index) => {
                                                         return index < 2 ? (<><h6>{item}</h6><div className="rounded-full w-2 h-2 bg-gray-700 mx-2"></div></>)
                                                             : (<><h6>{item}</h6></>)
                                                     })
-                                                }
+                                                } */}
                                             </div>
                                         }
                                         {

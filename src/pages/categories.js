@@ -3,13 +3,25 @@ import Sidebar from 'components/SideNavbar'
 import Table from 'components/table/index'
 import Spinner from 'components/spinner'
 import Category from 'api/category'
+import Modal from 'react-modal'
+Modal.setAppElement('*'); // suppresses modal-related test warnings.
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 const Categories = () => {
 
+    var subtitle;
     const [isLoading, setLoading] = useState(true)
     const [data, setData] = useState([])
+    const [title, setTitle] = useState('')
+    const [categoryName, setCategoryName] = useState('')
+    const [id, setId] = useState('')
+    const [isUpdate, setIsUpdate] = useState(true)
+    const [modalIsOpen, setIsOpen] = useState(false)
 
-    useEffect(() => {
+    function getData() {
         Category.getListCategory().then((res) => {
             setData(res.data.map((item) => {
                 return {
@@ -23,27 +35,77 @@ const Categories = () => {
                 }
             }))
             setLoading(false)
-            
+
         })
+    }
+    useEffect(() => {
+        getData()
+        // eslint-disable-next-line 
     }, [])
 
-    const deleteCategory = (id) => {
-        
-        isLoading(true)
-        Category.deleteCategory({ id: id.id, isActive: 0 }).then((res) => {
+    const changeName = (CategoryName) => {
+        setCategoryName(CategoryName)
+    }
 
-            isLoading(false)
+    const deleteCategory = (id) => {        
+        setLoading(true)
+        setId(id.id)
+        Category.deleteCategory({ id: id.id, isActive: 0 }).then((res) => {
+            setLoading(false)
+            if (res.isSuccess) {
+                MySwal.fire('Success!', res.message, 'success');
+                getData()
+            } else {
+                MySwal.fire('Error!', res.message, 'danger');
+            }
         })
     }
 
+    const insertCategory = () => {
+        setLoading(true)
+        Category.insertCategory({ name: categoryName }).then(res => {
+            if (res.isSuccess) {
+                MySwal.fire('Success!', res.message, 'success');
+                getData()
+                closeModal()
+            } else {
+                MySwal.fire('Error!', res.message, 'danger');
+            }
+        })
+    }
+
+    const updateCategory = () => {
+        setLoading(true)
+        Category.updateCategory({ name: categoryName, id: id }).then(res => {
+            if (res.isSuccess) {
+                MySwal.fire('Success!', res.message, 'success');
+                getData()
+                closeModal()
+            } else {
+                MySwal.fire('Error!', res.message, 'danger');
+            }
+        })
+    }
+
+    const openModalforInsert = () => {
+        setIsUpdate(false)
+        setCategoryName('')
+        setId('')
+        setTitle('Create Category')
+        openModal()
+    }
+
     const editCategory = (id) => {
-        
+        setIsUpdate(true)
+        setCategoryName(id.catName)
+        setId(id.id)
+        setTitle('Edit Category')
+        openModal()
     }
 
     const DeleteButton = (id) => {
         return (<><button onClick={() => editCategory(id)} className="py-2 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Edit</button>
             <button onClick={() => deleteCategory(id)} className="py-2 mt-2 w-full px-4 border border-red-600 font-medium text-red-600 rounded-3xl">Delete</button></>)
-        // return <button onClick={() => submitDelete(id)} className="font-semibold text-base md:text-lg text-red-600 mr-4">Delete</button>;
     };
 
     const tableHeadCategory = [
@@ -79,19 +141,76 @@ const Categories = () => {
         },
     ];
 
+    const openModal = () => { setIsOpen(true) }
+
+    const closeModal = () => { setIsOpen(false) }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        subtitle.style.color = '#f00';
+    }
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
+        }
+    };
+
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="min-h-screen flex flex-col xl:flex-row ">
                 <Sidebar />
                 <div className="py-20 px-5 w-full">
                     <div className="flex justify-end">
-                        <button className="bg-red-600 text-white font-medium text-lg px-4 py-2 rounded-3xl">Add New Category</button>
+                        <button onClick={() => openModalforInsert()} className="bg-red-600 text-white font-medium text-lg px-4 py-2 rounded-3xl">Add New Category</button>
                     </div>
                     <div className="flex pt-10 overflow-x-auto">
                         <Table itemHead={tableHeadCategory} itemBodyCategory={data} DeleteButton={DeleteButton} />
                     </div>
                 </div>
+                <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Livestream Modal"
+                    shouldCloseOnOverlayClick={false}
+                >
+                    <div className="flex items-start justify-between border-b border-solid border-gray-300 rounded-t">
+                        <h6 ref={_subtitle => (subtitle = _subtitle)}>{title}</h6>
+                        <button
+                            className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                            onClick={closeModal}  >
+                            <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                        </button>
+                    </div>
+                    {/*body*/}
+                    <div className="relative p-6 flex-auto">
+                        {/* {dataModal && ReactHtmlParserfrom(dataModal)} */}
+                        <div className="flex flex-wrap w-full items-start my-2">
+                            <label htmlFor="name" className="w-full md:w-1/4 text-base text-gray-700">Category Name</label>
+                            <input type="text" value={categoryName} onChange={(e) => {
+                                changeName(e.target.value)
+                            }} placeholder="Category Name" className="w-full md:w-4/6 px-4 py-2 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-lg" />
+                        </div>
+                    </div>
+                    {/*footer*/}
+                    <div className="flex items-center justify-end border-t border-solid border-gray-300 rounded-b">
+                        <button onClick={() => isUpdate ? updateCategory() : insertCategory()} className="py-2 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Save</button>
+                        <button
+                            className="py-2 mt-2 w-full px-4 border border-red-600 font-medium text-red-600 rounded-3xl"
+                            type="button"
+                            style={{ transition: "all .15s ease" }}
+                            onClick={closeModal}
+                        >Close</button>
 
+                    </div>
+                </Modal>
             </section>
         </Spinner>
     )

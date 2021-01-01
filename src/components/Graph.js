@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 //import components
 import MostviewsVideos from './view-video/index'
 import Lines from './graphic-chart/Lines'
@@ -8,12 +8,7 @@ import NumberLivestream from './numberLivestream'
 import TopSearch from './topsearch'
 import FavMerchant from './fav-merchant'
 
-
-
-
 const Graph = ({ merchant_year, mostfav, mostfavmerchant, mostshared, mostview, total_completed, total_live, total_merchant, total_upcoming, total_user, user_year }) => {
-
-
 
     return (
         <>

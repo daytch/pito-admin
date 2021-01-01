@@ -10,6 +10,7 @@ import { ReactComponent as TicketIcon } from 'assets/images/ticketsup-icon.svg'
 import { ReactComponent as CategoriesIcon } from 'assets/images/categories-icon.svg'
 import { ReactComponent as LogoutIcon } from 'assets/images/logout-icon.svg'
 import { ReactComponent as Hamburger } from 'assets/images/hamburger.svg'
+import { ReactComponent as LivestreamIcon } from 'assets/images/livestream-icon.svg'
 import Avatar from 'react-avatar';
 
 //import components
@@ -20,7 +21,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const SideNavbar = ({ history }) => {
+const SideNavbar = () => {
     const classNameSVG = "icon mx-auto"
     const [isOpen, setIsOpen] = useState(true)
     const [token] = React.useState(localStorage.getItem('PITO:token'))
@@ -68,28 +69,28 @@ const SideNavbar = ({ history }) => {
                 </div>
                 <div className="py-2 w-full">
                     <section>
-                        <ListMenu linkTo="/">
+                        <ListMenu dashboard={true} linkTo="/dashboard">
                             <DashboardIcon className={classNameSVG} />
                         </ListMenu>
-                        {/* <ListMenu linkTo="/livestream-list">
+                        <ListMenu linkTo="/livestream">
                             <LivestreamIcon className={classNameSVG} />
-                        </ListMenu> */}
-                        <ListMenu linkTo="/merchant-list">
+                        </ListMenu>
+                        <ListMenu linkTo="/merchant">
                             <MerchantListIcon className={classNameSVG} />
                         </ListMenu>
-                        <ListMenu linkTo="/user-list">
+                        <ListMenu linkTo="/user">
                             <UserlistIcon className={classNameSVG} />
                         </ListMenu>
                         <ListMenu linkTo="/analytic">
                             <AnalyticIcon className={classNameSVG} />
                         </ListMenu>
-                        <ListMenu linkTo="/tickets">
+                        <ListMenu linkTo="/ticket">
                             <TicketIcon className={classNameSVG} />
                         </ListMenu>
                         <ListMenu linkTo="/categories">
                             <CategoriesIcon className={classNameSVG} />
                         </ListMenu>
-                        <ListMenu button="button" logout={logout}>
+                        <ListMenu button={true} logout={logout}>
                             <LogoutIcon className={classNameSVG} />
                         </ListMenu>
                     </section>
@@ -117,13 +118,13 @@ const SideNavbar = ({ history }) => {
                         <ListMenu linkTo="/">
                             <DashboardIcon className={classNameSVG} />
                         </ListMenu>
-                        {/* <ListMenu linkTo="/livestream-list">
+                        <ListMenu linkTo="/livestream">
                             <LivestreamIcon className={classNameSVG} />
-                        </ListMenu> */}
-                        <ListMenu linkTo="/merchant-list">
+                        </ListMenu>
+                        <ListMenu linkTo="/merchant">
                             <MerchantListIcon className={classNameSVG} />
                         </ListMenu>
-                        <ListMenu linkTo="/user-list">
+                        <ListMenu linkTo="/user">
                             <UserlistIcon className={classNameSVG} />
                         </ListMenu>
                         <ListMenu linkTo="/analytic">
