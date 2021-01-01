@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 //import Component SVG and image
-import  DefaultImg from 'assets/images/default.svg'
+import DefaultImg from 'assets/images/default.svg'
 import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
 import { ReactComponent as EyeIcon } from 'assets/images/eye-icon.svg'
 import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
@@ -10,7 +10,7 @@ import ReactHtmlParserfrom from 'react-html-parser'
 import Modal from 'react-modal'
 Modal.setAppElement('*'); // suppresses modal-related test warnings.
 
-const MostviewsVideos = ({ no, thumbnail, views, likes, title, iframe, categories }) => {
+const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categories }) => {
 
     const [dataModal, setDataModal] = useState('')
     const [modalIsOpen, setIsOpen] = useState(false)
@@ -46,12 +46,13 @@ const MostviewsVideos = ({ no, thumbnail, views, likes, title, iframe, categorie
                         <p>{no}.</p>
                         <div className="item relative w-auto px-4 lg:px-2">
                             <figure className="item-image">
-                                <PlayIcon style={{ transition: "all .15s ease" }}
-                                    onClick={() => openModal(iframe)} className="icon" />
-                                <img src={thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
+                                <Link to={`/livestream/detail/${id}`} className="link-wrapped">
+                                    <PlayIcon style={{ transition: "all .15s ease" }}
+                                        onClick={() => openModal(iframe)} className="icon" />
+                                    <img src={thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
+                                </Link>
                             </figure>
                         </div>
-                        <Link to="/" className="link-wrapped hidden"></Link>
                     </div>
                     <div className="lg:w-2/3 item-meta">
                         <div className="flex flex-wrap">

@@ -1,5 +1,4 @@
 {
-    "extends": "eslint:recommended",
     "rules": {
         // enable additional rules
         "indent": [

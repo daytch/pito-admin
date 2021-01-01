@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from 'components/SideNavbar'
 import Searchbar from 'components/forms/search'
 import Dropdown from 'components/forms/dropdown'
 import FullWidth from 'components/view-video/FullWidth'
-import thumbnail from 'assets/images/thumbnail-one.jpg'
+// import thumbnail from 'assets/images/thumbnail-one.jpg'
+import Livestream from 'api/livestream'
+import Spinner from 'components/spinner'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
+const MySwal = withReactContent(Swal)
 const itemsDate = [
     {
         id: 1,
@@ -32,31 +37,69 @@ const items = [
     }
 ]
 
-const videos = [
-    {
-        id: 1,
-        thumbnail: thumbnail,
-        live: true,
-        views: 260.000,
-        shared: 989,
-        status: "Live Now",
-        title: "Tomy W"
-    },
-    {
-        id: 2,
-        thumbnail: thumbnail,
-        live: false,
-        views: 260.000,
-        shared: 989,
-        date: "12",
-        title: "Tomy W"
-    },
-]
-
-
 const LivestreamList = () => {
+
+    const [isLoading, setLoading] = useState(true)
+    const [videos, setVideos] = useState([])
+
+    function getData(param) {
+        Livestream.getLivestream({
+            type: param,
+            page: 1
+        }).then((res) => {
+            setVideos(res.data)
+            setLoading(false)
+        })
+
+    }
+    useEffect(() => {
+        Livestream.getLivestream({
+            type: "list_vid_popular",
+            page: 1
+        }).then((res) => {
+            setVideos(res.data)
+            setLoading(false)
+        })
+    }, [])
+    const DeleteButton = (id) => {
+        return <button onClick={() => submitDelete(id)} className="font-semibold text-base md:text-lg text-red-600 mr-4">Delete</button>;
+    };
+
+    function submitDelete(id) {
+        setLoading(true)
+        Livestream.deleteLivestream(id).then((res) => {
+            setLoading(false)
+            if (res.isSuccess) {
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res.message
+                })
+            } else {
+                MySwal.fire({
+                    icon: 'danger',
+                    title: 'Error',
+                    text: res.message
+                })
+            }
+        });
+    }
+    function changeDropdown(e) {
+        console.log(e)
+        switch (e.value) {
+            case 'Ongoing':
+                getData('list_vid_recom')
+                break;
+            case 'Upcoming':
+                getData('list_vid_upcoming')
+                break;
+            case 'Previous':
+                getData('list_vid_previous')
+                break;
+        }
+    }
     return (
-        <>
+        <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="flex flex-col xl:flex-row ">
                 <Sidebar />
                 <div className="py-20 px-5 w-full">
@@ -65,20 +108,30 @@ const LivestreamList = () => {
                         <div className="flex w-full md:w-auto md:flex-row mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold text-sm md:text-lg text-gray-700">Filter</h2>
                             <div className="flex ml-5 w-1/3">
-                                <Dropdown title="Select..." items={items} />
+                                <Dropdown title="Select..." onClick={changeDropdown} items={items} />
                             </div>
                             <div className="flex ml-5 w-1/3">
-                                <Dropdown title="Date..." items={itemsDate} />
+                                <Dropdown title="Date..." onClick={changeDropdown} items={itemsDate} />
                             </div>
                         </div>
                     </div>
-                    <div className="my-10">
-                        <FullWidth dataVideos={videos} socmedVertical={true} liveRecord={true} name={true} subtitle={true} caption={true} category={true}
-                            buttons={true} />
+                    <div className="grid grid-cols-2 gap-2">
+                        {
+                            videos.map((item, index) => {
+
+                                const ListVideo = [{ iframe: item.iframe, id: item.id, thumbnail: item.img_thumbnail, live: false, views: item.views, likes: item.likes, date: item.start_time, title: item.title }]
+
+                                return (
+                                    <div key={index} className="flex flex-wrap w-full mt-4">
+                                        <FullWidth actionLinks={'/livestream/' + item.id} dataVideos={ListVideo} title={item.title} viewsElement={true} DeleteButton={DeleteButton} actions={true} ig={item.instagram_url} fb={item.facebook_url} tiktok={item.tiktok_url} caption={item.description} category={item.categories} socmedCustom={true} />
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </section>
-        </>
+        </Spinner>
     )
 }
 

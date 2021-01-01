@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
 import { ReactComponent as FbIcon } from 'assets/images/fb-icon.svg'
@@ -9,20 +9,62 @@ import { ReactComponent as ShareIcon } from 'assets/images/share-icon.svg'
 import { ReactComponent as ShareIconMobile } from 'assets/images/share-icon-mobile.svg'
 import { ReactComponent as EyeIcon } from 'assets/images/eye-icon.svg'
 import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
-import { ReactComponent as CalendarIcon } from 'assets/images/calendar-icon.svg'
+// import { ReactComponent as CalendarIcon } from 'assets/images/calendar-icon.svg'
 import iconLive from 'assets/images/live-icon.png'
-import  DefaultImg from 'assets/images/default.svg'
+import DefaultImg from 'assets/images/default.svg'
+import Modal from 'react-modal'
+import ReactHtmlParserfrom from 'react-html-parser';
 
-const FullWidth = ({ actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, category, buttons }) => {
+const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, ig, tiktok, fb, category, buttons }) => {
+
+    const [category1, setCategory1] = useState("")
+    const [category2, setCategory2] = useState("")
+    const [category3, setCategory3] = useState("")
+    const [dataModal, setDataModal] = useState('');
+    const [modalIsOpen, setIsOpen] = useState(false)
+
+    useEffect(() => {
+        if (typeof category !== "undefined") {
+            let cat1 = typeof category[0] === "undefined" ? "Category" : category[0]
+            let cat2 = typeof category[1] === "undefined" ? "Category" : category[1]
+            let cat3 = typeof category[2] === "undefined" ? "Category" : category[2]
+            setCategory1(cat1)
+            setCategory2(cat2)
+            setCategory3(cat3)
+        }
+    })
+
+    const openModal = (data) => {
+        setIsOpen(true)
+        setDataModal(data)
+    }
+    const closeModal = () => { setIsOpen(false) }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        subtitle.style.color = '#f00';
+    }
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
+        }
+    };
+
     return (
         <>
             {
                 dataVideos.map((item, index) => {
                     return (
-                        <div className="flex mb-6 flex-col lg:flex-row" key={index}>
+                        <div className="flex w-full flex-col lg:flex-row" key={index}>
                             <div className="flex">
                                 <div className="item relative w-auto">
-                                    <Link to={`/merchant/livestream/${item.id}`} className="link-wrapped">
+                                    <Link to={`/livestream/detail/${item.id}`} className="link-wrapped">
                                         <figure className="item-image-live">
                                             {
                                                 item?.live ? (
@@ -101,43 +143,78 @@ const FullWidth = ({ actionLinks, viewsElement, actions, dataVideos, socmedVerti
                                             viewsElement && <div className="icon-controller-user flex flex-wrap items-center leading-relaxed">
                                                 <div className="flex mr-2 md:mr-4 items-center">
                                                     <EyeIcon className="icon-at-user" />
-                                                    <h4 className="ml-2 text-gray-900 text-sm md:text-sm font-medium">52K Views</h4>
+                                                    <h4 className="ml-2 text-gray-900 text-sm md:text-sm font-medium">{item.views && 0} Views</h4>
                                                 </div>
                                                 <div className="flex mr-2 md:mr-4 items-center">
                                                     <LikeIcon className="icon-at-user" />
-                                                    <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">283 Likes</h4>
+                                                    <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">{item.likes && 0} Likes</h4>
                                                 </div>
-                                                <div className="flex mr-2 md:mr-4 items-center">
-                                                    <CalendarIcon className="icon-at-user" />
-                                                    <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">283 Likes</h4>
-                                                </div>
+                                                {/* <div className="flex mr-2 md:mr-4 items-center">
+                                                  <CalendarIcon className="icon-at-user" />
+                                                  <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">283 Likes</h4>
+                                              </div> */}
                                             </div>
                                         }
                                         {
                                             category && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
-                                                {/* {
+                                                {
                                                     category.map((item, index) => {
-                                                        return index < 2 ? (<><h6>{item}</h6><div className="rounded-full w-2 h-2 bg-gray-700 mx-2"></div></>)
-                                                            : (<><h6>{item}</h6></>)
+                                                        return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="inline-block">{item}</h6></span>)
+                                                        // : (<span key={index}><div className="rounded-full w-2 h-2 bg-gray-700 mx-2"></div><h6>{item}</h6></span>)
                                                     })
-                                                } */}
+                                                }
                                             </div>
                                         }
+                                        <Modal
+                                            isOpen={modalIsOpen}
+                                            onAfterOpen={afterOpenModal}
+                                            onRequestClose={closeModal}
+                                            style={customStyles}
+                                            contentLabel="Livestream Modal"
+                                            shouldCloseOnOverlayClick={false}
+                                        >
+                                            <div className="flex items-start justify-between border-b border-solid border-gray-300 rounded-t">
+                                                <h6 ref={_subtitle => (subtitle = _subtitle)}>{title}</h6>
+                                                <button
+                                                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                                    onClick={closeModal}  >
+                                                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                                                </button>
+                                            </div>
+                                            {/*body*/}
+                                            <div className="relative p-6 flex-auto">
+                                                {ReactHtmlParserfrom(dataModal)}
+                                            </div>
+                                        </Modal>
+
                                         {
-                                            socmedCustom && (
-                                                <div className="merchant-dashboard my-2 flex flex-wrap">
-                                                    <FbIcon className="mr-4" />
-                                                    <IgIcon className="mr-4" />
-                                                    <TtIcon className="mr-4" />
-                                                    <ShareIconMobile className="mr-4" />
-                                                </div>
-                                            )
+                                            <div className="merchant-dashboard my-2 flex flex-wrap">
+                                                {
+                                                    fb && (
+                                                        <button style={{ transition: "all .15s ease" }}
+                                                            onClick={() => openModal(fb)}><FbIcon className="mr-4" />
+                                                        </button>)
+                                                }
+                                                {
+                                                    ig && (<button style={{ transition: "all .15s ease" }}
+                                                        onClick={() => openModal(ig)}><IgIcon className="mr-4" /></button>)
+
+                                                }
+                                                {
+                                                    tiktok && (<button style={{ transition: "all .15s ease" }}
+                                                        onClick={() => openModal(tiktok)}><TtIcon className="mr-4" /></button>)
+                                                }
+                                                <button href=""><ShareIconMobile className="mr-4" /></button>
+                                            </div>
                                         }
                                         {
                                             actions && (
                                                 <div className="mt-4 flex items-center">
-                                                    <Link to={actionLinks} className="font-semibold text-base md:text-lg text-red-600 mr-4">Edit</Link>
-                                                    <Link className="font-semibold text-base md:text-lg text-red-600 mr-4">Delete</Link>
+                                                    <Link to={{
+                                                        pathname: actionLinks,
+                                                        query: { linkVideo, actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, ig, tiktok, fb, category1, category2, category3, buttons }
+                                                    }} className="font-semibold text-base md:text-lg text-red-600 mr-4">Edit</Link>
+                                                    <DeleteButton id={item.id} />
                                                 </div>
                                             )
                                         }

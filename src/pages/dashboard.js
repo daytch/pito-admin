@@ -112,7 +112,7 @@ const Dashboard = () => {
                         toggleView ? mostView && <div>
                             {
                                 mostView.map((item, index) => {
-                                    return (<MostviewsVideos key={index} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                    return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
                                 })
                             }
                         </div> : null
@@ -121,7 +121,7 @@ const Dashboard = () => {
                         toggleFav ? mostFav && <div>
                             {
                                 mostFav.map((item, index) => {
-                                    return (<MostviewsVideos key={index} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                    return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
                                 })
                             }
                         </div> : null
@@ -130,7 +130,7 @@ const Dashboard = () => {
                         toggleShared ? mostShared && <div>
                             {
                                 mostShared.map((item, index) => {
-                                    return (<MostviewsVideos key={index} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                    return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
                                 })
                             }
                         </div> : null

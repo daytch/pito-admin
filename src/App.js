@@ -9,6 +9,7 @@ import Login from 'pages/login'
 import ForgotPassword from 'pages/forgotPassword'
 import Dashboard from 'pages/dashboard'
 import LivestreamList from 'pages/livestream-list'
+import LivestreamDetail from 'pages/livestream-detail'
 import MerchantList from 'pages/merchant-list'
 import MerchantDetail from 'pages/merchant-detail'
 import MerchantEdit from 'pages/merchant-edit'
@@ -31,7 +32,14 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/livestream" component={LivestreamList} />
+        {/* <PrivateRoute path="/livestream" component={LivestreamList} />  */}
+        <Route path="/livestream"
+          render={({ match: { url } }) => (
+            <>
+              <PrivateRoute path={`${url}/`} component={LivestreamList} exact />
+              <PrivateRoute path={`${url}/detail/:id`} component={LivestreamDetail} exact />
+            </>
+          )} />
         <Route path="/merchant"
           render={({ match: { url } }) => (
             <>
