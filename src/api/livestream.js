@@ -6,6 +6,6 @@ export default {
     getLivestreamDetail: (id) => axios.get("/merchant/getVideosDetail?videoId=" + id),
     getDashboard: () => axios.get("/admin/getDashboard"),
     getLivestream: (param) => axios.post("/admin/listVideos",param),
-    deleteLivestream: (data) => axios.post("/merchant/deleteLivestream", data),
+    deleteLivestream: (data) => axios.post("/admin/deleteLivestream", data),
 }
 

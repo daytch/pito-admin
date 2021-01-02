@@ -41,6 +41,7 @@ const LivestreamList = () => {
 
     const [isLoading, setLoading] = useState(true)
     const [videos, setVideos] = useState([])
+    const [filter,setFilter]=useState('')
 
     function getData(param) {
         Livestream.getLivestream({
@@ -54,7 +55,7 @@ const LivestreamList = () => {
     }
     useEffect(() => {
         Livestream.getLivestream({
-            type: "list_vid_popular",
+            type: "live_videos",
             page: 1
         }).then((res) => {
             setVideos(res.data)
@@ -75,6 +76,7 @@ const LivestreamList = () => {
                     title: 'Success',
                     text: res.message
                 })
+                getData('')
             } else {
                 MySwal.fire({
                     icon: 'danger',
@@ -85,16 +87,31 @@ const LivestreamList = () => {
         });
     }
     function changeDropdown(e) {
-        console.log(e)
         switch (e.value) {
             case 'Ongoing':
-                getData('list_vid_recom')
+                getData('live_videos')
+                setFilter('live_videos')
                 break;
             case 'Upcoming':
-                getData('list_vid_upcoming')
+                getData('upcoming_videos')
+                setFilter('upcoming_videos')
                 break;
             case 'Previous':
-                getData('list_vid_previous')
+                getData('previous_videos')
+                setFilter('previous_videos')
+                break;
+        }
+    }
+    function changeDropdown(e) {
+        switch (e.value) {
+            case 'Ongoing':
+                getData('live_videos')
+                break;
+            case 'Upcoming':
+                getData('upcoming_videos')
+                break;
+            case 'Previous':
+                getData('previous_videos')
                 break;
         }
     }

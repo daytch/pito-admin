@@ -1,21 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.44d1a0fe.chunk.css",
-    "main.js": "/static/js/main.3c8a629b.chunk.js",
-    "main.js.map": "/static/js/main.3c8a629b.chunk.js.map",
+    "main.css": "/static/css/main.ce74a35a.chunk.css",
+    "main.js": "/static/js/main.5d096db2.chunk.js",
+    "main.js.map": "/static/js/main.5d096db2.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.b554da55.js",
     "runtime-main.js.map": "/static/js/runtime-main.b554da55.js.map",
     "static/css/2.ccc6f86f.chunk.css": "/static/css/2.ccc6f86f.chunk.css",
-    "static/js/2.00037f9e.chunk.js": "/static/js/2.00037f9e.chunk.js",
-    "static/js/2.00037f9e.chunk.js.map": "/static/js/2.00037f9e.chunk.js.map",
+    "static/js/2.df62f0c6.chunk.js": "/static/js/2.df62f0c6.chunk.js",
+    "static/js/2.df62f0c6.chunk.js.map": "/static/js/2.df62f0c6.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.ccc6f86f.chunk.css.map": "/static/css/2.ccc6f86f.chunk.css.map",
-    "static/css/main.44d1a0fe.chunk.css.map": "/static/css/main.44d1a0fe.chunk.css.map",
-    "static/js/2.00037f9e.chunk.js.LICENSE.txt": "/static/js/2.00037f9e.chunk.js.LICENSE.txt",
+    "static/css/main.ce74a35a.chunk.css.map": "/static/css/main.ce74a35a.chunk.css.map",
+    "static/js/2.df62f0c6.chunk.js.LICENSE.txt": "/static/js/2.df62f0c6.chunk.js.LICENSE.txt",
     "static/media/analytic-icon.4555494d.svg": "/static/media/analytic-icon.4555494d.svg",
     "static/media/arrow-custom.b0438a31.svg": "/static/media/arrow-custom.b0438a31.svg",
     "static/media/arrow-white.39ec4e8d.svg": "/static/media/arrow-white.39ec4e8d.svg",
-    "static/media/calendar-icon.2b9857c4.svg": "/static/media/calendar-icon.2b9857c4.svg",
     "static/media/categories-icon.dafd0158.svg": "/static/media/categories-icon.dafd0158.svg",
     "static/media/dashboard-icon.f4912018.svg": "/static/media/dashboard-icon.f4912018.svg",
     "static/media/default.8225dda3.svg": "/static/media/default.8225dda3.svg",
@@ -30,6 +29,7 @@
     "static/media/icon-play.420678b9.svg": "/static/media/icon-play.420678b9.svg",
     "static/media/icon-search.74af8a7e.svg": "/static/media/icon-search.74af8a7e.svg",
     "static/media/ig-icon.ba955abf.svg": "/static/media/ig-icon.ba955abf.svg",
+    "static/media/livestream-icon.79dc3f11.svg": "/static/media/livestream-icon.79dc3f11.svg",
     "static/media/login-icon.d4f9976f.svg": "/static/media/login-icon.d4f9976f.svg",
     "static/media/logout-icon.8a5e1ddd.svg": "/static/media/logout-icon.8a5e1ddd.svg",
     "static/media/merchantlist-icon.abcd1093.svg": "/static/media/merchantlist-icon.abcd1093.svg",
@@ -39,7 +39,6 @@
     "static/media/share-icon-mobile.112e5d50.svg": "/static/media/share-icon-mobile.112e5d50.svg",
     "static/media/share-icon.5f6464d0.svg": "/static/media/share-icon.5f6464d0.svg",
     "static/media/subscriber-icon.0bb59776.svg": "/static/media/subscriber-icon.0bb59776.svg",
-    "static/media/thumbnail-one.370221f7.jpg": "/static/media/thumbnail-one.370221f7.jpg",
     "static/media/thumbs-like-icon.857a0a2c.svg": "/static/media/thumbs-like-icon.857a0a2c.svg",
     "static/media/ticketsup-icon.48831602.svg": "/static/media/ticketsup-icon.48831602.svg",
     "static/media/tiktok-icon.cc60323f.svg": "/static/media/tiktok-icon.cc60323f.svg",
@@ -48,8 +47,8 @@
   "entrypoints": [
     "static/js/runtime-main.b554da55.js",
     "static/css/2.ccc6f86f.chunk.css",
-    "static/js/2.00037f9e.chunk.js",
-    "static/css/main.44d1a0fe.chunk.css",
-    "static/js/main.3c8a629b.chunk.js"
+    "static/js/2.df62f0c6.chunk.js",
+    "static/css/main.ce74a35a.chunk.css",
+    "static/js/main.5d096db2.chunk.js"
   ]
 }

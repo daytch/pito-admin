@@ -51,16 +51,17 @@ const UserLivestreamVideos = ({ ListVideo }) => {
                         <div key={index} className="mt-8 flex flex-wrap xl:flex-no-wrap">
                             <div className="">
                                 <div className="item relative">
-                                    <figure className="item-image-user">
-                                        <div className="minute-user py-2 px-2">
-                                            <p className="font-medium text-sm text-white float-right">{/*Moment.duration(Moment(item.end_time).diff(Moment(item.start_time))).format("HH:mm:ss")*/}30:32</p>
-                                        </div>
-                                        <PlayIcon style={{ transition: "all .15s ease" }}
-                                            onClick={() => openModal(item.iframe)} className="icon" />
-                                        <img src={item.img_thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={item.title} />
-                                    </figure>
+                                    <Link to={`/livestream/detail/${item.id}`} className="link-wrapped">
+                                        <figure className="item-image-user">
+                                            <div className="minute-user py-2 px-2">
+                                                <p className="font-medium text-sm text-white float-right">{/*Moment.duration(Moment(item.end_time).diff(Moment(item.start_time))).format("HH:mm:ss")*/}30:32</p>
+                                            </div>
+                                            <PlayIcon style={{ transition: "all .15s ease" }}
+                                                onClick={() => openModal(item.iframe)} className="icon" />
+                                            <img src={item.img_thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={item.title} />
+                                        </figure>
+                                    </Link>
                                 </div>
-                                <Link to="/" className="link-wrapped hidden"></Link>
                             </div>
                             <div className="item-meta xl:px-4 w-full xl:w-2/3">
                                 <h4 className="font-semibold text-lg md:text-xl text-gray-700 break-all">{item.title}</h4>
