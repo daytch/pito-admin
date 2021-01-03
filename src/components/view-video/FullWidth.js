@@ -13,15 +13,22 @@ import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
 import iconLive from 'assets/images/live-icon.png'
 import DefaultImg from 'assets/images/default.svg'
 import Modal from 'react-modal'
-import ReactHtmlParserfrom from 'react-html-parser';
+import ReactHtmlParserfrom from 'react-html-parser'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, ig, tiktok, fb, category, buttons }) => {
+const FullWidth = ({ displayToolTip, DeleteButton, linkVideo, actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, ig, tiktok, fb, category, buttons }) => {
 
     const [category1, setCategory1] = useState("")
     const [category2, setCategory2] = useState("")
     const [category3, setCategory3] = useState("")
-    const [dataModal, setDataModal] = useState('');
+    const [dataModal, setDataModal] = useState('')
     const [modalIsOpen, setIsOpen] = useState(false)
+    const [phoneTooltip, setPhoneTooltip] = useState({
+        show: false,
+        x: 0,
+        y: 0,
+        orientLeft: false
+    })
 
     useEffect(() => {
         if (typeof category !== "undefined") {
@@ -61,8 +68,8 @@ const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions
             {
                 dataVideos.map((item, index) => {
                     return (
-                        <div className="flex w-full flex-col lg:flex-row" key={index}>
-                            <div className="flex">
+                        <div className="inline-flex" key={index}>
+                            <div className="flex-1">
                                 <div className="item relative w-auto">
                                     <Link to={`/livestream/detail/${item.id}`} className="link-wrapped">
                                         <figure className="item-image-live">
@@ -79,7 +86,8 @@ const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions
                                                     </>
                                                 ) : null
                                             }
-                                            <PlayIcon className="icon" />
+                                            <PlayIcon style={{ transition: "all .15s ease" }}
+                                                onClick={() => openModal(item.iframe)} className="icon" />
                                             <img src={item.thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
                                         </figure>
                                     </Link>
@@ -93,7 +101,7 @@ const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions
                                     </div>
                                 }
                             </div>
-                            <div className="flex flex-col-reverse md:flex-row">
+                            <div className="flex-1">
                                 {
                                     liveRecord &&
                                     <div className="flex md:flex-col px-2 xxl:px-8 items-center">
@@ -135,7 +143,7 @@ const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions
                                             subtitle && <h5 className="text-gray-700 font-semibold mb-2 break-all">Title Lorem Ipsum...</h5>
                                         }
                                         {
-                                            caption && <p className="text-justify text-sm md:text-base break-all">
+                                            caption && <p className="text-justify text-sm break-all">
                                                 {caption}
                                             </p>
                                         }
@@ -150,21 +158,44 @@ const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions
                                                     <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">{item.likes && 0} Likes</h4>
                                                 </div>
                                                 {/* <div className="flex mr-2 md:mr-4 items-center">
-                                                  <CalendarIcon className="icon-at-user" />
-                                                  <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">283 Likes</h4>
-                                              </div> */}
+                                                    <CalendarIcon className="icon-at-user" />
+                                                    <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">283 Likes</h4>
+                                                </div> */}
                                             </div>
                                         }
                                         {
                                             category && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
                                                 {
                                                     category.map((item, index) => {
-                                                        return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="inline-block">{item}</h6></span>)
+                                                        return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="inline-block text-sm">{item}</h6></span>)
                                                         // : (<span key={index}><div className="rounded-full w-2 h-2 bg-gray-700 mx-2"></div><h6>{item}</h6></span>)
                                                     })
                                                 }
                                             </div>
                                         }
+                                        {
+                                            <div className="merchant-dashboard my-2 flex flex-wrap">
+                                                {
+                                                    fb && (
+                                                        <button style={{ transition: "all .15s ease" }}
+                                                            onClick={() => openModal(fb)}><FbIcon className="mr-4" />
+                                                        </button>)
+                                                }
+                                                {
+                                                    ig && (<button style={{ transition: "all .15s ease" }}
+                                                        onClick={() => openModal(ig)}><IgIcon className="mr-4" /></button>)
+
+                                                }
+                                                {
+                                                    tiktok && (<button style={{ transition: "all .15s ease" }}
+                                                        onClick={() => openModal(tiktok)}><TtIcon className="mr-4" /></button>)
+                                                }
+                                                <CopyToClipboard text={'Shared URL here'}>
+                                                    <button onClick={displayToolTip}><ShareIconMobile className="mr-4" /></button>
+                                                </CopyToClipboard>
+                                            </div>
+                                        }
+
                                         <Modal
                                             isOpen={modalIsOpen}
                                             onAfterOpen={afterOpenModal}
@@ -188,33 +219,13 @@ const FullWidth = ({ DeleteButton, linkVideo, actionLinks, viewsElement, actions
                                         </Modal>
 
                                         {
-                                            <div className="merchant-dashboard my-2 flex flex-wrap">
-                                                {
-                                                    fb && (
-                                                        <button style={{ transition: "all .15s ease" }}
-                                                            onClick={() => openModal(fb)}><FbIcon className="mr-4" />
-                                                        </button>)
-                                                }
-                                                {
-                                                    ig && (<button style={{ transition: "all .15s ease" }}
-                                                        onClick={() => openModal(ig)}><IgIcon className="mr-4" /></button>)
-
-                                                }
-                                                {
-                                                    tiktok && (<button style={{ transition: "all .15s ease" }}
-                                                        onClick={() => openModal(tiktok)}><TtIcon className="mr-4" /></button>)
-                                                }
-                                                <button href=""><ShareIconMobile className="mr-4" /></button>
-                                            </div>
-                                        }
-                                        {
                                             actions && (
                                                 <div className="mt-4 flex items-center">
                                                     <Link to={{
                                                         pathname: actionLinks,
                                                         query: { linkVideo, actionLinks, viewsElement, actions, dataVideos, socmedVertical, socmedCustom, liveRecord, title, name, subtitle, caption, ig, tiktok, fb, category1, category2, category3, buttons }
                                                     }} className="font-semibold text-base md:text-lg text-red-600 mr-4">Edit</Link>
-                                                    <DeleteButton id={item.id} />
+                                                    <DeleteButton id={item.id} />{/* <button onClick={() => submitDelete} className="font-semibold text-base md:text-lg text-red-600 mr-4">Delete</button> */}
                                                 </div>
                                             )
                                         }

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReactHtmlParserfrom from 'react-html-parser'
 import { ReactComponent as ShareIconMobile } from 'assets/images/share-icon-mobile.svg'
-// import Moment from 'moment'
 
 //import Component SVG and image
 import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
@@ -11,8 +10,8 @@ import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
 import { ReactComponent as FbIcon } from 'assets/images/fb-icon.svg'
 import { ReactComponent as IgIcon } from 'assets/images/ig-icon.svg'
 import { ReactComponent as TtIcon } from 'assets/images/tiktok-icon.svg'
-import DefaultImg from 'assets/images/default.svg'
 import Modal from 'react-modal'
+import DefaultImg from 'assets/images/default.svg'
 Modal.setAppElement('*'); // suppresses modal-related test warnings.
 
 const UserLivestreamVideos = ({ ListVideo }) => {
@@ -49,12 +48,12 @@ const UserLivestreamVideos = ({ ListVideo }) => {
                 ListVideo && ListVideo.map((item, index) => {
                     return (
                         <div key={index} className="mt-8 flex flex-wrap xl:flex-no-wrap">
-                            <div className="">
+                            <div className="flex">
                                 <div className="item relative">
                                     <Link to={`/livestream/detail/${item.id}`} className="link-wrapped">
                                         <figure className="item-image-user">
                                             <div className="minute-user py-2 px-2">
-                                                <p className="font-medium text-sm text-white float-right">{/*Moment.duration(Moment(item.end_time).diff(Moment(item.start_time))).format("HH:mm:ss")*/}30:32</p>
+                                                <p className="font-medium text-sm text-white float-right">30:32</p>
                                             </div>
                                             <PlayIcon style={{ transition: "all .15s ease" }}
                                                 onClick={() => openModal(item.iframe)} className="icon" />
@@ -65,7 +64,7 @@ const UserLivestreamVideos = ({ ListVideo }) => {
                             </div>
                             <div className="item-meta xl:px-4 w-full xl:w-2/3">
                                 <h4 className="font-semibold text-lg md:text-xl text-gray-700 break-all">{item.title}</h4>
-                                <p className="font-light mt-2 text-xs md:text-sm text-justify text-gray-700">
+                                <p className="overflow-ellipsis overflow-hidden h-10 break-all font-light mt-2 text-xs md:text-sm text-justify text-gray-700">
                                     {item.description}
                                 </p>
                                 <div className="icon-controller-user flex flex-wrap items-center py-2">
@@ -131,13 +130,13 @@ const UserLivestreamVideos = ({ ListVideo }) => {
                                         {ReactHtmlParserfrom(dataModal)}
                                     </div>
                                 </Modal>
+
                             </div>
                         </div>
                     )
                 })
             }
-        </>
-    )
+        </>)
 }
 
 export default UserLivestreamVideos;

@@ -139,7 +139,9 @@ const UserDetail = () => {
                             <div className="flex flex-col pt-16">
                                 <div className="flex md:justify-between items-center">
                                     <p className="px-6 text-red-600 font-bold text-base">Favorite Livestreams</p>
-                                    <Dropdown title="Most Recent" onClick={changeLivestream} items={MostList} />
+                                    <div className="w-50 text-sm px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" >
+                                        <Dropdown witdh="w-48" title="Most Recent" onClick={changeLivestream} items={MostList} />
+                                    </div>
                                 </div>
                                 <div className="px-2">
                                     {
@@ -162,7 +164,9 @@ const UserDetail = () => {
                         <div className="pt-10 md:pt-8 flex flex-col px-4">
                             <div className="flex justify-between items-center">
                                 <p className="text-red-600 font-bold text-base">Favorite Merchants</p>
-                                <Dropdown title="Most Recent" onClick={changeMerchant} items={MostRecent2} />
+                                <div className="w-50 text-sm px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" >
+                                    <Dropdown witdh="w-48" title="Most Recent" onClick={changeMerchant} items={MostRecent2} />
+                                </div>
                             </div>
                             <div className="pt-6">
                                 {

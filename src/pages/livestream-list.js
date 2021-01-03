@@ -115,9 +115,19 @@ const LivestreamList = () => {
                 break;
         }
     }
+    
+    const displayToolTip = () => {
+        if (!phoneTooltip.show) {
+            setPhoneTooltip(prev => ({ ...prev, show: true })); // show tooltip
+            setTimeout(() => {
+                setPhoneTooltip(prev => ({ ...prev, show: false })); // remove/hide tooltip
+            }, 1500);
+        }
+    }
+
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
-            <section className="flex flex-col xl:flex-row ">
+            <section className="min-h-screen flex flex-col xl:flex-row ">
                 <Sidebar />
                 <div className="py-20 px-5 w-full">
                     <div className="flex flex-col md:flex-row md:justify-between items-center">
@@ -140,7 +150,7 @@ const LivestreamList = () => {
 
                                 return (
                                     <div key={index} className="flex flex-wrap w-full mt-4">
-                                        <FullWidth actionLinks={'/livestream/' + item.id} dataVideos={ListVideo} title={item.title} viewsElement={true} DeleteButton={DeleteButton} actions={true} ig={item.instagram_url} fb={item.facebook_url} tiktok={item.tiktok_url} caption={item.description} category={item.categories} socmedCustom={true} />
+                                        <FullWidth actionLinks={'/livestream/detail/' + item.id} dataVideos={ListVideo} title={item.title} viewsElement={true} DeleteButton={DeleteButton} actions={true} ig={item.instagram_url} fb={item.facebook_url} tiktok={item.tiktok_url} caption={item.description} category={item.categories} socmedCustom={true} />
                                     </div>
                                 )
                             })

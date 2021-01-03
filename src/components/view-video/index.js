@@ -46,7 +46,7 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                         <p>{no}.</p>
                         <div className="item relative w-auto px-4 lg:px-2">
                             <figure className="item-image">
-                                <Link to={`/livestream/detail/${id}`} className="link-wrapped">
+                                <Link to={`/dashboard/detail/${id}`} className="link-wrapped">
                                     <PlayIcon style={{ transition: "all .15s ease" }}
                                         onClick={() => openModal(iframe)} className="icon" />
                                     <img src={thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />

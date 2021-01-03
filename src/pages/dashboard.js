@@ -109,7 +109,7 @@ const Dashboard = () => {
                         <option value="share" className="text-black">Most Shared</option>
                     </SelectForm>
                     {
-                        toggleView ? mostView && <div>
+                        toggleView ? mostView && <div className="mostview-dashboard overflow-auto">
                             {
                                 mostView.map((item, index) => {
                                     return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
@@ -118,7 +118,7 @@ const Dashboard = () => {
                         </div> : null
                     }
                     {
-                        toggleFav ? mostFav && <div>
+                        toggleFav ? mostFav && <div className="mostview-dashboard overflow-auto">
                             {
                                 mostFav.map((item, index) => {
                                     return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
@@ -127,7 +127,7 @@ const Dashboard = () => {
                         </div> : null
                     }
                     {
-                        toggleShared ? mostShared && <div>
+                        toggleShared ? mostShared && <div className="mostview-dashboard overflow-auto">
                             {
                                 mostShared.map((item, index) => {
                                     return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)

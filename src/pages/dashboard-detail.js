@@ -18,7 +18,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
-const LivestreamDetail = () => {
+const DashboardDetail = () => {
     const [isLoading, setLoading] = useState(true)
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
@@ -38,10 +38,10 @@ const LivestreamDetail = () => {
     const { id } = useParams();
     const [iframe, setIframe] = useState('');
     const history = useHistory()
-    console.log(useParams())
+
     useEffect(() => {
         setLoading(true)
-        livestream.getLivestreamDetail(id).then((res) => {
+        livestream.getDashboardDetail(id).then((res) => {
             let data = res.data;
             
             if (Object.keys(data).length < 1) {
@@ -177,4 +177,4 @@ const LivestreamDetail = () => {
     )
 }
 
-export default LivestreamDetail
+export default DashboardDetail

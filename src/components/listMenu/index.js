@@ -3,10 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 
 const ListMenu = ({ linkTo, children, button, logout, dashboard }) => {
+    console.log("button = " + button)
+    console.log("dashboard = " + dashboard)
     return (
         <>
             <div className="list-menu py-3 my-2 hover:bg-black transition-all duration-200">
-                <NavLink to={linkTo ? linkTo : "#"} onClick={button ? logout : null} activeClassName={button || dashboard ? "" : "active"} className="link-wrapped">
+                <NavLink to={linkTo ? linkTo : "#"} onClick={button ? logout : null} activeClassName={button ? "" : "active"} className="link-wrapped">
                     {
                         children
                     }

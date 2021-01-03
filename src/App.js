@@ -8,6 +8,7 @@ import PrivateRoute from 'Routes/PrivateRoute'
 import Login from 'pages/login'
 import ForgotPassword from 'pages/forgotPassword'
 import Dashboard from 'pages/dashboard'
+import DashboardDetail from 'pages/dashboard-detail'
 import LivestreamList from 'pages/livestream-list'
 import LivestreamDetail from 'pages/livestream-detail'
 import MerchantList from 'pages/merchant-list'
@@ -31,8 +32,14 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/forgot-password" component={ForgotPassword} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        {/* <PrivateRoute path="/livestream" component={LivestreamList} />  */}
+        {/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
+        <Route path="/dashboard"
+          render={({ match: { url } }) => (
+            <>
+              <PrivateRoute path={`${url}/`} component={Dashboard} exact />
+              <PrivateRoute path={`${url}/detail/:id`} component={DashboardDetail} exact />
+            </>
+          )} />
         <Route path="/livestream"
           render={({ match: { url } }) => (
             <>
@@ -55,16 +62,16 @@ function App() {
               <PrivateRoute path={`${url}/:id`} component={userDetail} />
             </>
           )} />
-          <Route path="/ticket"
-            render={({ match: { url } }) => (
-              <>
-                <PrivateRoute path={`${url}/`} component={Tickets} exact />
-                <PrivateRoute path={`${url}/:id`} component={TicketDetail} />
-              </>
-            )} />
+        <Route path="/ticket"
+          render={({ match: { url } }) => (
+            <>
+              <PrivateRoute path={`${url}/`} component={Tickets} exact />
+              <PrivateRoute path={`${url}/:id`} component={TicketDetail} />
+            </>
+          )} />
         <PrivateRoute path="/categories" component={Categories} />
         <PrivateRoute path="/analytic" component={Analytic} />
-       
+
         <Route path="*" component={NotFound404} />
       </Switch>
     </Router>

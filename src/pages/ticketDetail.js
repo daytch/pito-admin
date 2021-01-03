@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from 'components/SideNavbar'
 import Card from 'components/card'
-import axios from 'configs/axios'
 import Spinner from 'components/spinner'
 import ticket from 'api/ticket'
 import Dropdown from 'components/forms/dropdown'
+import { Link } from 'react-router-dom'
+import Tickets from './tickets'
 
 const TicketDetail = (props) => {
 
@@ -37,14 +38,14 @@ const TicketDetail = (props) => {
         // eslint-disable-next-line 
     }, [])
 
-
-
     function handleSubmit() {
+        setLoading(true)
         const formData = new FormData();
         formData.append('ticket_id', props.match.params.id)
         formData.append('message', message)
-        axios.post('/admin/insertMessageTicket', formData).then(() => {
+        Ticket.ReplyTicket(formData).then(() => {
             getMessage()
+            setLoading(false)
         })
     }
 
@@ -62,23 +63,32 @@ const TicketDetail = (props) => {
             value: 'Close'
         }
     ]
+
     return (
-        <Spinner isLoading={isLoading} className="min-h-screen">
+        <Spinner isLoading={isLoading}>
             <section className="min-h-screen flex flex-col xl:flex-row ">
                 <Sidebar />
                 <div className="chat-history">
                     <Card ListData={data} />
                     {
-                        hideInput ? null :
+                        hideInput ? (
+                            <div className="ml-20 mt-5">
+                                <div className="flex">
+                                    <Link to={"/ticket"} className="border border-gray-300 text-red-600 rounded-md text-lg px-6 py-2 mr-4">Back</Link>
+                                </div>
+                            </div>) :
                             (
                                 <div className="ml-16">
                                     <div className="flex flex-wrap items-start mt-4">
-                                        <textarea onChange={e => handleChange(e.target.value)} placeholder="Message" className="w-full md:w-4/5 h-32 px-4 py-2 border border-gray-300 rounded-lg" />
+                                        <textarea onChange={e => handleChange(e.target.value)} placeholder="Message" className="w-3/5 h-32 px-4 py-2 border border-gray-300 rounded-lg" />
                                     </div>
                                     <br />
-                                    <Dropdown title="Open" items={items} />
+                                    <div className="w-1/6 text-sm px-2 py-1 my-2 md:my-0 border border-gray-300 rounded-md">
+                                        <Dropdown witdh="w-50" title="Open" items={items} />
+                                    </div>
                                     <br />
                                     <div className="flex">
+                                        <Link to={"/support"} className="border border-gray-300 text-red-600 rounded-md text-lg px-6 py-2 mr-4">Back</Link>
                                         <button onClick={handleSubmit} className="border lg:w-32 w-full text-white font-medium bg-red-600 rounded-lg text-lg px-10 py-2">Reply</button>
                                     </div>
                                 </div>)

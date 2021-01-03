@@ -47,9 +47,9 @@ const SideNavbar = () => {
                     <PitoLogoSmall />
                 </div>
                 <div className="mb-navbar flex items-center px-4 py-3">
-                    <h5 className="text-white text-xs text-right px-2">Hello, <br /><span className="font-medium text-red-600 text-sm">{name}</span></h5>
+                <h5 className="text-white text-xs text-center px-2">Hello, <br /><span className="font-medium text-red-600 text-xs">{name}</span></h5>
                     {
-                        img ? (<img style={{ width: 80, height: 80, borderRadius: 80 / 2 }} src={img} className="mx-auto" alt={name}></img>) :
+                        img ? (<img style={{ width: 70, height: 70, borderRadius: 70 / 2 }} src={img} className="mx-auto" alt={name}></img>) :
                             (<Avatar name={name} className="mx-auto" round={true} size="75px" />)
                     }
                     <button onClick={() => setIsOpen(!isOpen)}><Hamburger /></button>
@@ -109,13 +109,13 @@ const SideNavbar = () => {
                     <PitoLogoSmall className="mx-auto" />
                     <div className="profile pt-6 text-center">
                         {
-                            img ? (<img style={{ width: 80, height: 80, borderRadius: 80 / 2 }} src={img} className="mx-auto" alt={name}></img>) :
+                            img ? (<img style={{ width: 70, height: 70, borderRadius: 70 / 2 }} src={img} className="mx-auto" alt={name}></img>) :
                                 (<Avatar name={name} className="mx-auto" round={true} size="75px" />)
                         }
-                        <h5 className="text-white mt-4 text-sm">Hello, <br /><span className="font-medium text-red-600 text-base">{name}</span></h5>
+                        <h5 className="text-white text-xs text-center px-2">Hello, <br /><span className="font-medium text-red-600 text-xs">{name}</span></h5>
                     </div>
                     <section className="mt-2">
-                        <ListMenu linkTo="/">
+                        <ListMenu linkTo="/dashboard">
                             <DashboardIcon className={classNameSVG} />
                         </ListMenu>
                         <ListMenu linkTo="/livestream">
@@ -130,7 +130,7 @@ const SideNavbar = () => {
                         <ListMenu linkTo="/analytic">
                             <AnalyticIcon className={classNameSVG} />
                         </ListMenu>
-                        <ListMenu linkTo="/tickets">
+                        <ListMenu linkTo="/ticket">
                             <TicketIcon className={classNameSVG} />
                         </ListMenu>
                         <ListMenu linkTo="/categories">

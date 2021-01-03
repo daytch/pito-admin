@@ -19898,6 +19898,11 @@ item:hover figure.item-image-user svg.icon {
   height: 95px;
 }
 
+.favmerchant-at-user img {
+  width: 95px;
+  height: 95px;
+}
+
 .fp {
   height: 100vh;
 }
@@ -95908,14 +95913,37 @@ item:hover figure.item-image-live-detail svg.icon {
   transform: translate(-50%, -50%) !important;
 }
 
+.mostview-dashboard {
+  height: 71rem;
+  margin-top: 1rem;
+}
+
 @media only screen and (max-width: 600px) {
   .icon-upload {
-      display: none;
+    display: none;
+  }
+  .livestream-detail-vid {
+    margin-bottom: -115px;
+  }
+}
+
+/**Desktop Query*/
+@media only screen and (min-width: 768px) {
+  .category2-livestream {
+    margin-left: 3px;
+    margin-right: 3px;
+    width: fit-content;
+  }
+  .history-vid-profile {
+    height: 48rem;
+  }
+  .merchantedit-img {
+    width: 45%;
   }
 }
 
 @media only screen and (min-width: 1920px) {
   .clipper {
-      width: 40vw !important;
+    width: 40vw !important;
   }
 }

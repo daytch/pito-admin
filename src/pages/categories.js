@@ -104,8 +104,8 @@ const Categories = () => {
     }
 
     const DeleteButton = (id) => {
-        return (<><button onClick={() => editCategory(id)} className="py-2 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Edit</button>
-            <button onClick={() => deleteCategory(id)} className="py-2 mt-2 w-full px-4 border border-red-600 font-medium text-red-600 rounded-3xl">Delete</button></>)
+        return (<><button onClick={() => editCategory(id)} className="text-xs py-2 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Edit</button>
+            <button onClick={() => deleteCategory(id)} className="text-xs py-2 mt-2 w-full px-4 border border-red-600 font-medium text-red-600 rounded-3xl">Delete</button></>)
     };
 
     const tableHeadCategory = [
@@ -157,7 +157,8 @@ const Categories = () => {
             right: 'auto',
             bottom: 'auto',
             marginRight: '-50%',
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
+            width: '34vw'
         }
     };
 
@@ -167,7 +168,7 @@ const Categories = () => {
                 <Sidebar />
                 <div className="py-20 px-5 w-full">
                     <div className="flex justify-end">
-                        <button onClick={() => openModalforInsert()} className="bg-red-600 text-white font-medium text-lg px-4 py-2 rounded-3xl">Add New Category</button>
+                        <button onClick={() => openModalforInsert()} className="bg-red-600 text-white font-medium text-md px-4 py-2 rounded-3xl">Add New Category</button>
                     </div>
                     <div className="flex pt-10 overflow-x-auto">
                         <Table itemHead={tableHeadCategory} itemBodyCategory={data} DeleteButton={DeleteButton} />
@@ -193,17 +194,17 @@ const Categories = () => {
                     <div className="relative p-6 flex-auto">
                         {/* {dataModal && ReactHtmlParserfrom(dataModal)} */}
                         <div className="flex flex-wrap w-full items-start my-2">
-                            <label htmlFor="name" className="w-full md:w-1/4 text-base text-gray-700">Category Name</label>
+                            <label htmlFor="name" className="w-full text-xs text-sm md:w-1/4 text-base text-gray-700">Category Name</label>
                             <input type="text" value={categoryName} onChange={(e) => {
                                 changeName(e.target.value)
-                            }} placeholder="Category Name" className="w-full md:w-4/6 px-4 py-2 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-lg" />
+                            }} placeholder="Category Name" className="w-full text-xs md:w-4/6 px-4 py-2 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-lg" />
                         </div>
                     </div>
                     {/*footer*/}
-                    <div className="flex items-center justify-end border-t border-solid border-gray-300 rounded-b">
-                        <button onClick={() => isUpdate ? updateCategory() : insertCategory()} className="py-2 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Save</button>
+                    <div className="flex items-center justify-end rounded-b">
+                        <button onClick={() => isUpdate ? updateCategory() : insertCategory()} className="pt-1 py-2 text-xs mr-1 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Save</button>
                         <button
-                            className="py-2 mt-2 w-full px-4 border border-red-600 font-medium text-red-600 rounded-3xl"
+                            className="pt-1 py-2 text-xs mr-1 w-full px-4 border border-red-600 font-medium text-red-600 rounded-3xl"
                             type="button"
                             style={{ transition: "all .15s ease" }}
                             onClick={closeModal}
