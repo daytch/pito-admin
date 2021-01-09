@@ -39,6 +39,7 @@ const MerchantEdit = () => {
             let categories = e.data.categories;
 
             // setName(e.data.name)
+            debugger;
             setCat1(categories[0] && categories[0].name ? categories[0].name : 'Category')
             setCat2(categories[1] && categories[1].name ? categories[1].name : 'Category')
             setCat3(categories[2] && categories[2].name ? categories[2].name : 'Category')
@@ -82,6 +83,11 @@ const MerchantEdit = () => {
         setCategoryid({ ...categoryid, [idx]: e.id });
     }
 
+    function goBack() {
+        debugger;
+        window.location.href = "/merchant/" + id
+    }
+
     function handleEdit() {
         setLoading(true);
         let cat = []
@@ -113,19 +119,6 @@ const MerchantEdit = () => {
         formData.append('userId', id.id)
         formData.set('categories', cat)
 
-        // if (currentPass && rePass && newPass) {
-        //     if (newPass !== rePass) {
-        //         alert('New Password dan Retype Passord tidak sama')
-        //     } else {
-        //         users.changePassword({
-        //             old_password: currentPass,
-        //             new_password: newPass
-        //         }).then(e => {
-        //             toast.success(e.message);
-        //         })
-        //     }
-        // }
-
         users.submitMerchantProfile(formData).then(e => {
             if (e.isSuccess) {
                 MySwal.fire("Success", e.message, 'success')
@@ -156,13 +149,16 @@ const MerchantEdit = () => {
                 <div className="py-10 md:py-10 flex flex-col md:flex-row w-full">
                     <div className="w-full md:w-3/5 xxl:w-1/2 px-4">
                         <div className="flex flex-col xl:flex-row xl:items-center">
-                            <div className="w-4/5 md:w-1/2">
+                            <div className="w-4/5 md:w-1/2 flex-row-reverse">
                                 {
-                                    data.img_avatar ? (<img src={data.img_avatar ? data.img_avatar : ava} draggable={false} className="merchantedit-img rounded-full border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt={data.name} />) :
-                                        (<Avatar name={data.name} className="mx-auto" round={true} size="125px" />)
+                                    data.img_avatar ?
+                                        (<><img src={data.img_avatar ? data.img_avatar : ava} draggable={false} className="merchantedit-img rounded-full border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt={data.name} />
+                                            <br />
+                                            <h3 className="mr-8 text-md font-light flex">{data.email}</h3></>) :
+                                        (<><Avatar name={data.name} className="mx-auto" round={true} size="125px" />
+                                            <br />
+                                            <h3 className="mr-8 text-md font-light flex">{data.email}</h3></>)
                                 }
-                                <br />
-                                <h3 className="mr-8 text-md font-light flex flex-row-reverse">{data.email}</h3>
                             </div>
                             <div className="xl:px-8 w-3/6">
                                 <div className="flex flex-wrap w-full pt-2">
@@ -200,7 +196,7 @@ const MerchantEdit = () => {
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Category 1</label>
                                 <div className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" >
-                                    <Dropdown title={cat2} placeholder="Category 1" items={category} onClick={changeCategoryid} idx={1} />
+                                    <Dropdown title={cat1} placeholder="Category 1" items={category} onClick={changeCategoryid} idx={1} />
                                 </div>
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
@@ -212,7 +208,7 @@ const MerchantEdit = () => {
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Category 3</label>
                                 <div className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" >
-                                    <Dropdown title={cat2} placeholder="Category 3" items={category} onClick={changeCategoryid} idx={3} />
+                                    <Dropdown title={cat3} placeholder="Category 3" items={category} onClick={changeCategoryid} idx={3} />
                                 </div>
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
@@ -235,24 +231,9 @@ const MerchantEdit = () => {
                             </div>
                         </div>
                         <div className="flex justify-end md:px-8 mt-4">
-                            <button className="w-1/3 px-4 py-1 rounded-3xl border border-red-600 text-red-600 mx-5 font-medium">Cancel</button>
+                            <button className="w-1/3 px-4 py-1 rounded-3xl border border-red-600 text-red-600 mx-5 font-medium"><Link to={`/merchant/${id.id}`} className="link-wrapped">Cancel</Link></button>
                             <button onClick={handleEdit} className="w-1/3 px-4 py-1 rounded-3xl bg-red-600 text-white font-medium">Save</button>
                         </div>
-                        {/* <div className="flex flex-col pt-8 md:pt-0 px-4 mt-4 md:mt-4">
-                            <h6 className="text-red-600 font-semibold text-lg">Edit Password</h6>
-                            <div className="flex flex-wrap w-full items-start my-2">
-                                <label htmlFor="currentPassword" className="w-full md:w-1/4 text-sm text-gray-700">Current Password</label>
-                                <input type="text" value={currentPass} onChange={(e) => handleCurrent(e.target.value)} placeholder="Your Current Password" className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" />
-                            </div>
-                            <div className="flex flex-wrap w-full items-start my-2">
-                                <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">New Password</label>
-                                <input type="text" value={newPass} onChange={(e) => handleNew(e.target.value)} placeholder="Your New Passoword" className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" />
-                            </div>
-                            <div className="flex flex-wrap w-full items-start my-2">
-                                <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Retype Password</label>
-                                <input type="text" value={rePass} onChange={(e) => handleRe(e.target.value)} placeholder="Retype Your new Passoword" className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" />
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </section>

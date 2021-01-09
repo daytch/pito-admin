@@ -69,7 +69,7 @@ const Dashboard = () => {
             setMostFavMerchant(res.mostfavmerchant.map((item) => {
                 return {
                     nama: item.name,
-                    avatar: item.img_thumbnail,
+                    avatar: item.img_avatar,
                     totalSubs: item.total
                 }
             }))

@@ -38,7 +38,7 @@ const LivestreamDetail = () => {
     const { id } = useParams();
     const [iframe, setIframe] = useState('');
     const history = useHistory()
-    console.log(useParams())
+    
     useEffect(() => {
         setLoading(true)
         livestream.getLivestreamDetail(id).then((res) => {

@@ -24,25 +24,21 @@ import 'react-toastify/dist/ReactToastify.css';
 const SideNavbar = () => {
     const classNameSVG = "icon mx-auto"
     const [isOpen, setIsOpen] = useState(true)
-    const [token] = React.useState(localStorage.getItem('PITO:token'))
+    const [token] = useState(localStorage.getItem('PITO:token'))
     const [img] = useState(localStorage.getItem('PITO:img'))
     const [name] = useState(localStorage.getItem('PITO:name'))
 
     function logout() {
         if (token) {
             toast.success('you have successfully logged out')
-            localStorage.removeItem('PITO:token')
-            window.location.reload();
-            // setTimeout(() => {
-            //     localStorage.removeItem('PITO:token')
-            //     window.location.reload();
-            // }, 3000);
+            localStorage.clear();
+            window.location.href = "/"
         }
     }
     return (
         <>
             <ToastContainer position="top-right" />
-            <div className="min-h-screen w-full flex justify-between xl:hidden bg-gray-800 items-center">
+            <div className="w-full flex justify-between xl:hidden bg-gray-800 items-center">
                 <div className="px-4 py-3">
                     <PitoLogoSmall />
                 </div>
