@@ -104,15 +104,18 @@ const UserDetail = () => {
                                 <h4 className="text-red-600 md:text-2xl font-bold">{data.name}</h4>
                                 <p className="md:text-lg mt-4">{data.email}</p>
                                 <div className="md:flex flex-wrap hidden ">
-                                    <button disabled className="flex items-center text-sm md:text-base shadow-md mr-1 px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
-                                        <FbIcon className="mr-3" /> Facebook
-                                                </button>
-                                    <button disabled className="flex items-center text-sm md:text-base shadow-md px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
-                                        <GoogleIcon className="mr-3" /> Google
-                                                </button>
-                                    <button disabled className="flex items-center text-sm md:text-base shadow-md mr-4 px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
-                                        <EmailIcon className="mr-3" /> Email
-                                                </button>
+                                    {
+                                        data.source == 'fb' ?
+                                            (<button disabled className="flex items-center text-sm md:text-base shadow-md mr-1 px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
+                                                <FbIcon className="mr-3" /> Facebook
+                                            </button>) : data.source == 'google' ?
+                                                (<button disabled className="flex items-center text-sm md:text-base shadow-md px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
+                                                    <GoogleIcon className="mr-3" /> Google
+                                                </button>) :
+                                                (<button disabled className="flex items-center text-sm md:text-base shadow-md mr-4 px-6 mt-4 py-2 border border-gray-50 rounded-3xl bg white text-gray-700">
+                                                    <EmailIcon className="mr-3" /> Email
+                                                </button>)
+                                    }
                                 </div>
                                 <div className="flex">
                                     {

@@ -12,10 +12,12 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 const itemsDate = [
     {
+        id: 0,
+        value: 'Date'
+    }, {
         id: 1,
         value: 'Views'
-    },
-    {
+    }, {
         id: 2,
         value: 'Favourites'
     }, {
@@ -41,7 +43,7 @@ const LivestreamList = () => {
 
     const [isLoading, setLoading] = useState(true)
     const [videos, setVideos] = useState([])
-    const [filter,setFilter]=useState('')
+    const [filter, setFilter] = useState('')
 
     function getData(param) {
         Livestream.getLivestream({
@@ -87,6 +89,7 @@ const LivestreamList = () => {
         });
     }
     function changeDropdown(e) {
+        setLoading(true)
         switch (e.value) {
             case 'Ongoing':
                 getData('live_videos')
@@ -102,20 +105,25 @@ const LivestreamList = () => {
                 break;
         }
     }
-    function changeDropdown(e) {
+    function changeDropdownFilter(e) {
+        debugger;
+        let vids = [...videos];
         switch (e.value) {
-            case 'Ongoing':
-                getData('live_videos')
+            case 'Views':
+                setVideos(vids.sort((a, b) => (a.views > b.views) ? 1 : -1));
                 break;
-            case 'Upcoming':
-                getData('upcoming_videos')
+            case 'Favourites':
+                setVideos(vids.sort((a, b) => (a.likes > b.likes) ? 1 : -1));
                 break;
-            case 'Previous':
-                getData('previous_videos')
+            case 'Shares':
+                setVideos(vids.sort((a, b) => (a.share > b.share) ? 1 : -1));
+                break;
+            case 'Date':
+                setVideos(vids.sort((a, b) => (a.start_time > b.start_time) ? 1 : -1));
                 break;
         }
     }
-    
+
     const displayToolTip = () => {
         if (!phoneTooltip.show) {
             setPhoneTooltip(prev => ({ ...prev, show: true })); // show tooltip
@@ -132,13 +140,13 @@ const LivestreamList = () => {
                 <div className="py-20 px-5 w-full">
                     <div className="flex flex-col md:flex-row md:justify-between items-center">
                         <Searchbar />
-                        <div className="flex w-full md:w-auto md:flex-row mt-4 md:mt-0 items-center">
+                        <div className="flex w-full md:w-auto md:w-3/12 mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold text-sm md:text-lg text-gray-700">Filter</h2>
-                            <div className="flex ml-5 w-1/3">
-                                <Dropdown title="Select..." onClick={changeDropdown} items={items} />
+                            <div className="flex ml-5 w-1/3 border border-gray-300 rounded-md">
+                                <Dropdown title="Ongoing" onClick={changeDropdown} items={items} />
                             </div>
-                            <div className="flex ml-5 w-1/3">
-                                <Dropdown title="Date..." onClick={changeDropdown} items={itemsDate} />
+                            <div className="flex ml-5 w-1/3 border border-gray-300 rounded-md">
+                                <Dropdown title="Date" onClick={changeDropdownFilter} items={itemsDate} />
                             </div>
                         </div>
                     </div>

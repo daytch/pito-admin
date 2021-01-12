@@ -95927,8 +95927,22 @@ item:hover figure.item-image-live-detail svg.icon {
   }
 }
 
+/*Wide Monitor*/
+
+@media screen and (min-width: 1400px) {
+  img, video {
+    max-width: 429px;
+    height: 222px;
+  }
+}
+
 /**Desktop Query*/
+
 @media only screen and (min-width: 768px) {
+  img, video {
+    max-width: 348px;
+    max-height: 222px;
+  }
   .category2-livestream {
     margin-left: 3px;
     margin-right: 3px;

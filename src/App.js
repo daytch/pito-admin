@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 //import PrivateRoutes
@@ -17,7 +17,8 @@ import MerchantEdit from 'pages/merchant-edit'
 import UserListing from 'pages/user-list'
 import Tickets from 'pages/tickets'
 import Categories from 'pages/categories'
-import Analytic from 'pages/analytic'
+import Analytic from 'pages/analytic/analytic'
+// import Analytic from 'pages/analytic'
 import userDetail from 'pages/user-detail'
 import NotFound404 from 'pages/404'
 

@@ -41,7 +41,7 @@ const DashboardDetail = () => {
 
     useEffect(() => {
         setLoading(true)
-        livestream.getDashboardDetail(id).then((res) => {
+        livestream.getLivestreamDetail(id).then((res) => {
             let data = res.data;
             
             if (Object.keys(data).length < 1) {

@@ -39,7 +39,7 @@ const MerchantEdit = () => {
             let categories = e.data.categories;
 
             // setName(e.data.name)
-            debugger;
+            
             setCat1(categories[0] && categories[0].name ? categories[0].name : 'Category')
             setCat2(categories[1] && categories[1].name ? categories[1].name : 'Category')
             setCat3(categories[2] && categories[2].name ? categories[2].name : 'Category')
@@ -84,7 +84,7 @@ const MerchantEdit = () => {
     }
 
     function goBack() {
-        debugger;
+        
         window.location.href = "/merchant/" + id
     }
 

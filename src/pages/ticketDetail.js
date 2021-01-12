@@ -5,7 +5,6 @@ import Spinner from 'components/spinner'
 import ticket from 'api/ticket'
 import Dropdown from 'components/forms/dropdown'
 import { Link } from 'react-router-dom'
-import Tickets from './tickets'
 
 const TicketDetail = (props) => {
 
@@ -43,7 +42,7 @@ const TicketDetail = (props) => {
         const formData = new FormData();
         formData.append('ticket_id', props.match.params.id)
         formData.append('message', message)
-        Ticket.ReplyTicket(formData).then(() => {
+        ticket.ReplyTicket(formData).then(() => {
             getMessage()
             setLoading(false)
         })

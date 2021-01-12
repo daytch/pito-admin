@@ -7,7 +7,7 @@ const Analytic = () => {
     })
     return (
         <>
-            <section className="flex flex-col xl:flex-row ">
+            <section className="flex flex-col xl:flex-row min-h-screen">
                 <Sidebar />
                 <div className="py-20 px-5 w-full flex">
                     <iframe title="Dashboard Analytic" id="embeded-dashboard" allowtransparency="true" scrolling="no" frameBorder="0" style={{ border: "none", overflow: "hidden", minHeight: "600px", width: "100%" }}></iframe>

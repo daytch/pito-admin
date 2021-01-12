@@ -9,7 +9,10 @@ const RenderTBodyUserListing = ({ itemBodyUser }) => {
                 itemBodyUser && itemBodyUser.map((item, index) => {
                     return (
                         <tr key={index} className="border-b border-gray-50">
-                            <td className="text-center py-3 px-4 text-red-600 font-bold text-sm">{item.id}</td>
+                            <td className="text-center py-3 px-4 text-red-600 font-bold text-sm"><Link className="hover:text-blue-500" to={{
+                                pathname: `/user/${item.id}`,
+                                query: item
+                            }}>{item.id}</Link></td>
                             <td className="text-center py-3 px-4 text-red-600 font-bold text-sm"><Link className="hover:text-blue-500" to={{
                                 pathname: `/user/${item.id}`,
                                 query: item
