@@ -37,9 +37,9 @@
     "webpack-merge": "^5.7.3"
   },
   "scripts": {
-    "watch:css": "postcss --watch tailwindcss/style.css -o src/assets/css/main.css",
-    "start": "react-scripts start -FAST_REFRESH=true",
-    "build": "react-scripts build",
+    "watch:css": "postcss tailwindcss/style.css -o src/assets/css/main.css",
+    "start": "npm run watch:css && react-scripts start -FAST_REFRESH=true",
+    "build": "npm run watch:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -69,24 +69,29 @@ const LivestreamList = () => {
     };
 
     function submitDelete(id) {
-        setLoading(true)
-        Livestream.deleteLivestream(id).then((res) => {
-            setLoading(false)
-            if (res.isSuccess) {
-                MySwal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: res.message
-                })
-                getData('')
-            } else {
-                MySwal.fire({
-                    icon: 'danger',
-                    title: 'Error',
-                    text: res.message
-                })
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setLoading(true)
+                Livestream.deleteLivestream(id).then((res) => {
+                    setLoading(false)
+                    MySwal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    ).then(() => {
+                        getData('')
+                    })
+                });
             }
-        });
+        })
     }
     function changeDropdown(e) {
         setLoading(true)

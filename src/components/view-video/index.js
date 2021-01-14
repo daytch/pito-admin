@@ -46,7 +46,10 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                         <p>{no}.</p>
                         <div className="item relative w-auto px-4 lg:px-2">
                             <figure className="item-image">
-                                <Link to={`/dashboard/detail/${id}`} className="link-wrapped">
+                                <Link to={{
+                                    pathname: `/dashboard/detail/${id}`,
+                                    query: { iframe }
+                                }} className="link-wrapped">
                                     <PlayIcon style={{ transition: "all .15s ease" }}
                                         onClick={() => openModal(iframe)} className="icon" />
                                     <img src={thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
@@ -71,7 +74,6 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                                 {
                                     categories.map((item, index) => {
                                         return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="inline-block">{item}</h6></span>)
-                                        // : (<span key={index}><div className="rounded-full w-2 h-2 bg-gray-700 mx-2"></div><h6>{item}</h6></span>)
                                     })
                                 }
                             </div>

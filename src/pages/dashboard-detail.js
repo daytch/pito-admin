@@ -18,7 +18,9 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
-const DashboardDetail = () => {
+const DashboardDetail = ({ location }) => {
+    
+    const [query] = useState(location.query)
     const [isLoading, setLoading] = useState(true)
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
@@ -48,6 +50,7 @@ const DashboardDetail = () => {
                 MySwal.fire('Empty data!', 'The selected video is empty or has been deleted', 'warning')
             } else {
                 let url_iframe = data.fb_url !== "" ? data.fb_url : data.ig !== null ? data.ig_url : data.tiktok_url;
+                url_iframe = url_iframe.indexOf('iframe') === -1 ? iframe : url_iframe;
 
                 setIframe(url_iframe);
                 setTitle(data.title);
@@ -100,23 +103,23 @@ const DashboardDetail = () => {
                         </div>
                     </div>
 
-                    <div className="mt-0 md:mt-10">
-                        <div className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2">
-                            {ReactHtmlParserfrom(iframe)}
+                    <div className="overflow-auto mt-0 md:mt-10">
+                        <div style={{ marginBottom: '-14rem' }} className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2">
+                            {ReactHtmlParserfrom(iframe ? iframe : query.iframe)}
                         </div>
-                        <div className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2">
-                            <div className="flex flex-col mr-8 text-center">
-                                <h4 className="font-bold text-2xl text-red-600">{views}</h4>
-                                <p className="font-light text-md text-gray-300">Views</p>
-                            </div>
-                            <div className="flex flex-col mr-8 text-center">
-                                <h4 className="font-bold text-2xl text-red-600">{fav}</h4>
-                                <p className="font-light text-md text-gray-300">Subscriber</p>
-                            </div>
-                            <div className="flex flex-col text-center">
-                                <h4 className="font-bold text-2xl text-red-600">{share}</h4>
-                                <p className="font-light text-md text-gray-300">Shared</p>
-                            </div>
+                    </div>
+                    <div className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2">
+                        <div className="flex flex-col mr-8 text-center">
+                            <h4 className="font-bold text-2xl text-red-600">{views}</h4>
+                            <p className="font-light text-md text-gray-300">Views</p>
+                        </div>
+                        <div className="flex flex-col mr-8 text-center">
+                            <h4 className="font-bold text-2xl text-red-600">{fav}</h4>
+                            <p className="font-light text-md text-gray-300">Subscriber</p>
+                        </div>
+                        <div className="flex flex-col text-center">
+                            <h4 className="font-bold text-2xl text-red-600">{share}</h4>
+                            <p className="font-light text-md text-gray-300">Shared</p>
                         </div>
                     </div>
                     <div className="flex flex-col xl:flex-row pt-10">

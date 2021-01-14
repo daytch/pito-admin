@@ -20,7 +20,7 @@ const RenderTBody = ({ itemBody }) => {
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.total_favorites}</td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.total_share}</td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{item.total_view}</td>
-                            <td className="text-center py-3 px-4 text-gray-400 font-light"> - </td>
+                            <td className="text-center py-3 px-4 text-gray-400 font-light">{item.last_login ? moment(item.last_login).format('DD/MM/YYYY') : '-'}</td>
                             <td className="text-center py-3 px-4 text-gray-400 font-light">{moment(item.createdAt).format('DD/MM/YYYY')}</td>
                         </tr>
                     )

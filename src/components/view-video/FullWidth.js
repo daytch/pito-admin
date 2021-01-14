@@ -67,11 +67,15 @@ const FullWidth = ({ displayToolTip, DeleteButton, linkVideo, actionLinks, views
         <>
             {
                 dataVideos.map((item, index) => {
+                    let iframe = item.iframe
                     return (
                         <div className="inline-flex" key={index}>
                             <div className="flex-1">
                                 <div className="item relative w-auto">
-                                    <Link to={`/livestream/detail/${item.id}`} className="link-wrapped">
+                                    <Link to={{
+                                        pathname: `/livestream/detail/${item.id}`,
+                                        query: { iframe }
+                                    }} className="link-wrapped">
                                         <figure className="item-image-live">
                                             {
                                                 item?.live ? (
@@ -88,7 +92,7 @@ const FullWidth = ({ displayToolTip, DeleteButton, linkVideo, actionLinks, views
                                             }
                                             <PlayIcon style={{ transition: "all .15s ease" }}
                                                 onClick={() => openModal(item.iframe)} className="icon" />
-                                            <img src={item.thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
+                                            <img style={{ maxWidth: '348px', maxHeight: '222px' }} src={item.thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={title} className="thumbnail-live" />
                                         </figure>
                                     </Link>
                                 </div>
