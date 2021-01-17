@@ -44,6 +44,12 @@ const LivestreamList = () => {
     const [isLoading, setLoading] = useState(true)
     const [videos, setVideos] = useState([])
     const [filter, setFilter] = useState('')
+    const [phoneTooltip, setPhoneTooltip] = useState({
+        show: false,
+        x: 0,
+        y: 0,
+        orientLeft: false
+    })
 
     function getData(param) {
         Livestream.getLivestream({
@@ -145,25 +151,29 @@ const LivestreamList = () => {
                 <div className="py-20 px-5 w-full">
                     <div className="flex flex-col md:flex-row md:justify-between items-center">
                         <Searchbar />
-                        <div className="flex w-full md:w-auto md:w-3/12 mt-4 md:mt-0 items-center">
+                        <div className="flex w-full md:w-3/12 mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold text-sm md:text-lg text-gray-700">Filter</h2>
-                            <div className="flex ml-5 w-1/3 border border-gray-300 rounded-md">
+                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-xl">
                                 <Dropdown title="Ongoing" onClick={changeDropdown} items={items} />
                             </div>
-                            <div className="flex ml-5 w-1/3 border border-gray-300 rounded-md">
+                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-xl">
                                 <Dropdown title="Date" onClick={changeDropdownFilter} items={itemsDate} />
                             </div>
                         </div>
                     </div>
+
+                    {phoneTooltip.show && (
+                        <h3 style={{ color: 'green', textAlign: 'center' }}>URL copied.</h3>
+                    )}
                     <div className="grid grid-cols-2 gap-2">
                         {
                             videos.map((item, index) => {
 
-                                const ListVideo = [{ iframe: item.iframe, id: item.id, thumbnail: item.img_thumbnail, live: false, views: item.views, likes: item.likes, date: item.start_time, title: item.title }]
+                                const ListVideo = [{ iframe: item.iframe, id: item.id, thumbnail: item.img_thumbnail, share_url: item.share_url, live: false, views: item.views, likes: item.likes, date: item.start_time, title: item.title }]
 
                                 return (
                                     <div key={index} className="flex flex-wrap w-full mt-4">
-                                        <FullWidth actionLinks={'/livestream/detail/' + item.id} dataVideos={ListVideo} title={item.title} viewsElement={true} DeleteButton={DeleteButton} actions={true} ig={item.instagram_url} fb={item.facebook_url} tiktok={item.tiktok_url} caption={item.description} category={item.categories} socmedCustom={true} />
+                                        <FullWidth displayToolTip={displayToolTip} actionLinks={'/livestream/detail/' + item.id} dataVideos={ListVideo} title={item.title} viewsElement={true} DeleteButton={DeleteButton} actions={true} ig={item.redirect_ig} fb={item.redirect_fb} tiktok={item.redirect_tiktok} caption={item.description} category={item.categories} socmedCustom={true} />
                                     </div>
                                 )
                             })

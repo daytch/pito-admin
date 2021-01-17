@@ -33,6 +33,21 @@ const UserDetail = () => {
     const [isMerchantRecent, setIsMerchantRecent] = useState('')
     const [isLivestreamFav, setIsLivestreamFav] = useState('')
     const [nama, setNama] = useState('')
+    const [phoneTooltip, setPhoneTooltip] = useState({
+        show: false,
+        x: 0,
+        y: 0,
+        orientLeft: false
+    })
+
+    const displayToolTip = () => {
+        if (!phoneTooltip.show) {
+            setPhoneTooltip(prev => ({ ...prev, show: true })); // show tooltip
+            setTimeout(() => {
+                setPhoneTooltip(prev => ({ ...prev, show: false })); // remove/hide tooltip
+            }, 1500);
+        }
+    }
 
     useEffect(() => {
         User.getUserDetail(id.id).then((res) => {
@@ -96,7 +111,7 @@ const UserDetail = () => {
                         <div className="flex flex-col xl:flex-row xl:items-center">
 
                             {
-                                data.img_avatar ? (<img src={data.img_avatar} draggable={false} className="rounded-full w-4/5 xl:w-1/3 border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt={data.name} />) :
+                                data.img_avatar ? (<img src={data.img_avatar} draggable={false} style={{ width: '250px', height: '250px' }} className="rounded-full w-4/5 xl:w-1/3 border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt={data.name} />) :
                                     (<Avatar name={data.name} className="mx-auto" round={true} size="125px" />)
                             }
 
@@ -146,11 +161,16 @@ const UserDetail = () => {
                                         <Dropdown witdh="w-48" title="Most Recent" onClick={changeLivestream} items={MostList} />
                                     </div>
                                 </div>
+                                {
+                                    phoneTooltip.show && (
+                                        <h3 style={{ color: 'green', textAlign: 'center' }}>URL copied.</h3>
+                                    )
+                                }
                                 <div className="px-2">
                                     {
                                         isLivestreamFav ?
-                                            <UserLivestreamVideos ListVideo={livestreamFav} /> :
-                                            <UserLivestreamVideos ListVideo={livestreamView} />
+                                            <UserLivestreamVideos displayToolTip={displayToolTip} ListVideo={livestreamFav} /> :
+                                            <UserLivestreamVideos displayToolTip={displayToolTip} ListVideo={livestreamView} />
                                     }
                                 </div>
                             </div>

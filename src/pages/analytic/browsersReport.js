@@ -60,7 +60,7 @@ const BrowsersReport = (props) => {
 
   useEffect(() => {
     const request = {
-      viewID: props.viewID,
+      viewId: props.viewId,
       startDate,
       endDate,
       metrics: "ga:users",

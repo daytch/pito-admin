@@ -12,9 +12,11 @@ import { ReactComponent as IgIcon } from 'assets/images/ig-icon.svg'
 import { ReactComponent as TtIcon } from 'assets/images/tiktok-icon.svg'
 import Modal from 'react-modal'
 import DefaultImg from 'assets/images/default.svg'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+
 Modal.setAppElement('*'); // suppresses modal-related test warnings.
 
-const UserLivestreamVideos = ({ ListVideo }) => {
+const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
 
     const [dataModal, setDataModal] = useState('');
     const [modalIsOpen, setIsOpen] = useState(false)
@@ -85,14 +87,13 @@ const UserLivestreamVideos = ({ ListVideo }) => {
                                     item.categories && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
                                         {
                                             item.categories.map((item, index) => {
-                                                return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="inline-block">{item}</h6></span>)
-                                                // : (<span key={index}><div className="rounded-full w-2 h-2 bg-gray-700 mx-2"></div><h6>{item}</h6></span>)
+                                                return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="text-xs inline-block">{item}</h6></span>)
                                             })
                                         }
                                     </div>
                                 }
                                 <div className="merchant-dashboard my-2 flex flex-wrap">
-                                    {
+                                    {/* {
                                         item.facebook_url && (
                                             <button style={{ transition: "all .15s ease" }}
                                                 onClick={() => openModal(item.facebook_url)}><FbIcon className="mr-4" />
@@ -105,8 +106,21 @@ const UserLivestreamVideos = ({ ListVideo }) => {
                                     {
                                         item.tiktok_url && (<button style={{ transition: "all .15s ease" }}
                                             onClick={() => openModal(item.tiktok_url)}><TtIcon className="mr-4" /></button>)
+                                    } */}
+                                    {
+                                        item.facebook_url && (
+                                            <Link target="_blank" to={{ pathname: item.redirect_fb }} style={{ transition: "all .15s ease" }} ><FbIcon className="mr-4" /></Link>)
                                     }
-                                    <button href=""><ShareIconMobile className="mr-4" /></button>
+                                    {
+                                        item.instagram_url && (<Link target="_blank" to={{ pathname: item.redirect_ig }} style={{ transition: "all .15s ease" }}><IgIcon className="mr-4" /></Link>)
+
+                                    }
+                                    {
+                                        item.tiktok_url && (<Link target="_blank" to={{ pathname: item.redirect_tiktok }} style={{ transition: "all .15s ease" }}><TtIcon className="mr-4" /></Link>)
+                                    }
+                                    <CopyToClipboard text={item.share_url}>
+                                        <button onClick={displayToolTip}><ShareIconMobile className="mr-4" /></button>
+                                    </CopyToClipboard>
                                 </div>
 
                                 <Modal

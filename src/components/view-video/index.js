@@ -73,7 +73,7 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                             categories && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
                                 {
                                     categories.map((item, index) => {
-                                        return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="inline-block">{item}</h6></span>)
+                                        return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="text-xs inline-block">{item}</h6></span>)
                                     })
                                 }
                             </div>

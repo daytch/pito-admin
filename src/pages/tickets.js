@@ -34,7 +34,7 @@ const Tickets = () => {
                 return {
                     ticketNumber: e.id,
                     username:e.name,
-                    tittle: e.title,
+                    title: e.title,
                     status: (e.status === 1) ? "Open" : "Close",
                     lastUpdated: e.last_session
                 }

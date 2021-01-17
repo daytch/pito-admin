@@ -13,7 +13,7 @@ import { renderButton, checkSignedIn } from "api/google";
 // import InputField from "../Components/input";
 
 const Analytic = () => {
-    const [viewID, setViewID] = useState(null)
+    const [viewId, setViewID] = useState('216813803')
     const [isSignedIn, setIsSignedIn] = useState(false);
 
     const updateSignin = (signedIn) => {
@@ -40,7 +40,7 @@ const Analytic = () => {
     };
 
     useEffect(() => {
-        setViewID(216813803)
+        setViewID('216813803')
     }, [])
     return (
         <section className="flex flex-col xl:flex-row min-h-screen">
@@ -55,19 +55,19 @@ const Analytic = () => {
                         <DayVisitsReport
                             metric={"ga:users"}
                             title={"Users"}
-                            viewID={viewID}
-                        />
+                            viewId={viewId}
+                        /><br />
                         <DayVisitsReport
                             metric={"ga:sessions"}
                             title={"Sessions"}
-                            viewID={viewID}
-                        />
-                        <CountriesReport viewID={viewID} />
-                        <PageviewsReport viewID={viewID} />
-                        <SourceReport viewID={viewID} />
+                            viewId={viewId}
+                        /><br />
+                        <CountriesReport viewId={viewId} /><br />
+                        <PageviewsReport viewId={viewId} /><br />
+                        <SourceReport viewId={viewId} /><br />
                         <LastRow>
-                            <BrowsersReport viewID={viewID} />
-                            <DevicesReport viewID={viewID} />
+                            <BrowsersReport viewId={viewId} />
+                            <DevicesReport viewId={viewId} />
                         </LastRow>
                     </>)
             }

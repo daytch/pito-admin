@@ -3,7 +3,7 @@ import { gapi } from 'gapi-script'
 
 export const queryReport = (props) => {
     const {
-        viewID,
+        viewId,
         startDate,
         endDate,
         metrics,
@@ -29,7 +29,7 @@ export const queryReport = (props) => {
         body: {
             reportRequests: [
                 {
-                    viewId: viewID,
+                    viewId: viewId,
                     filtersExpression: filter,
                     dateRanges: [
                         {

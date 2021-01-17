@@ -47,16 +47,29 @@ const Categories = () => {
         setCategoryName(CategoryName)
     }
 
-    const deleteCategory = (id) => {        
-        setLoading(true)
-        setId(id.id)
-        Category.deleteCategory({ id: id.id, isActive: 0 }).then((res) => {
-            setLoading(false)
-            if (res.isSuccess) {
-                MySwal.fire('Success!', res.message, 'success');
-                getData()
-            } else {
-                MySwal.fire('Error!', res.message, 'danger');
+    const deleteCategory = (id) => {
+
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, close it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setLoading(true)
+                setId(id.id)
+                Category.deleteCategory({ id: id.id, isActive: 0 }).then((res) => {
+                    setLoading(false)
+                    if (res.isSuccess) {
+                        MySwal.fire('Success!', res.message, 'success');
+                        getData()
+                    } else {
+                        MySwal.fire('Error!', res.message, 'danger');
+                    }
+                })
             }
         })
     }
