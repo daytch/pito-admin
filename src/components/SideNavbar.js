@@ -38,15 +38,15 @@ const SideNavbar = () => {
     return (
         <>
             <ToastContainer position="top-right" />
-            <div className="w-full flex justify-between xl:hidden bg-gray-800 items-center">
+            <div className="min-w-screen w-full flex justify-between xl:hidden bg-gray-800 items-center">
                 <div className="px-4 py-3">
                     <PitoLogoSmall />
                 </div>
                 <div className="mb-navbar flex items-center px-4 py-3">
                 <h5 className="text-white text-xs text-center px-2">Hello, <br /><span className="font-medium text-red-600 text-xs">{name}</span></h5>
                     {
-                        img ? (<img style={{ width: 70, height: 70, borderRadius: 70 / 2 }} src={img} className="mx-auto" alt={name}></img>) :
-                            (<Avatar name={name} className="mx-auto" round={true} size="75px" />)
+                        img ? (<img style={{ width: 70, height: 70, borderRadius: 70 / 2 }} src={img} className="avatar mr-2 md:mr-0 mx-auto" alt={name}></img>) :
+                            (<Avatar name={name} className="avatar mr-2 md:mr-0 mx-auto" round={true} size="75px" />)
                     }
                     <button onClick={() => setIsOpen(!isOpen)}><Hamburger /></button>
                 </div>
@@ -101,7 +101,7 @@ const SideNavbar = () => {
                         </svg>
                     </button>
                 </div>
-                <div className="py-10 w-full">
+                <div className="py-4 w-full">
                     <PitoLogoSmall className="mx-auto" />
                     <div className="profile pt-6 text-center">
                         {

@@ -1,12 +1,14 @@
 import React from 'react'
 import moment from 'moment'
-import Avatar from 'react-avatar';
+import Avatar from 'react-avatar'
+import ReactHtmlParserfrom from 'react-html-parser'
 
 const Card = ({ ListData }) => {
+
     return (
         <>
-            <div className="w-2/3 mt-3 flex items-center mx-auto">
-                <div className="chat-content p-6 border rounded-t-lg bg-gray-100">
+            <div className="w-full md:w-2/3 mt-3 flex items-center mx-auto">
+                <div className="w-full text-sm md:text-md chat-content p-6 border rounded-t-lg bg-gray-100">
                     {
                         ListData && ListData.map((item, index) => {
                             return (<div key={index}>
@@ -17,7 +19,11 @@ const Card = ({ ListData }) => {
                                             <div className="my-2 text-gray-800 text-xs">
                                                 <span className="mr-4">{moment(item.lastUpdated).format('YYYY-MM-DD HH:mm:ss')}</span>
                                             </div>
-                                            <p className="font-light text-gray-900">{item.text}</p>
+                                            {/* <p className="font-light text-gray-900">{item.text}</p> */}
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: item.text }}
+                                                className="font-light text-gray-900"
+                                            />
                                         </div>
                                         <div className="w-1/6">
                                             {
@@ -40,7 +46,10 @@ const Card = ({ ListData }) => {
                                                 <span className="mr-4">{moment(item.lastUpdated).format('YYYY-MM-DD HH:mm:ss')}</span>
                                             </div>
                                             {/* <p className="font-light text-gray-900">{item.text}</p> */}
-                                            <div dangerouslySetInnerHTML={{ __html: item.text }} className="font-light text-gray-900" />
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: item.text }}
+                                                className="font-light text-gray-900"
+                                            />
                                         </div>
                                     </div>
                                 }

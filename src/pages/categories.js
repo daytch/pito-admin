@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Sidebar from 'components/SideNavbar'
-import Table from 'components/table/index'
+import TableCategory from 'components/table/TableCategory'
 import Spinner from 'components/spinner'
 import Category from 'api/category'
 import Modal from 'react-modal'
@@ -51,7 +51,7 @@ const Categories = () => {
 
         MySwal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "Do you really want to delete this Category? This process cannot be undone.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -123,32 +123,29 @@ const Categories = () => {
 
     const tableHeadCategory = [
         {
-            title: "No."
+            title: "No.",
+            value:'no'
         },
         {
-            title: "Name"
-        },
-        // {
-        //     title: "Slug"
-        // },
-        {
-            title: "Total Livestreams"
+            title: "Name",
+            value:'name'
         },
         {
-            title: "Total Merchants"
+            title: "Total Livestreams",
+            value:'totLivestream'
         },
         {
-            title: "Total Searches"
+            title: "Total Merchants",
+            value:'totMerchants'
         },
         {
-            title: "Total Views"
+            title: "Total Searches",
+            value:'totSearches'
         },
-        // {
-        //     title: "Total Favourites"
-        // },
-        // {
-        //     title: "Total Shared"
-        // },
+        {
+            title: "Total Views",
+            value:'totViews'
+        },
         {
             title: ""
         },
@@ -179,12 +176,12 @@ const Categories = () => {
         <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="min-h-screen flex flex-col xl:flex-row ">
                 <Sidebar />
-                <div className="py-20 px-5 w-full">
+                <div className="py-5 md:py-10 px-5 w-full">
                     <div className="flex justify-end">
                         <button onClick={() => openModalforInsert()} className="bg-red-600 text-white font-medium text-md px-4 py-2 rounded-3xl">Add New Category</button>
                     </div>
-                    <div className="flex pt-10 overflow-x-auto">
-                        <Table itemHead={tableHeadCategory} itemBodyCategory={data} DeleteButton={DeleteButton} />
+                    <div className="flex pt-5 md:pt-10 overflow-x-auto">
+                        <TableCategory itemHead={tableHeadCategory} itemBody={data} DeleteButton={DeleteButton} />
                     </div>
                 </div>
                 <Modal
@@ -203,9 +200,7 @@ const Categories = () => {
                             <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
                         </button>
                     </div>
-                    {/*body*/}
                     <div className="relative p-6 flex-auto">
-                        {/* {dataModal && ReactHtmlParserfrom(dataModal)} */}
                         <div className="flex flex-wrap w-full items-start my-2">
                             <label htmlFor="name" className="w-full text-xs text-sm md:w-1/4 text-base text-gray-700">Category Name</label>
                             <input type="text" value={categoryName} onChange={(e) => {
@@ -213,7 +208,6 @@ const Categories = () => {
                             }} placeholder="Category Name" className="w-full text-xs md:w-4/6 px-4 py-2 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-lg" />
                         </div>
                     </div>
-                    {/*footer*/}
                     <div className="flex items-center justify-end rounded-b">
                         <button onClick={() => isUpdate ? updateCategory() : insertCategory()} className="pt-1 py-2 text-xs mr-1 w-full px-4 bg-red-600 font-medium text-white rounded-3xl">Save</button>
                         <button

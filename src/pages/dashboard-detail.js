@@ -84,7 +84,7 @@ const DashboardDetail = ({ location }) => {
         <Spinner isLoading={isLoading}>
             <section className="min-h-screen flex flex-col xl:flex-row">
                 <SideNavbar />
-                <div className="py-10 md:py-20 px-5 w-full">
+                <div className="py-5 md:py-10 px-5 w-full">
                     <div className="flex flex-col-reverse md:flex-row w-full justify-between">
                         <h6 className="text-red-600 font-semibold text-lg text-center pt-8 md:pt-0">Livestreams Detail</h6>
                         <div className="flex items-center md:mb-0 justify-end">

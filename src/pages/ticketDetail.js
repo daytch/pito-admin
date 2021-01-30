@@ -64,7 +64,7 @@ const TicketDetail = (props) => {
         if (e.id === 1) {
             MySwal.fire({
                 title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                text: "Do you really want to close this Ticket Support? This process cannot be undone.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -132,7 +132,7 @@ const TicketDetail = (props) => {
                             </div>) :
                             (
                                 <div className="md:ml-16">
-                                    <div className="flex mb-3 flex-wrap items-start mt-4">
+                                    <div className="flex flex-wrap items-start mt-4">
                                         {/* <textarea onChange={e => handleChange(e.target.value)} placeholder="Message" className="w-full md:w-4/5 h-32 px-4 py-2 border border-gray-300 rounded-lg" /> */}
                                         <CKEditor
                                             editor={ClassicEditor}
@@ -165,7 +165,7 @@ const TicketDetail = (props) => {
                                     {/* <div className="w-40 form-categories border border-gray-300 rounded-md px-2 py-2 mr-4 my-2" role="button">
                                         <Dropdown title="Open" onClick={changeStatus} items={items} />
                                     </div> */}
-                                    <div className="flex">
+                                    <div className="flex py-5">
                                         <Link to={"/ticket"} className="border border-gray-300 text-red-600 rounded-md text-lg px-6 py-2 mr-4">Back</Link>
                                         <button onClick={handleSubmit} className="border lg:w-32 w-full text-white font-medium bg-red-600 rounded-lg text-lg px-10 py-2">Reply</button>
                                     </div>

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Sidebar from 'components/SideNavbar'
 import Searchbar from 'components/forms/search'
 import Dropdown from 'components/forms/dropdown'
-import FullWidth from 'components/view-video/FullWidth'
-// import thumbnail from 'assets/images/thumbnail-one.jpg'
-import Livestream from 'api/livestream'
+import Livestream from 'components/view-video/Livestream'
+import thumbnail from 'assets/images/thumbnail-one.jpg'
+
+import LivestreamApi from 'api/livestream'
 import Spinner from 'components/spinner'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -40,10 +41,10 @@ const items = [
 ]
 
 const LivestreamList = () => {
-
     const [isLoading, setLoading] = useState(true)
     const [videos, setVideos] = useState([])
     const [filter, setFilter] = useState('')
+    const [tipe, setTipe] = useState('')
     const [phoneTooltip, setPhoneTooltip] = useState({
         show: false,
         x: 0,
@@ -52,17 +53,18 @@ const LivestreamList = () => {
     })
 
     function getData(param) {
-        Livestream.getLivestream({
+        LivestreamApi.getLivestream({
             type: param,
             page: 1
         }).then((res) => {
+            setTipe(param)
             setVideos(res.data)
             setLoading(false)
         })
 
     }
     useEffect(() => {
-        Livestream.getLivestream({
+        LivestreamApi.getLivestream({
             type: "live_videos",
             page: 1
         }).then((res) => {
@@ -70,30 +72,31 @@ const LivestreamList = () => {
             setLoading(false)
         })
     }, [])
-    const DeleteButton = (id) => {
-        return <button onClick={() => submitDelete(id)} className="font-semibold text-base md:text-lg text-red-600 mr-4">Delete</button>;
+    const DisableButton = (id) => {
+        return <button onClick={() => submitDelete(id)} className="border border-red-600 rounded-full w-full px-6 py-3 font-medium text-red-600 focus:outline-none">Disable</button>;
     };
 
-    function submitDelete(id) {
+    function submitDelete(id, tp) {
         MySwal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "Do you really want to disable this livestream schedule? This process cannot be undone.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, disable it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 setLoading(true)
-                Livestream.deleteLivestream(id).then((res) => {
+                LivestreamApi.deleteLivestream(id).then((res) => {
                     setLoading(false)
                     MySwal.fire(
-                        'Deleted!',
-                        'Your data has been deleted.',
+                        'Disabled!',
+                        'Your data has been disabled.',
                         'success'
                     ).then(() => {
-                        getData('')
+                        setLoading(true)
+                        getData(tp)
                     })
                 });
             }
@@ -117,7 +120,7 @@ const LivestreamList = () => {
         }
     }
     function changeDropdownFilter(e) {
-        debugger;
+
         let vids = [...videos];
         switch (e.value) {
             case 'Views':
@@ -146,38 +149,29 @@ const LivestreamList = () => {
 
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
-            <section className="min-h-screen flex flex-col xl:flex-row ">
+            <section className="flex flex-col xl:flex-row ">
                 <Sidebar />
-                <div className="py-20 px-5 w-full">
+                <div className="py-5 md:py-10 px-5 w-full">
                     <div className="flex flex-col md:flex-row md:justify-between items-center">
                         <Searchbar />
-                        <div className="flex w-full md:w-3/12 mt-4 md:mt-0 items-center">
+                        <div className="text-xs flex w-full md:w-3/12 mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold text-sm md:text-lg text-gray-700">Filter</h2>
-                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-xl">
+                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-md">
                                 <Dropdown title="Ongoing" onClick={changeDropdown} items={items} />
                             </div>
-                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-xl">
+                            <h2 className="font-semibold text-sm md:text-lg text-gray-700">Sort</h2>
+                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-md">
                                 <Dropdown title="Date" onClick={changeDropdownFilter} items={itemsDate} />
                             </div>
                         </div>
                     </div>
-
-                    {phoneTooltip.show && (
-                        <h3 style={{ color: 'green', textAlign: 'center' }}>URL copied.</h3>
-                    )}
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="my-10">
                         {
-                            videos.map((item, index) => {
-
-                                const ListVideo = [{ iframe: item.iframe, id: item.id, thumbnail: item.img_thumbnail, share_url: item.share_url, live: false, views: item.views, likes: item.likes, date: item.start_time, title: item.title }]
-
-                                return (
-                                    <div key={index} className="flex flex-wrap w-full mt-4">
-                                        <FullWidth displayToolTip={displayToolTip} actionLinks={'/livestream/detail/' + item.id} dataVideos={ListVideo} title={item.title} viewsElement={true} DeleteButton={DeleteButton} actions={true} ig={item.redirect_ig} fb={item.redirect_fb} tiktok={item.redirect_tiktok} caption={item.description} category={item.categories} socmedCustom={true} />
-                                    </div>
-                                )
-                            })
+                            phoneTooltip.show && (
+                                <h3 style={{ color: 'green', textAlign: 'center' }}>URL copied.</h3>
+                            )
                         }
+                        <Livestream dataVideos={videos} tipe={tipe} displayToolTip={displayToolTip} DisableButton={DisableButton} />
                     </div>
                 </div>
             </section>

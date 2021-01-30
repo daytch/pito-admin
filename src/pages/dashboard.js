@@ -98,11 +98,11 @@ const Dashboard = () => {
         <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="min-h-screen flex flex-col xl:flex-row">
                 <Sidebar />
-                <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 pb-10 lg:border-r-2 lg:border-gray-500">
+                <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 pb-2 md:pb-10 lg:border-r-2 lg:border-gray-500">
                     <Lines label={labels} data={dataLine} total_user={totalUser} />
                     <Bars label={labelMerchant} data={dataBar} total_merchant={totalMerchant} />
                 </section>
-                <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 py-10 lg:border-r-2 lg:border-gray-500">
+                <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 py-2 md:py-10 lg:border-r-2 lg:border-gray-500">
                     <SelectForm change={setToggleDropdown} name="most-view">
                         <option value="view" className="text-black">Most Viewed Livestream</option>
                         <option value="fav" className="text-black">Most Favourite</option>
@@ -141,7 +141,7 @@ const Dashboard = () => {
                     <div className="flex-col py-4 lg:border-b-2 lg:border-gray-500">
                         <SelectForm change={setToggleSearch} name="total-search">
                             <option value="keyword" className="text-black">Top Search Keywords</option>
-                            <option value="category" className="text-black">Top Search Categories</option>
+                            <option value="category" className="text-black" selected>Top Search Categories</option>
                         </SelectForm>
                         {
                             toggleKeyword ?

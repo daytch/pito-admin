@@ -19743,6 +19743,10 @@ video {
   fill: #E0472D;
 }
 
+.active svg.icon {
+  fill: #E0472D;
+}
+
 select::-ms-expand {
   display: none;
 }
@@ -19792,6 +19796,10 @@ item:hover figure.item-image svg.icon {
 
 .item-image-live .thumbnail-live {
   width: 500px
+}
+
+.item-image-live .thumbnail-livestream {
+  max-width: 500px !important;
 }
 
 .item:hover figure.item-image-live svg.icon {
@@ -20010,7 +20018,74 @@ item:hover figure.item-image-live-detail svg.icon {
   height: 159px;
 }
 
+.Modal {
+  top: '50%';
+  left: '50%';
+  right: 'auto';
+  bottom: 'auto';
+  margin-right: '-50%';
+  transform: translate(-50%, -50%);
+  width: '34vw';
+}
+
 @media all and (min-width: 480px) and (max-width: 768px) {
+  .container-countdown {
+    padding: 0.1rem;
+  }
+
+  .text-starting {
+    font-size: 1.1rem;
+    font-weight: bold;
+    vertical-align: top;
+    position: relative;
+    margin-top: 0.5rem;
+  }
+
+  .font-starting-in {
+    font-size: small;
+    word-spacing: 0.2rem;
+    margin-top: -13px;
+  }
+
+  .starting-in {
+    font-size: x-small;
+  }
+
+  .upcoming {
+    position: absolute;
+    top: 33%;
+    left: 4%;
+  }
+
+  .timer {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .Modal {
+    top: '50%';
+    left: '50%';
+    right: 'auto';
+    bottom: 'auto';
+    margin-right: '-50%';
+    transform: translate(-50%, -50%);
+    width: '100vw';
+  }
+
+  .item-image-live .thumbnail-livestream {
+    max-width: 330px !important;
+    max-height: 200px !important;
+  }
+
+  .item-image-live .thumbnail-live {
+    max-width: 330px !important;
+    max-height: 200px !important;
+  }
+
+  .icon-sosmed {
+    width: 25px;
+  }
+
   .item-image img {
     width: 700px;
   }
@@ -20030,9 +20105,56 @@ item:hover figure.item-image-live-detail svg.icon {
   }
 }
 
+.max-lines {
+  display: block;
+  /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.3em;
+}
+
 @media all and (max-width: 480px) {
+  .share-icon-live svg {
+    width: 40px !important;
+    height: 40px;
+    margin-top: 0.8rem;
+  }
+
+  .thumbnail-livestream {
+    max-width: 300px !important;
+    max-height: 200px !important;
+  }
+
+  .Modal {
+    top: '50%';
+    left: '50%';
+    right: 'auto';
+    bottom: 'auto';
+    margin-right: '-50%';
+    transform: 'translate(-50%, -50%)';
+    width: '100%';
+  }
+
+  .icon-sosmed {
+    width: 25px !important;
+  }
+
+  .avatar {
+    /* display: none !important; */
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .item-image-live .thumbnail-livestream {
+    max-width: 330px !important;
+    max-height: 200px !important;
+  }
+
   .item-image-live .thumbnail-live {
-    width: 350px;
+    max-width: 330px !important;
+    max-height: 200px !important;
   }
 
   .item figure.item-image-live .live-viewers {
@@ -20106,6 +20228,40 @@ item:hover figure.item-image-live-detail svg.icon {
 }
 
 @media only screen and (max-width: 600px) {
+  .container-countdown {
+    padding: 0.1rem;
+  }
+
+  .text-starting {
+    font-size: 1.1rem;
+    font-weight: bold;
+    vertical-align: top;
+    position: relative;
+    margin-top: 0.5rem;
+  }
+
+  .font-starting-in {
+    font-size: small;
+    word-spacing: 0.2rem;
+    margin-top: -13px;
+  }
+
+  .starting-in {
+    font-size: x-small;
+  }
+
+  .upcoming {
+    position: absolute;
+    top: 33%;
+    /* left: 4%; */
+    width: 100%;
+  }
+
+  .timer {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
   .icon-upload {
     display: none;
   }
@@ -20124,9 +20280,79 @@ item:hover figure.item-image-live-detail svg.icon {
   }
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse !important;
+}
+
+tbody td {
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+}
+
+tbody tr:hover {
+  background-color: #eee;
+}
+
+thead tr th.ascending::after {
+  content: '▼';
+  display: inline-block;
+  margin-left: 1em;
+}
+
+thead tr th.descending::after {
+  content: '▲';
+  display: inline-block;
+  margin-left: 1em;
+}
+
 /**Desktop Query*/
 
 @media only screen and (min-width: 768px) {
+  .container-countdown {
+    padding: 0.1rem;
+  }
+
+  .text-starting {
+    font-size: 1.1rem;
+    font-weight: bold;
+    vertical-align: top;
+    position: relative;
+    margin-top: 1rem;
+  }
+
+  .font-starting-in {
+    font-size: small;
+    word-spacing: 0.3rem;
+    margin-top: -13px;
+  }
+
+  .starting-in {
+    font-size: x-small;
+  }
+
+  .upcoming {
+    position: absolute;
+    top: 33%;
+  }
+
+  .timer {
+    font-size: 2.3rem;
+    font-weight: bold;
+  }
+
+  .text-livestream {
+    width: 543px !important;
+  }
+
+  .fav-merchant {
+    height: 19rem;
+  }
+
+  .mostview-dashboard {
+    height: 55rem;
+  }
+
   .chat-history {
     width: 189vh;
   }

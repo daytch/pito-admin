@@ -57,7 +57,7 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                             </figure>
                         </div>
                     </div>
-                    <div className="lg:w-2/3 item-meta">
+                    <div className="ml-3 md:ml-0 lg:w-2/3 item-meta">
                         <div className="flex flex-wrap">
                             <h4 className="break-all font-light xl:text-lg xxl:text-xl text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-4">{title}</h4>
                         </div>
@@ -70,7 +70,7 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                             </div>
                         </div>
                         {
-                            categories && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
+                            categories && <div className="pl-3 xl:pl-0 flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
                                 {
                                     categories.map((item, index) => {
                                         return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="text-xs inline-block">{item}</h6></span>)

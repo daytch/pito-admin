@@ -19,7 +19,7 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
 const LivestreamDetail = ({ location }) => {
-    
+
     const [query] = useState(location.query)
     const [isLoading, setLoading] = useState(true)
     const [title, setTitle] = useState("")
@@ -85,7 +85,7 @@ const LivestreamDetail = ({ location }) => {
         <Spinner isLoading={isLoading}>
             <section className="min-h-screen flex flex-col xl:flex-row">
                 <SideNavbar />
-                <div className="py-10 md:py-20 px-5 w-full">
+                <div className="py-5 md:py-10 px-5 w-full">
                     <div className="flex flex-col-reverse md:flex-row w-full justify-between">
                         <h6 className="text-red-600 font-semibold text-lg text-center pt-8 md:pt-0">Livestreams Detail</h6>
                         <div className="flex items-center md:mb-0 justify-end">
@@ -160,17 +160,17 @@ const LivestreamDetail = ({ location }) => {
                             </div>
                             <div className="form-dashboard flex flex-wrap w-full items-center">
                                 <label htmlFor="fbLink" className="xl:px-2 xl:w-1/6 xxl:w-1/6 text-md text-gray-700">Facebook Link</label>
-                                <input type="text" value={fb} placeholder="https://facebook.com/live/url" className="w-full px-2 md:w-4/5 px-2 py-1 mr-2 bg-gray-700 text-white focus:outline-none my-2 border border-gray-300 rounded-lg" readOnly />
+                                <input type="text" value={fb ? fb : ""} placeholder="https://facebook.com/live/url" className="w-full px-2 md:w-4/5 px-2 py-1 mr-2 bg-gray-700 text-white focus:outline-none my-2 border border-gray-300 rounded-lg" readOnly />
                                 {/* <FbIcon /> */}
                             </div>
                             <div className="form-dashboard flex flex-wrap w-full items-center">
                                 <label htmlFor="igLink" className="xl:px-2 xl:w-1/6 xxl:w-1/6 text-md text-gray-700">Instagram Link</label>
-                                <input type="text" value={ig} placeholder="https://instagram.com/live/url" className="w-full px-2 md:w-4/5 px-2 py-1 mr-2 bg-gray-700 text-white focus:outline-none my-2 border border-gray-300 rounded-lg" readOnly />
+                                <input type="text" value={ig ? ig : ""} placeholder="https://instagram.com/live/url" className="w-full px-2 md:w-4/5 px-2 py-1 mr-2 bg-gray-700 text-white focus:outline-none my-2 border border-gray-300 rounded-lg" readOnly />
                                 {/* <IgIcon /> */}
                             </div>
                             <div className="form-dashboard flex flex-wrap w-full items-center">
                                 <label htmlFor="ttLink" className="xl:px-2 xl:w-1/6 xxl:w-1/6 text-md text-gray-700">Tiktok Link</label>
-                                <input type="text" value={tiktok} placeholder="https://tiktok.com/live/url" className="w-full px-2 md:w-4/5 px-2 py-1 mr-2 bg-gray-700 text-white focus:outline-none my-2 border border-gray-300 rounded-lg" readOnly />
+                                <input type="text" value={tiktok ? tiktok : ""} placeholder="https://tiktok.com/live/url" className="w-full px-2 md:w-4/5 px-2 py-1 mr-2 bg-gray-700 text-white focus:outline-none my-2 border border-gray-300 rounded-lg" readOnly />
                                 {/* <TtIcon /> */}
                             </div>
                         </div>

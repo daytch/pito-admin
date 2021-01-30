@@ -12,11 +12,11 @@ const Graph = ({ merchant_year, mostfav, mostfavmerchant, mostshared, mostview, 
 
     return (
         <>
-            <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 pb-10 lg:border-r-2 lg:border-gray-500">
+            <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 pb-2 md:pb-10 lg:border-r-2 lg:border-gray-500">
                 <Lines label={user_year && user_year.year} data={user_year && user_year.total} total_user={total_user} />
                 <Bars />
             </section>
-            <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 py-10 lg:border-r-2 lg:border-gray-500">
+            <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 py-2 md:py-10 lg:border-r-2 lg:border-gray-500">
                 <SelectForm name="most-view">
                     <option value="" className="text-black">Most Viewed Livestream</option>
                     <option value="" className="text-black">Most Favourite</option>

@@ -45,32 +45,38 @@ const Analytic = () => {
     return (
         <section className="flex flex-col xl:flex-row min-h-screen">
             <Sidebar />
-            {
-                !isSignedIn ? (<>
-                    <Title>Google Analytics Analytic</Title>
-                    <ButtonContainer>
-                        <div id="signin-button"></div>
-                    </ButtonContainer></>) :
-                    (<>
-                        <DayVisitsReport
-                            metric={"ga:users"}
-                            title={"Users"}
-                            viewId={viewId}
-                        /><br />
-                        <DayVisitsReport
-                            metric={"ga:sessions"}
-                            title={"Sessions"}
-                            viewId={viewId}
-                        /><br />
-                        <CountriesReport viewId={viewId} /><br />
-                        <PageviewsReport viewId={viewId} /><br />
-                        <SourceReport viewId={viewId} /><br />
-                        <LastRow>
-                            <BrowsersReport viewId={viewId} />
-                            <DevicesReport viewId={viewId} />
-                        </LastRow>
-                    </>)
-            }
+            <div className="py-5 md:py-10 px-5 w-full">
+                {
+                    !isSignedIn ? (<>
+                        <Title>Google Analytics Analytic</Title>
+                        <ButtonContainer>
+                            <div id="signin-button"></div>
+                        </ButtonContainer></>) :
+                        (<>
+                            <DayVisitsReport
+                                metric={"ga:users"}
+                                title={"Users"}
+                                viewId={viewId}
+                            /><br />
+                            <DayVisitsReport
+                                metric={"ga:sessions"}
+                                title={"Sessions"}
+                                viewId={viewId}
+                            /><br />
+                            <CountriesReport viewId={viewId} /><br />
+                            <PageviewsReport viewId={viewId} /><br />
+                            <SourceReport viewId={viewId} /><br />
+                            <LastRow>
+                                <div className="w-1/2">
+                                    <BrowsersReport viewId={viewId} />
+                                </div>
+                                <div className="w-1/2">
+                                    <DevicesReport viewId={viewId} />
+                                </div>
+                            </LastRow>
+                        </>)
+                }
+            </div>
         </section>
     );
 };
