@@ -488,6 +488,13 @@ item:hover figure.item-image-live-detail svg.icon {
 }
 
 @media only screen and (max-width: 600px) {
+    .ck-editor__editable {
+        width: 23.3rem;
+        height: 10rem;
+    }
+    div.ck.ck-editor__top.ck-reset_all {
+        width: 23.3rem;
+    }
     .container-countdown {
         padding: 0.1rem;
     }
@@ -560,6 +567,13 @@ thead tr th.descending::after {
 /**Desktop Query*/
 
 @media only screen and (min-width: 768px) {
+    .ck-editor__editable {
+        width: 55.3rem;
+        height: 15rem;
+    }
+    div.ck.ck-editor__top.ck-reset_all {
+        width: 55.3rem;
+    }
     .container-countdown {
         padding: 0.1rem;
     }
@@ -590,10 +604,10 @@ thead tr th.descending::after {
         width: 543px !important;
     }
     .fav-merchant {
-        height: 19rem;
+        height: 37rem;
     }
     .mostview-dashboard {
-        height: 55rem;
+        height: 75rem;
     }
     .chat-history {
         width: 189vh;

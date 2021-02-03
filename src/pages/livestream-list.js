@@ -149,18 +149,18 @@ const LivestreamList = () => {
 
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
-            <section className="flex flex-col xl:flex-row ">
+            <section className="min-h-screen flex flex-col xl:flex-row ">
                 <Sidebar />
                 <div className="py-5 md:py-10 px-5 w-full">
                     <div className="flex flex-col md:flex-row md:justify-between items-center">
                         <Searchbar />
                         <div className="text-xs flex w-full md:w-3/12 mt-4 md:mt-0 items-center">
-                            <h2 className="font-semibold text-sm md:text-lg text-gray-700">Filter</h2>
-                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-md">
+                            <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Filter</h2>
+                            <div className="w-full md:w-40 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
                                 <Dropdown title="Ongoing" onClick={changeDropdown} items={items} />
                             </div>
-                            <h2 className="font-semibold text-sm md:text-lg text-gray-700">Sort</h2>
-                            <div className="form-categories border ml-5 w-1/3 border-gray-300 rounded-md">
+                            <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Sort</h2>
+                            <div className="w-full md:w-40 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
                                 <Dropdown title="Date" onClick={changeDropdownFilter} items={itemsDate} />
                             </div>
                         </div>

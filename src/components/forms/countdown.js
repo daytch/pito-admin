@@ -16,10 +16,11 @@ const Countdown = ({ StartTime }) => {
             const then = Moment(StartTime);
             const now = Moment();
             const countdown = Moment(then - now);
-            const day = countdown.format('DD');
+            let day = countdown.format('DD');
             const hour = countdown.format('HH');
             const minute = countdown.format('mm');
             const second = countdown.format('ss');
+            day = day - 1 < 1 ? '00' : '0' + (day - 1);
             setDays(day);
             setHours(hour);
             setMinutes(minute);

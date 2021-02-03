@@ -51,7 +51,7 @@ const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
                                                         <div className="upcoming rounded-lg border-2 border-red-600 w-11/12 md:w-full">
                                                             <Countdown StartTime={Converter.convertToLocal(item.start_time)} />
                                                         </div>
-                                                        <img style={{ maxWidth: '348px', maxHeight: '222px' }} src={BgUpcoming} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={item.title} className="thumbnail-live" />
+                                                        <img style={{ maxWidth: '348px', maxHeight: '222px' }} src={BgUpcoming} alt={item.title} className="thumbnail-live" />
                                                     </>
                                                 ) : (
                                                         <>
