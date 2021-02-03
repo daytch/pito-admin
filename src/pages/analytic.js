@@ -15,7 +15,9 @@ const Analytic = () => {
                  <div className="py-5 md:py-10 px-5 w-full flex">
                     <iframe title="Dashboard Analytic" src="https://datastudio.google.com/embed/reporting/745b72aa-2aa0-47a2-9f1f-c26ee47d64e0/page/1M" allowtransparency="true" scrolling="no" frameBorder="0" style={{ border: "none", overflow: "hidden", minHeight: "600px", width: "100%" }}></iframe>
                 </div>
-                {/**https://datastudio.google.com/reporting/745b72aa-2aa0-47a2-9f1f-c26ee47d64e0 */}
+               
+                {/** "https://datastudio.google.com/reporting/745b72aa-2aa0-47a2-9f1f-c26ee47d64e0/page/1M"
+                 * https://datastudio.google.com/reporting/745b72aa-2aa0-47a2-9f1f-c26ee47d64e0 */}
             </section>
         </>
     )
