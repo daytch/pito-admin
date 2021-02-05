@@ -17,7 +17,7 @@ const index = ({ ListMerchant }) => {
                             <div className="px-4">
                                 <h5 className="font-semibold text-base text-gray-700">{item.name}</h5>
                                 <div className="flex flex-wrap mt-2 items-center">
-                                    <p className="text-xs md:text-sm text-gray-900 font-light">{item.total_subs} subscribers</p> <div className="rounded-full w-1 h-1 bg-gray-700 mx-2"></div>
+                                    <p className="text-xs md:text-sm text-gray-900 font-light">{item.total_subs} Likes</p> <div className="rounded-full w-1 h-1 bg-gray-700 mx-2"></div>
                                     <p className="text-xs md:text-sm text-gray-900 font-light">{item.total_livestream} Livestreams</p>
                                 </div>
 

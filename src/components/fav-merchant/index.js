@@ -33,7 +33,7 @@ const index = ({ merchants }) => {
                                 </div>
                                 <div className="px-2 w-full">
                                     <p className="font-semibold text-base text-red-600">{item.totalSubs}</p>
-                                    <p className="text-gray-900 text-xs font-medium flex items-center"><SubscriberIcon className="mr-1" /> Subscriber</p>
+                                    <p className="text-gray-900 text-xs font-medium flex items-center"><SubscriberIcon className="mr-1" /> Likes</p>
                                 </div>
                             </div>
                             <div className="text-gray-400 text-xs font-semibold px-5 py-2 md:text-left">

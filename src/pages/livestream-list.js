@@ -28,6 +28,10 @@ const itemsDate = [
 ]
 const items = [
     {
+        id: 0,
+        value: 'All'
+    },
+    {
         id: 1,
         value: 'Ongoing'
     },
@@ -53,24 +57,54 @@ const LivestreamList = () => {
     })
 
     function getData(param) {
-        LivestreamApi.getLivestream({
-            type: param,
-            page: 1
-        }).then((res) => {
-            setTipe(param)
-            setVideos(res.data)
-            setLoading(false)
-        })
-
+        let arrData = [];
+        setTipe(param)
+        if (param === 'All') {
+            LivestreamApi.getLivestream({ type: 'live_videos', page: 1 })
+                .then((res) => {
+                    if (res.data.length > 0) {
+                        setTipe(param)
+                        arrData = res.data;
+                        // setVideos(res.data)
+                    }
+                    LivestreamApi.getLivestream({ type: 'upcoming_videos', page: 1 })
+                        .then((res) => {
+                            if (res.data.length > 0) {
+                                arrData = arrData.concat(res.data)
+                                // setVideos([...videos, res.data])
+                            }
+                            LivestreamApi.getLivestream({ type: 'previous_videos', page: 1 })
+                                .then((res) => {
+                                    if (res.data.length > 0) {
+                                        arrData = arrData.concat(res.data)
+                                        // setVideos([...videos, res.data])
+                                    }
+                                    setVideos(arrData.sort((a, b) => (a.start_time > b.start_time) ? 1 : -1))
+                                    setLoading(false)
+                                })
+                        })
+                })
+        } else {
+            LivestreamApi.getLivestream({
+                type: param,
+                page: 1
+            }).then((res) => {
+                setTipe(param)
+                setVideos(res.data)
+                setLoading(false)
+            })
+        }
     }
     useEffect(() => {
-        LivestreamApi.getLivestream({
-            type: "live_videos",
-            page: 1
-        }).then((res) => {
-            setVideos(res.data)
-            setLoading(false)
-        })
+        setLoading(true)
+        getData('All');
+        // LivestreamApi.getLivestream({
+        //     type: "live_videos",
+        //     page: 1
+        // }).then((res) => {
+        //     setVideos(res.data)
+        //     setLoading(false)
+        // })
     }, [])
     const DisableButton = (id) => {
         return <button onClick={() => submitDelete(id)} className="border border-red-600 rounded-full w-full px-6 py-3 font-medium text-red-600 focus:outline-none">Disable</button>;
@@ -105,6 +139,10 @@ const LivestreamList = () => {
     function changeDropdown(e) {
         setLoading(true)
         switch (e.value) {
+            case 'All':
+                getData('All')
+                setFilter('All')
+                break;
             case 'Ongoing':
                 getData('live_videos')
                 setFilter('live_videos')
@@ -157,7 +195,7 @@ const LivestreamList = () => {
                         <div className="text-xs flex w-full md:w-3/12 mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Filter</h2>
                             <div className="w-full md:w-40 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
-                                <Dropdown title="Ongoing" onClick={changeDropdown} items={items} />
+                                <Dropdown title="All" onClick={changeDropdown} items={items} />
                             </div>
                             <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Sort</h2>
                             <div className="w-full md:w-40 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">

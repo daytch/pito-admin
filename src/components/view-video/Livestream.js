@@ -19,7 +19,7 @@ const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
     return (
         <>
             {
-                dataVideos.map((item, index) => {
+                dataVideos && dataVideos.map((item, index) => {
                     let allWord = Moment(Converter.convertToLocal(item.start_time)).fromNow();
                     allWord = allWord.replace("a ", "1 ");
                     var angka = allWord.replace(/[^\d.-]/g, '');
@@ -113,7 +113,7 @@ const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
                                 </div>
 
                                 <div className="flex-col md:px-4 xxl:px-8 leading-tight">
-                                    <h4 className="font-bold text-xl text-red-600">{item.merchant.name}</h4>
+                                    <h4 className="font-bold text-xl text-red-600">{item.merchant ? item.merchant.name : ''}</h4>
                                     <div className="mt-4">
                                         <h5 className="text-gray-700 font-semibold mb-2 break-all">{item.title}</h5>
                                         <p className="max-lines text-livestream text-justify text-sm md:text-base break-all">{item.description}</p>
