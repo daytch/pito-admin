@@ -12,6 +12,7 @@ import SelectForm from 'components/forms/select'
 import NumberLivestream from 'components/numberLivestream'
 import TopSearch from 'components/topsearch'
 import FavMerchant from 'components/fav-merchant'
+import Moment from 'moment'
 
 const Dashboard = () => {
     const [isLoading, setLoading] = useState(true)
@@ -60,7 +61,6 @@ const Dashboard = () => {
         let tk = toggleKeyword ? false : true;
         setToggleKeyword(tk)
     }
-
     useEffect(() => {
         setLoading(true)
         live.getDashboard().then((res) => {
@@ -87,7 +87,11 @@ const Dashboard = () => {
             setTotalUpcoming(res.total_upcoming)
             setTotalUser(res.total_user)
             // setUserYear(res.user_year)
-            setLabel(res.user_year.map((item) => { return item.year }))
+
+            setLabel(res.user_year.map((item) => {
+                console.log(item)
+                return getMonth(item.month) + "-" + item.year
+            }))
             setDataLine(res.user_year.map((item) => { return item.total }))
             setLabelMerchant(res.merchant_year.map((item) => { return item.year }))
             setDataBar(res.merchant_year.map((item) => { return item.total }))
@@ -159,4 +163,46 @@ const Dashboard = () => {
     )
 }
 
+function getMonth(no) {
+    var bln = '';
+    switch (no) {
+        case 1:
+            bln = 'Jan';
+            break;
+        case 2:
+            bln = 'Feb';
+            break;
+        case 3:
+            bln = 'Mar';
+            break;
+        case 4:
+            bln = 'Apr';
+            break;
+        case 5:
+            bln = 'May';
+            break;
+        case 6:
+            bln = 'Jun';
+            break;
+        case 7:
+            bln = 'Jul';
+            break;
+        case 8:
+            bln = 'Aug';
+            break;
+        case 9:
+            bln = 'Sep';
+            break;
+        case 10:
+            bln = 'Oct';
+            break;
+        case 11:
+            bln = 'Nov';
+            break;
+        default:
+            bln = 'Des';
+            break;
+    }
+    return bln;
+}
 export default Dashboard;

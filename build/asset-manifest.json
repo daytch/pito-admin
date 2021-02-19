@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/static/css/main.d4c3023c.chunk.css",
-    "main.js": "/static/js/main.085fe470.chunk.js",
-    "main.js.map": "/static/js/main.085fe470.chunk.js.map",
+    "main.js": "/static/js/main.89b590c5.chunk.js",
+    "main.js.map": "/static/js/main.89b590c5.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.5b03d60e.js",
     "runtime-main.js.map": "/static/js/runtime-main.5b03d60e.js.map",
     "static/css/2.ccc6f86f.chunk.css": "/static/css/2.ccc6f86f.chunk.css",
-    "static/js/2.00462cc4.chunk.js": "/static/js/2.00462cc4.chunk.js",
-    "static/js/2.00462cc4.chunk.js.map": "/static/js/2.00462cc4.chunk.js.map",
+    "static/js/2.5a48796e.chunk.js": "/static/js/2.5a48796e.chunk.js",
+    "static/js/2.5a48796e.chunk.js.map": "/static/js/2.5a48796e.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.ccc6f86f.chunk.css.map": "/static/css/2.ccc6f86f.chunk.css.map",
     "static/css/main.d4c3023c.chunk.css.map": "/static/css/main.d4c3023c.chunk.css.map",
-    "static/js/2.00462cc4.chunk.js.LICENSE.txt": "/static/js/2.00462cc4.chunk.js.LICENSE.txt",
+    "static/js/2.5a48796e.chunk.js.LICENSE.txt": "/static/js/2.5a48796e.chunk.js.LICENSE.txt",
     "static/media/analytic-icon.4555494d.svg": "/static/media/analytic-icon.4555494d.svg",
     "static/media/arrow-custom.b0438a31.svg": "/static/media/arrow-custom.b0438a31.svg",
     "static/media/arrow-white.39ec4e8d.svg": "/static/media/arrow-white.39ec4e8d.svg",
     "static/media/categories-icon.dafd0158.svg": "/static/media/categories-icon.dafd0158.svg",
     "static/media/dashboard-icon.f4912018.svg": "/static/media/dashboard-icon.f4912018.svg",
-    "static/media/default.8225dda3.svg": "/static/media/default.8225dda3.svg",
+    "static/media/default.b318bf28.svg": "/static/media/default.b318bf28.svg",
     "static/media/email-icon.8f87c745.svg": "/static/media/email-icon.8f87c745.svg",
     "static/media/eye-icon.9c257360.svg": "/static/media/eye-icon.9c257360.svg",
     "static/media/fb-icon-blue.4fbaa286.svg": "/static/media/fb-icon-blue.4fbaa286.svg",
@@ -48,8 +48,8 @@
   "entrypoints": [
     "static/js/runtime-main.5b03d60e.js",
     "static/css/2.ccc6f86f.chunk.css",
-    "static/js/2.00462cc4.chunk.js",
+    "static/js/2.5a48796e.chunk.js",
     "static/css/main.d4c3023c.chunk.css",
-    "static/js/main.085fe470.chunk.js"
+    "static/js/main.89b590c5.chunk.js"
   ]
 }
