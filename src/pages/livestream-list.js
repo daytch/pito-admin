@@ -187,7 +187,7 @@ const LivestreamList = () => {
 
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
-            <section className="min-h-screen flex flex-col xl:flex-row ">
+            <section className="min-h-screen flex flex-col xl:flex-row">
                 <Sidebar />
                 <div className="py-5 md:py-10 px-5 w-full">
                     <div className="flex flex-col md:flex-row md:justify-between items-center">

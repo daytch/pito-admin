@@ -4,12 +4,13 @@ import SideNavbar from 'components/SideNavbar'
 // import { Link } from 'react-router-dom'
 // import { withRouter } from "react-router"
 // import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
-import { ReactComponent as FbIcon } from 'assets/images/fb-icon.svg'
-import { ReactComponent as IgIcon } from 'assets/images/ig-icon.svg'
-import { ReactComponent as TtIcon } from 'assets/images/tiktok-icon.svg'
+// import { ReactComponent as FbIcon } from 'assets/images/fb-icon.svg'
+// import { ReactComponent as IgIcon } from 'assets/images/ig-icon.svg'
+// import { ReactComponent as TtIcon } from 'assets/images/tiktok-icon.svg'
 import livestream from 'api/livestream'
 import Spinner from 'components/spinner'
-import moment from 'moment'
+import Moment from 'moment'
+import Converter from 'configs/moment/DatetimeConverter'
 import ReactHtmlParserfrom from 'react-html-parser'
 import Modal from 'react-modal'
 // import DefaultImg from 'assets/images/default.svg'
@@ -56,9 +57,11 @@ const LivestreamDetail = ({ location }) => {
                 setIframe(url_iframe);
                 setTitle(data.title);
                 setDesc(data.desc);
-                let stDate = moment(data.startDate).format('YYYY-MM-DD');
-                let stTime = moment(data.startDate).format('HH:mm');
-                let enTime = moment(data.endDate).format('HH:mm');
+
+                let stDate = Moment(Converter.convertToLocal(data.startDate)).format('YYYY-MM-DD');
+                let stTime = Moment(Converter.convertToLocal(data.startDate)).format("HH:mm")
+                let enTime = Moment(Converter.convertToLocal(data.endDate)).format("HH:mm")
+
                 setStartDate(stDate);
                 setStartTime(stTime);
                 setEndTime(enTime);

@@ -96,64 +96,66 @@ const Dashboard = () => {
     }, [])
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
-            <section className="min-h-screen flex flex-col xl:flex-row">
+            <section className="flex flex-col xl:flex-row min-h-screen">
                 <Sidebar />
-                <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 pb-2 md:pb-10 lg:border-r-2 lg:border-gray-500">
-                    <Lines label={labels} data={dataLine} total_user={totalUser} />
-                    <Bars label={labelMerchant} data={dataBar} total_merchant={totalMerchant} />
-                </section>
-                <section className="w-full md:w-full xl:w-2/5 xxl:w-2/4 py-2 md:py-10 lg:border-r-2 lg:border-gray-500">
-                    <SelectForm change={setToggleDropdown} name="most-view">
-                        <option value="view" className="text-black">Most Viewed Livestream</option>
-                        <option value="fav" className="text-black">Most Favourite</option>
-                        <option value="share" className="text-black">Most Shared</option>
-                    </SelectForm>
-                    {
-                        toggleView ? mostView && <div className="mostview-dashboard overflow-auto">
-                            {
-                                mostView.map((item, index) => {
-                                    return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
-                                })
-                            }
-                        </div> : null
-                    }
-                    {
-                        toggleFav ? mostFav && <div className="mostview-dashboard overflow-auto">
-                            {
-                                mostFav.map((item, index) => {
-                                    return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
-                                })
-                            }
-                        </div> : null
-                    }
-                    {
-                        toggleShared ? mostShared && <div className="mostview-dashboard overflow-auto">
-                            {
-                                mostShared.map((item, index) => {
-                                    return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
-                                })
-                            }
-                        </div> : null
-                    }
-                </section>
-                <section className="w-full md:w-full xl:w-1/4 xxl:w-4/12 py-10 px-4 lg:px-0">
-                    <NumberLivestream live={totalLive} previous={totalCompleted} upcoming={totalUpcoming} />
-                    <div className="flex-col py-4 lg:border-b-2 lg:border-gray-500">
-                        <SelectForm change={setToggleSearch} name="total-search">
-                            <option value="keyword" className="text-black">Top Search Keywords</option>
-                            <option value="category" className="text-black" selected>Top Search Categories</option>
+                <div className="w-full gap-8 flex py-5 md:py-10 px-5 grid grid-cols-1 lg:grid-cols-5 md:gap-0 lg:gap-4 ">
+                    <section className="w-full lg:border-r-2 lg:border-gray-500 lg:col-span-2">
+                        <Lines label={labels} data={dataLine} total_user={totalUser} />
+                        <Bars label={labelMerchant} data={dataBar} total_merchant={totalMerchant} />
+                    </section>
+                    <section className="w-full lg:border-r-2 lg:border-gray-500 lg:col-span-2">
+                        <SelectForm change={setToggleDropdown} name="most-view">
+                            <option value="view" className="text-black">Most Viewed Livestream</option>
+                            <option value="fav" className="text-black">Most Favourite</option>
+                            <option value="share" className="text-black">Most Shared</option>
                         </SelectForm>
                         {
-                            toggleKeyword ?
-                                <TopSearch data={searchCategory} /> :
-                                <TopSearch data={searchKeyword} />
+                            toggleView ? mostView && <div className="mostview-dashboard overflow-auto">
+                                {
+                                    mostView.map((item, index) => {
+                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                    })
+                                }
+                            </div> : null
                         }
-                    </div>
-                    <div className="flex-col px-2 py-4 xxl:px-4 lg:border-b-2 lg:border-gray-500">
-                        <h5 className="text-red-600">Most Favourite Merchant</h5>
-                        <FavMerchant merchants={mostFavMerchant} />
-                    </div>
-                </section>
+                        {
+                            toggleFav ? mostFav && <div className="mostview-dashboard overflow-auto">
+                                {
+                                    mostFav.map((item, index) => {
+                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                    })
+                                }
+                            </div> : null
+                        }
+                        {
+                            toggleShared ? mostShared && <div className="mostview-dashboard overflow-auto">
+                                {
+                                    mostShared.map((item, index) => {
+                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                    })
+                                }
+                            </div> : null
+                        }
+                    </section>
+                    <section className="w-full">
+                        <NumberLivestream live={totalLive} previous={totalCompleted} upcoming={totalUpcoming} />
+                        <div className="flex-col py-4 lg:border-b-2 lg:border-gray-500">
+                            <SelectForm change={setToggleSearch} name="total-search">
+                                <option value="keyword" className="text-black">Top Search Keywords</option>
+                                <option value="category" className="text-black" selected>Top Search Categories</option>
+                            </SelectForm>
+                            {
+                                toggleKeyword ?
+                                    <TopSearch data={searchCategory} /> :
+                                    <TopSearch data={searchKeyword} />
+                            }
+                        </div>
+                        <div className="flex-col px-2 py-4 xxl:px-4 lg:border-b-2 lg:border-gray-500">
+                            <h5 className="text-red-600">Most Favourite Merchant</h5>
+                            <FavMerchant merchants={mostFavMerchant} />
+                        </div>
+                    </section>
+                </div>
             </section>
         </Spinner>
     )

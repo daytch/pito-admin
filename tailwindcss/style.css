@@ -27,7 +27,7 @@
 
 .sidebar {
     @apply .bg-gray-800;
-    width: 150px !important;
+    width: 140px !important;
 }
 
 .list-menu svg.icon {

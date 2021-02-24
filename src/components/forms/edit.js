@@ -158,7 +158,7 @@ const Edit = ({ data, openLoading, closeLoading }) => {
 
         if (ids.length < 1) {
             livestream.getCategory().then((res) => {
-                debugger;
+                
                 res.data.map((i) => {
                     if (i.text == data.item.categories[0]) {
                         ids.push(i.id)
