@@ -41,15 +41,16 @@ const Bars = ({ label, data, total_merchant }) => {
                     }}
                 />
                 <div className="mt-4 w-full flex flex-col lg:flex-row">
-                    <div className="lg:w-1/2 text-right md:px-5">
+                    {/* <div className="lg:w-1/2 text-right md:px-5"> */}
+                    <div className="lg:w-full text-right md:px-5">
                         <span className="font-semibold text-md md:text-lg text-gray-400">TOTAL PITO USER</span>
                         <h2 className="font-semibold text-3xl md:text-5xl text-red-600">{total_merchant}</h2>
                     </div>
-                    <div className="lg:w-1/2 text-justify">
+                    {/* <div className="lg:w-1/2 text-justify">
                         <p className="font-light text-xs">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodMERCHANTGRAPH
                                 </p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
