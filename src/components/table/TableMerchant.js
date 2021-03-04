@@ -10,7 +10,7 @@ const TableMerchant = ({ itemHead, itemBody }) => {
         if (!sortConfig) {
             return;
         }
-        console.log(sortConfig.key);
+        
         return sortConfig.key === name ? sortConfig.direction : undefined;
     };
     return (

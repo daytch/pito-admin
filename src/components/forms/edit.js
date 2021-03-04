@@ -16,7 +16,7 @@ import Converter from 'configs/moment/DatetimeConverter'
 const MySwal = withReactContent(Swal)
 
 const Edit = ({ data, openLoading, closeLoading }) => {
-    console.log(data)
+
     const { id } = useParams()
     const [mypic, setMypic] = useState('')
     const [startDate, setStartDate] = useState(Moment(Converter.convertToLocal(data.item.start_time)).format("YYYY-MM-DD"))
@@ -190,7 +190,6 @@ const Edit = ({ data, openLoading, closeLoading }) => {
                         title: 'Success',
                         text: res.message
                     }).then(result => {
-                        console.log(result)
                         window.location.href = '/livestream'
                     })
                 }).catch(err => {
@@ -218,7 +217,6 @@ const Edit = ({ data, openLoading, closeLoading }) => {
                     title: 'Success',
                     text: res.message
                 }).then(result => {
-                    console.log(result)
                     window.location.href = '/livestream'
                 })
             }).catch(err => {

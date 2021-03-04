@@ -12,6 +12,7 @@ import DashboardDetail from 'pages/dashboard-detail'
 import LivestreamList from 'pages/livestream-list'
 import LivestreamDetail from 'pages/livestream-detail'
 import LivestreamEdit from 'pages/livestream-edit'
+import LivestreamCreate from 'pages/livestream-create'
 import MerchantList from 'pages/merchant-list'
 import MerchantDetail from 'pages/merchant-detail'
 import MerchantEdit from 'pages/merchant-edit'
@@ -49,6 +50,7 @@ function App() {
               <PrivateRoute path={`${url}/`} component={LivestreamList} exact />
               <PrivateRoute path={`${url}/detail/:id`} component={LivestreamDetail} exact />
               <PrivateRoute path={`${url}/edit/:id`} component={LivestreamEdit} exact />
+              <PrivateRoute path={`${url}/create/:id`} component={LivestreamCreate} exact />
             </>
           )} />
         <Route path="/merchant"

@@ -12,4 +12,6 @@ export default {
     getMerchantDetail: (id) => axios.get('/admin/getMerchantProfileByAdmin?userId=' + id),
     submitMerchantProfile: (data) => axios.post("/admin/submitProfileMerchant", data),
     submitUserProfile: (data) => axios.post("/admin/submitProfileUser", data),
+    disableUser: (data) => axios.post("/admin/disableUser", data),
+    enableUser: (data) => axios.post("/admin/enableUser", data)
 }

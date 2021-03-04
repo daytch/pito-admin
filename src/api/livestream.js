@@ -7,5 +7,7 @@ export default {
     getDashboard: () => axios.get("/admin/getDashboard"),
     getLivestream: (param) => axios.post("/admin/listVideos",param),
     deleteLivestream: (data) => axios.post("/admin/deleteLivestream", data),
+    submitLivestreamByAdmin: (data) => axios.post("/admin/submitLivestreamByAdmin", data)
+    
 }
 

@@ -15,7 +15,7 @@ import Countdown from 'components/forms/countdown'
 import Moment from 'moment'
 
 const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
-    console.log(dataVideos)
+    
     return (
         <>
             {

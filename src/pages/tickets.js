@@ -40,7 +40,7 @@ const Tickets = () => {
                     ticketNumber: e.id,
                     username: e.name,
                     title: e.title,
-                    status: (e.status === 1) ? "Open" : "Close",
+                    status: (e.status === 0) ? "Open" : "Close",
                     lastUpdated: e.last_session
                 }
             })

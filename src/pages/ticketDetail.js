@@ -28,7 +28,7 @@ const TicketDetail = (props) => {
     function getMessage() {
         Support.getListMessage(props.match.params.id).then(e => {
 
-            const isClosed = e.data.map((el) => el.status).indexOf(0);
+            const isClosed = e.data.map((el) => el.status).indexOf(1);
             setHideInput(isClosed === -1 ? false : true)
             const a = e.data.map(a => {
                 return {

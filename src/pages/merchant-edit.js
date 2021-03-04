@@ -22,14 +22,9 @@ const MerchantEdit = () => {
     const [category, setCategory] = useState(data.category)
     const [categoryid, setCategoryid] = useState({})
     const [isLoading, setLoading] = useState(true)
-    // const [newPass, setnewPass] = useState('')
-    // const [rePass, setrePass] = useState('')
-    // const [currentPass, setcurrentPass] = useState('')
-    // const [loginBy] = useState(localStorage.getItem('PITO:login'));
     const [cat1, setCat1] = useState('')
     const [cat2, setCat2] = useState('')
     const [cat3, setCat3] = useState('')
-    // const [name, setName] = useState('')
 
     function getData() {
 
@@ -38,8 +33,6 @@ const MerchantEdit = () => {
             setData(e.data);
             let categories = e.data.categories;
 
-            // setName(e.data.name)
-            
             setCat1(categories[0] && categories[0].name ? categories[0].name : 'Category')
             setCat2(categories[1] && categories[1].name ? categories[1].name : 'Category')
             setCat3(categories[2] && categories[2].name ? categories[2].name : 'Category')

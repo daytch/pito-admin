@@ -89,11 +89,12 @@ const Dashboard = () => {
             // setUserYear(res.user_year)
 
             setLabel(res.user_year.map((item) => {
-                console.log(item)
                 return getMonth(item.month) + "-" + item.year
             }))
             setDataLine(res.user_year.map((item) => { return item.total }))
-            setLabelMerchant(res.merchant_year.map((item) => { return item.year }))
+            setLabelMerchant(res.merchant_year.map((item) => {
+                return getMonth(item.month) + "-" + item.year
+            }))
             setDataBar(res.merchant_year.map((item) => { return item.total }))
             setLoading(false);
         });

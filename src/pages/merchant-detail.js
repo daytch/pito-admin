@@ -14,7 +14,9 @@ import { useParams, Link } from 'react-router-dom'
 import Spinner from 'components/spinner'
 import moment from 'moment'
 import Avatar from 'react-avatar'
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 const MerchantDetail = () => {
 
@@ -28,7 +30,7 @@ const MerchantDetail = () => {
     const [tiktok, setTiktok] = useState();
     const [about, setAbout] = useState();
     const [name, setName] = useState();
-    // const [data, setData] = useState();
+    const [isActive, setIsactive] = useState();
     const [fav, setFav] = useState();
     const [share, setShare] = useState();
     const [view, setView] = useState();
@@ -50,6 +52,46 @@ const MerchantDetail = () => {
                 break;
 
         }
+    }
+
+    function DisableUser() {
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to disable this merchant?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, disable it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setLoading(true);
+                User.disableUser({ 'user_id': id.id }).then((res) => {
+                    let data = res;
+                    setLoading(false);
+                    if (data.isSuccess) {
+                        MySwal.fire('Success!', data.message, 'success');
+                    } else {
+                        MySwal.fire('Error!', data.message, 'warning');
+                    }
+                })
+            }
+        })
+
+    }
+
+    function EnableUser() {
+        setLoading(true);
+        User.enableUser({ 'user_id': id.id }).then((res) => {
+            debugger;
+            let data = res;
+            setLoading(false);
+            if (data.isSuccess) {
+                MySwal.fire('Success!', data.message, 'success');
+            } else {
+                MySwal.fire('Error!', data.message, 'warning');
+            }
+        })
     }
 
     const MostRecent2 = [
@@ -74,18 +116,7 @@ const MerchantDetail = () => {
         User.getMerchantDetail(id.id).then((res) => {
             let data = res.data;
 
-            // let dataUser = {
-            //     "email": data.email,
-            //     "name": data.name,
-            //     "img_avatar": data.img_avatar,
-            //     "about": data.about,
-            //     "categories": data.categories,
-            //     "company_website": data.company_website,
-            //     "fb_url": data.fb_url,
-            //     "ig_url": data.ig_url,
-            //     "tiktok_url": data.tiktok_url
-            // };
-            // setData(dataUser);
+            setIsactive(data.isActive);
             setAvatar(data.img_avatar);
             setCategory(data.categories);
             setFB(data.fb_url);
@@ -93,13 +124,6 @@ const MerchantDetail = () => {
             setTiktok(data.tiktok_url);
             setAbout(data.about);
             setName(data.name);
-            // let HistoryVideos = data.history_videos.map((item)=>{
-            //     let start = moment(item.start_time)
-            //     let end = moment(item.end_time)
-            //     let duration  = moment.duration(end.diff(start)
-
-
-            // })
             setVideos(data.history_videos);
             setFav(data.total_fav);
             setShare(data.total_shared);
@@ -161,14 +185,20 @@ const MerchantDetail = () => {
                             </div>
                         </div>
                         <div className="flex flex-wrap pt-8 justify-center">
-                            <button className="rounded-3xl text-sm md:text-base font-medium mr-2 mb-2 xl:mb-0 md:mr-6 text-red-600 border border-red-600 px-6 py-2 md:px-12 md:py-2">Disable</button>
+                            {
+                                isActive === 1 ? (<button onClick={DisableUser} className="rounded-3xl text-sm md:text-base font-medium mr-2 mb-2 xl:mb-0 md:mr-6 text-red-600 border border-red-600 px-6 py-2 md:px-12 md:py-2">Disable</button>)
+                                    : (<button onClick={EnableUser} className="rounded-3xl text-sm md:text-base font-medium mr-2 mb-2 xl:mb-0 md:mr-6 text-green-600 border border-green-600 px-6 py-2 md:px-12 md:py-2">Enable</button>)
+                            }
+
                             <Link to={{
                                 pathname: `/merchant/edit/${id.id}`,
                                 query: id
                             }} className="rounded-3xl text-sm md:text-base font-medium mr-2 mb-2 xl:mb-0 md:mr-6 text-white bg-red-600 px-6 py-2 md:px-10 md:py-2" >
                                 Edit Account
                             </Link>
-                            <button className="rounded-3xl text-sm md:text-base font-medium text-white bg-red-600 px-6 py-2 md:px-10 md:py-2">Create Livestreams</button>
+                            <Link to={{ pathname: `/livestream/create/${id.id}`, query: id }} className="rounded-3xl text-sm md:text-base font-medium text-white bg-red-600 px-6 py-2 md:px-10 md:py-2">
+                                Create Livestreams
+                            </Link>
                         </div>
                         <div className="pt-8">
                             <LineCustom favData={fav} shareData={share} viewData={view} />

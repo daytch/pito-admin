@@ -43,7 +43,7 @@ const LivestreamDetail = ({ location }) => {
     const history = useHistory()
 
     useEffect(() => {
-        console.log(query)
+        
         setLoading(true)
         livestream.getLivestreamDetail(id).then((res) => {
             let data = res.data;
