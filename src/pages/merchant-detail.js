@@ -34,6 +34,10 @@ const MerchantDetail = () => {
     const [fav, setFav] = useState();
     const [share, setShare] = useState();
     const [view, setView] = useState();
+    const [graphFav, setGraphFav] = useState();
+    const [graphShare, setGraphShare] = useState();
+    const [graphView, setGraphView] = useState();
+    const [labelGraph, setLabelGraph] = useState();
 
     function changeDateid(e) {
 
@@ -125,12 +129,26 @@ const MerchantDetail = () => {
             setAbout(data.about);
             setName(data.name);
             setVideos(data.history_videos);
+
+            if (Array.isArray(data.fav_month) || typeof (data.fav_month) === 'object') {
+                setLabelGraph(data.fav_month.map((item) => {
+                    return getMonth(item.month) + "-" + item.year
+                }))
+                setGraphFav(data.fav_month.map((item) => { return item.total }));
+            }
+            if (Array.isArray(data.view_month) || typeof (data.view_month) === 'object') {
+                setGraphView(data.view_month.map((item) => { return item.total }));
+            }
+            if (Array.isArray(data.shared_month) || typeof (data.shared_month) === 'object') {
+                setGraphShare(data.shared_month.map((item) => { return item.total }));
+            }
+
             setFav(data.total_fav);
             setShare(data.total_shared);
             setView(data.total_view);
             setLoading(false);
         })
-    }, [id.id])
+    }, [])
 
     return (
         <Spinner isLoading={isLoading} className="min-h-screen">
@@ -201,7 +219,12 @@ const MerchantDetail = () => {
                             </Link>
                         </div>
                         <div className="pt-8">
-                            <LineCustom favData={fav} shareData={share} viewData={view} />
+                            {
+                                typeof (labelGraph) !== 'undefined' && typeof (graphFav) !== 'undefined' && typeof (graphShare) !== 'undefined' && typeof (graphView) !== 'undefined' ?
+                                    (
+                                        <LineCustom labels={labelGraph} favData={graphFav} shareData={graphShare} viewData={graphView} />)
+                                    : null
+                            }
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 flex flex-col">
@@ -223,4 +246,46 @@ const MerchantDetail = () => {
     )
 }
 
+function getMonth(no) {
+    var bln = '';
+    switch (no) {
+        case 1:
+            bln = 'Jan';
+            break;
+        case 2:
+            bln = 'Feb';
+            break;
+        case 3:
+            bln = 'Mar';
+            break;
+        case 4:
+            bln = 'Apr';
+            break;
+        case 5:
+            bln = 'May';
+            break;
+        case 6:
+            bln = 'Jun';
+            break;
+        case 7:
+            bln = 'Jul';
+            break;
+        case 8:
+            bln = 'Aug';
+            break;
+        case 9:
+            bln = 'Sep';
+            break;
+        case 10:
+            bln = 'Oct';
+            break;
+        case 11:
+            bln = 'Nov';
+            break;
+        default:
+            bln = 'Des';
+            break;
+    }
+    return bln;
+}
 export default MerchantDetail;
