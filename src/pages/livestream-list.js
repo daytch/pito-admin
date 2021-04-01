@@ -58,7 +58,8 @@ const LivestreamList = () => {
 
     function getData(param) {
         let arrData = [];
-        setTipe(param)
+        setTipe(param);
+        debugger;
         if (param === 'All') {
             LivestreamApi.getLivestream({ type: 'live_videos', page: 1 })
                 .then((res) => {
@@ -162,13 +163,13 @@ const LivestreamList = () => {
         let vids = [...videos];
         switch (e.value) {
             case 'Views':
-                setVideos(vids.sort((a, b) => (a.views > b.views) ? 1 : -1));
+                setVideos(vids.sort((a, b) => (a.views > b.views) ? -1 : 1));
                 break;
             case 'Favourites':
-                setVideos(vids.sort((a, b) => (a.likes > b.likes) ? 1 : -1));
+                setVideos(vids.sort((a, b) => (a.likes > b.likes) ? -1 : 1));
                 break;
             case 'Shares':
-                setVideos(vids.sort((a, b) => (a.share > b.share) ? 1 : -1));
+                setVideos(vids.sort((a, b) => (a.share > b.share) ? -1 : 1));
                 break;
             case 'Date':
                 setVideos(vids.sort((a, b) => (a.start_time > b.start_time) ? 1 : -1));
