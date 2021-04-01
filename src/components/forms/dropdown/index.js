@@ -35,7 +35,7 @@ const Dropdown = ({ title, items = [], onClick, idx, isNeedReset }) => {
         }
     }
     return (
-        <div ref={innerRef} className="text-sm dd-wrapper border z-30 border-white w-56 px-2 py-0 w-full">
+        <div ref={innerRef} className="text-sm dd-wrapper border z-30 border-white w-56 px-2 py-0">
             <div role="button" onKeyPress={() => toggle(!open)}
                 onClick={() => toggle(!open)} className="dd-header flex justify-between">
                 <div className="text-sm dd-header_title">

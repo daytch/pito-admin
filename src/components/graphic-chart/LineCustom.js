@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Line } from 'react-chartjs-2'
 
-const LineCustom = ({ favData, shareData, viewData }) => {
+const LineCustom = ({ labels,favData, shareData, viewData }) => {
+
     const [favouriteData] = useState(favData)
     const [sharedData] = useState(shareData)
     const [viewsData] = useState(viewData)
+    const [labelData] = useState(labels)
 
     const state = {
-        labels: ['Jan', 'Feb', 'March', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'],
+        labels: labelData, //['Jan', 'Feb', 'March', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'],
         datasets: [
             {
                 label: 'Favorite Per Months',
