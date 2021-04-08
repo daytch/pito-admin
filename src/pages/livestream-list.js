@@ -172,7 +172,7 @@ const LivestreamList = () => {
                 setVideos(vids.sort((a, b) => (a.share > b.share) ? -1 : 1));
                 break;
             case 'Date':
-                setVideos(vids.sort((a, b) => (a.start_time > b.start_time) ? 1 : -1));
+                setVideos(vids.sort((a, b) => (a.start_time > b.start_time) ? -1 : 1));
                 break;
         }
     }
@@ -191,15 +191,15 @@ const LivestreamList = () => {
             <section className="min-h-screen flex flex-col xl:flex-row">
                 <Sidebar />
                 <div className="py-5 md:py-10 px-5 w-full">
-                    <div className="flex flex-col md:flex-row md:justify-between items-center">
+                    <div className="flex justify-between items-center">
                         <Searchbar />
-                        <div className="text-xs flex w-full md:w-3/12 mt-4 md:mt-0 items-center">
+                        <div className="text-xs flex justify-end w-full md:w-3/12 mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Filter</h2>
-                            <div className="w-full md:w-40 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
+                            <div className="w-full md:w-56 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
                                 <Dropdown title="All" onClick={changeDropdown} items={items} />
                             </div>
                             <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Sort</h2>
-                            <div className="w-full md:w-40 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
+                            <div className="w-full md:w-56 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
                                 <Dropdown title="Date" onClick={changeDropdownFilter} items={itemsDate} />
                             </div>
                         </div>
