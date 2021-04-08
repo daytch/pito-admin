@@ -20420,6 +20420,13 @@ thead tr th.descending::after {
   text-align: center;
 }
 
+a .thumbnail-live{
+  width: 200px !important;
+  height: 143px !important;
+  object-fit: cover !important;
+  max-width: none !important;
+}
+
 .fof {
   display: table-cell;
   vertical-align: middle;

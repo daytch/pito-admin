@@ -57,7 +57,7 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                             </figure>
                         </div>
                     </div>
-                    <div className="ml-3 md:ml-0 lg:w-2/3 item-meta">
+                    <div className="ml-3 lg:w-2/3 item-meta">
                         <div className="flex flex-wrap">
                             <h4 className="break-all font-light xl:text-lg xxl:text-xl text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-4">{title}</h4>
                         </div>

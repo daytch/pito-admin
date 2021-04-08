@@ -56,7 +56,7 @@ const Dashboard = () => {
             setToggleView(false)
         }
     }
-
+// mostview mostfav mostshared mostfavmerchant
     const setToggleSearch = () => {
         let tk = toggleKeyword ? false : true;
         setToggleKeyword(tk)
@@ -64,7 +64,7 @@ const Dashboard = () => {
     useEffect(() => {
         setLoading(true)
         live.getDashboard().then((res) => {
-            // setMerchantYear(res.merchant_year)
+            
             setMostFav(res.mostfav)
             setMostFavMerchant(res.mostfavmerchant.map((item) => {
                 return {
@@ -86,7 +86,6 @@ const Dashboard = () => {
             setTotalMerchant(res.total_merchant)
             setTotalUpcoming(res.total_upcoming)
             setTotalUser(res.total_user)
-            // setUserYear(res.user_year)
 
             setLabel(res.user_year.map((item) => {
                 return getMonth(item.month) + "-" + item.year
