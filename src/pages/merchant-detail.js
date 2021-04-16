@@ -87,7 +87,7 @@ const MerchantDetail = () => {
     function EnableUser() {
         setLoading(true);
         User.enableUser({ 'user_id': id.id }).then((res) => {
-            debugger;
+            
             let data = res;
             setLoading(false);
             if (data.isSuccess) {
