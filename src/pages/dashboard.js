@@ -154,7 +154,7 @@ const Dashboard = () => {
                                     <TopSearch data={searchKeyword} />
                             }
                         </div>
-                        <div className="flex-col px-2 py-4 xxl:px-4 lg:border-b-2 lg:border-gray-500">
+                        <div className="flex-col px-2 py-4 lg:border-b-2 lg:border-gray-500">
                             <h5 className="text-red-600">Most Favourite Merchant</h5>
                             <FavMerchant merchants={mostFavMerchant} />
                         </div>

@@ -43,7 +43,7 @@
   "scripts": {
     "build:css": "postcss tailwindcss/style.css -o src/assets/css/main.css",
     "watch:css": "postcss tailwindcss/style.css -o src/assets/css/main.css -w",
-    "start": "concurrently \"npm run watch:css\" \"FAST_REFRESH=false react-scripts start\"",
+    "start": "concurrently \"npm run watch:css\" \"react-scripts start\"",
     "build": "concurrently  \"npm run build:css\" \"react-scripts build\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
