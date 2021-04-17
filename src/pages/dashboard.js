@@ -12,11 +12,10 @@ import SelectForm from 'components/forms/select'
 import NumberLivestream from 'components/numberLivestream'
 import TopSearch from 'components/topsearch'
 import FavMerchant from 'components/fav-merchant'
-import Moment from 'moment'
+import Pagination from 'components/pagination'
 
 const Dashboard = () => {
     const [isLoading, setLoading] = useState(true)
-    // const [merchantYear, setMerchantYear] = useState()
     const [mostFav, setMostFav] = useState()
     const [mostFavMerchant, setMostFavMerchant] = useState()
     const [mostShared, setMostShared] = useState()
@@ -26,7 +25,6 @@ const Dashboard = () => {
     const [totalMerchant, setTotalMerchant] = useState()
     const [totalUpcoming, setTotalUpcoming] = useState()
     const [totalUser, setTotalUser] = useState()
-    // const [userYear, setUserYear] = useState()
     const [searchKeyword, setSearchKeyword] = useState()
     const [searchCategory, setSearchCategory] = useState()
 
@@ -39,24 +37,55 @@ const Dashboard = () => {
     const [toggleShared, setToggleShared] = useState(false)
     const [toggleKeyword, setToggleKeyword] = useState(true)
 
+    const [totalMostView, setTotalMostView] = useState(0)
+    const [totalMostFav, setTotalMostFav] = useState(0)
+    const [totalMostShared, setTotalMostShared] = useState(0)
+    const [totalMostFavMerchant, setTotalMostFavMerchant] = useState(0)
+
     const setToggleDropdown = (e) => {
         if (e.currentTarget.value === "view") {
+            getData(1, "mostview")
             setToggleView(true)
             setToggleFav(false)
             setToggleShared(false)
         }
         if (e.currentTarget.value === "fav") {
+            getData(1, "mostfav")
             setToggleFav(true)
             setToggleView(false)
             setToggleShared(false)
         }
         if (e.currentTarget.value === "share") {
+            getData(1, "mostshared")
             setToggleShared(true)
             setToggleFav(false)
             setToggleView(false)
         }
     }
-// mostview mostfav mostshared mostfavmerchant
+    // mostview mostfav mostshared mostfavmerchant
+    function getData(page, tipe) {
+        setLoading(true)
+        live.getDashboardPaging(tipe, page)
+            .then((res) => {
+                if (tipe == "mostview") {
+                    setMostView(res)
+                } else if (tipe == "mostfav") {
+                    setMostFav(res)
+                } else if (tipe == "mostshared") {
+                    setMostShared(res)
+                } else {
+                    setMostFavMerchant(res.map((item) => {
+                        return {
+                            nama: item.name,
+                            avatar: item.img_avatar,
+                            totalSubs: item.total
+                        }
+                    }))
+                }
+                setLoading(false)
+            });
+    }
+
     const setToggleSearch = () => {
         let tk = toggleKeyword ? false : true;
         setToggleKeyword(tk)
@@ -64,7 +93,6 @@ const Dashboard = () => {
     useEffect(() => {
         setLoading(true)
         live.getDashboard().then((res) => {
-            
             setMostFav(res.mostfav)
             setMostFavMerchant(res.mostfavmerchant.map((item) => {
                 return {
@@ -95,6 +123,11 @@ const Dashboard = () => {
                 return getMonth(item.month) + "-" + item.year
             }))
             setDataBar(res.merchant_year.map((item) => { return item.total }))
+
+            setTotalMostView(res.count_mostview);
+            setTotalMostFav(res.count_mostfav);
+            setTotalMostShared(res.count_mostshared);
+            setTotalMostFavMerchant(res.count_mostfavmerchant);
             setLoading(false);
         });
     }, [])
@@ -102,7 +135,7 @@ const Dashboard = () => {
         <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="flex flex-col xl:flex-row min-h-screen">
                 <Sidebar />
-                <div className="w-full gap-8 flex py-5 md:py-10 px-5 grid grid-cols-1 lg:grid-cols-5 md:gap-0 lg:gap-4 ">
+                <div className="w-full gap-8 flex py-5 md:py-10 px-5 grid-cols-1 lg:grid-cols-5 md:gap-0 lg:gap-4 ">
                     <section className="w-full lg:border-r-2 lg:border-gray-500 lg:col-span-2">
                         <Lines label={labels} data={dataLine} total_user={totalUser} />
                         <Bars label={labelMerchant} data={dataBar} total_merchant={totalMerchant} />
@@ -120,6 +153,14 @@ const Dashboard = () => {
                                         return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
                                     })
                                 }
+                                {/* mostfavmerchant */}
+                                <div style={{
+                                    overflowX: 'auto',
+                                    width: '350px',
+                                    marginTop: '20px'
+                                }}>
+                                    <Pagination pages={totalMostView} getData={getData} tipe={'mostview'} />
+                                </div>
                             </div> : null
                         }
                         {
@@ -129,6 +170,13 @@ const Dashboard = () => {
                                         return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
                                     })
                                 }
+                                <div style={{
+                                    overflowX: 'auto',
+                                    width: '350px',
+                                    marginTop: '20px'
+                                }}>
+                                    <Pagination pages={totalMostFav} getData={getData} tipe={'mostfav'} />
+                                </div>
                             </div> : null
                         }
                         {
@@ -138,6 +186,13 @@ const Dashboard = () => {
                                         return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
                                     })
                                 }
+                                <div style={{
+                                    overflowX: 'auto',
+                                    width: '350px',
+                                    marginTop: '20px'
+                                }}>
+                                    <Pagination pages={totalMostShared} getData={getData} tipe={'mostshared'} />
+                                </div>
                             </div> : null
                         }
                     </section>
@@ -146,7 +201,7 @@ const Dashboard = () => {
                         <div className="flex-col py-4 lg:border-b-2 lg:border-gray-500">
                             <SelectForm change={setToggleSearch} name="total-search">
                                 <option value="keyword" className="text-black">Top Search Keywords</option>
-                                <option value="category" className="text-black" selected>Top Search Categories</option>
+                                <option defaultValue="category" className="text-black">Top Search Categories</option>
                             </SelectForm>
                             {
                                 toggleKeyword ?
