@@ -156,7 +156,7 @@ const Dashboard = () => {
                                 {/* mostfavmerchant */}
                                 <div style={{
                                     overflowX: 'auto',
-                                    width: '350px',
+                                    width: '35vw',
                                     marginTop: '20px'
                                 }}>
                                     <Pagination pages={totalMostView} getData={getData} tipe={'mostview'} />
