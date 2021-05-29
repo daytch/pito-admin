@@ -15,21 +15,23 @@ import Converter from 'configs/moment/DatetimeConverter'
 
 const MySwal = withReactContent(Swal)
 
-const Edit = ({ data, openLoading, closeLoading }) => {
+const Edit = ({ data = JSON.parse(localStorage.getItem('data')), openLoading, closeLoading }) => {
 
+    localStorage.setItem('data', JSON.stringify(data ? data : JSON.parse(localStorage.getItem('data'))));
     const { id } = useParams()
     const [mypic, setMypic] = useState('')
-    const [startDate, setStartDate] = useState(Moment(Converter.convertToLocal(data.item.start_time)).format("YYYY-MM-DD"))
-    const [startTime, setStartTime] = useState(Moment(Converter.convertToLocal(data.item.start_time)).format("HH:mm"))
-    const [endTime, setEndTime] = useState(Moment(Converter.convertToLocal(data.item.end_time)).format("HH:mm"))
-    const [title, setTitle] = useState(data.item.title)
-    const [desc, setDesc] = useState(data.item.description)
-    const [category1] = useState(data.item.categories[0])
-    const [category2] = useState(data.item.categories[1])
-    const [category3] = useState(data.item.categories[2])
-    const [fb_url, setFburl] = useState(data.item.redirect_fb)
-    const [tiktok_url, setTiktokurl] = useState(data.item.redirect_tiktok)
-    const [ig_url, setIgurl] = useState(data.item.redirect_ig)
+    const [startDate, setStartDate] = useState(Moment(Converter.convertToLocal(data ? data.item.start_time : JSON.parse(localStorage.getItem('data')).item.start_time)).format("YYYY-MM-DD"))
+    const [startTime, setStartTime] = useState(Moment(Converter.convertToLocal(data ? data.item.start_time : JSON.parse(localStorage.getItem('data')).item.start_time)).format("HH:mm"))
+    const [endTime, setEndTime] = useState(Moment(Converter.convertToLocal(data ? data.item.end_time : JSON.parse(localStorage.getItem('data')).item.end_time)).format("HH:mm"))
+    const [merchantId] = useState(data ? data.item.merchant.id : JSON.parse(localStorage.getItem('data')).item.merchant.id)
+    const [title, setTitle] = useState(data ? data.item.title : JSON.parse(localStorage.getItem('data')).item.title)
+    const [desc, setDesc] = useState(data ? data.item.description : JSON.parse(localStorage.getItem('data')).item.description)
+    const [category1] = useState(data ? data.item.categories[0] : JSON.parse(localStorage.getItem('data')).item.categories[0])
+    const [category2] = useState(data ? data.item.categories[1] : JSON.parse(localStorage.getItem('data')).item.categories[1])
+    const [category3] = useState(data ? data.item.categories[2] : JSON.parse(localStorage.getItem('data')).item.categories[2])
+    const [fb_url, setFburl] = useState(data ? data.item.redirect_fb : JSON.parse(localStorage.getItem('data')).item.redirect_fb)
+    const [tiktok_url, setTiktokurl] = useState(data ? data.item.redirect_tiktok : JSON.parse(localStorage.getItem('data')).item.redirect_tiktok)
+    const [ig_url, setIgurl] = useState(data ? data.item.redirect_ig : JSON.parse(localStorage.getItem('data')).item.redirect_ig)
     const [category, setCategory] = useState([])
     const [categoryid, setCategoryid] = useState({})
 
@@ -158,7 +160,7 @@ const Edit = ({ data, openLoading, closeLoading }) => {
 
         if (ids.length < 1) {
             livestream.getCategory().then((res) => {
-                
+
                 res.data.map((i) => {
                     if (i.text == data.item.categories[0]) {
                         ids.push(i.id)
@@ -182,6 +184,7 @@ const Edit = ({ data, openLoading, closeLoading }) => {
                 formData.append("tiktok_url", tiktok_url ? tiktok_url : '');
                 formData.append("ig_url", ig_url ? ig_url : '');
                 formData.append("category", ids);
+                formData.append("userId", merchantId);
 
                 livestream.create(formData).then((res) => {
                     closeLoading()
@@ -209,6 +212,7 @@ const Edit = ({ data, openLoading, closeLoading }) => {
             formData.append("tiktok_url", tiktok_url ? tiktok_url : '');
             formData.append("ig_url", ig_url ? ig_url : '');
             formData.append("category", ids);
+            formData.append("userId", merchantId);
 
             livestream.create(formData).then((res) => {
                 closeLoading()

@@ -135,7 +135,7 @@ const Dashboard = () => {
         <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="flex flex-col xl:flex-row min-h-screen">
                 <Sidebar />
-                <div className="w-full gap-8 flex py-5 md:py-10 px-5 grid-cols-1 lg:grid-cols-5 md:gap-0 lg:gap-4 ">
+                <div className="lg:w-full lg:flex lg:py-5 md:py-10 md:px-5 md:grid-cols-1 lg:grid-cols-5 md:gap-0 lg:gap-4 ">
                     <section className="w-full lg:border-r-2 lg:border-gray-500 lg:col-span-2">
                         <Lines label={labels} data={dataLine} total_user={totalUser} />
                         <Bars label={labelMerchant} data={dataBar} total_merchant={totalMerchant} />

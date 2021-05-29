@@ -52,7 +52,11 @@ const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
                         <div key={index} className="mt-8 flex flex-wrap xl:flex-no-wrap">
                             <div className="flex">
                                 <div className="item relative">
-                                    <Link to={`/livestream/detail/${item.id}`} className="link-wrapped">
+                                    <Link // to={`/livestream/detail/${item.id}`}
+                                        to={{
+                                            pathname: `/livestream/detail/${item.id}`,
+                                            query: { iframe: item.iframe }
+                                        }} className="link-wrapped">
                                         <figure className="item-image-user">
                                             <div className="minute-user py-2 px-2">
                                                 <p className="font-medium text-sm text-white float-right">30:32</p>

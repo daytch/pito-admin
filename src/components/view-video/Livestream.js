@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
 import { ReactComponent as FbIcon } from 'assets/images/fb-icon.svg'
@@ -15,11 +15,20 @@ import Countdown from 'components/forms/countdown'
 import Moment from 'moment'
 
 const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
-    
+
+    const [dataModal, setDataModal] = useState('');
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    const openModal = (data) => {
+        setIsOpen(true)
+        setDataModal(data)
+    }
+
     return (
         <>
             {
                 dataVideos && dataVideos.map((item, index) => {
+                    let iframe = item.iframe
                     let allWord = Moment(Converter.convertToLocal(item.start_time)).fromNow();
                     allWord = allWord.replace("a ", "1 ");
                     var angka = allWord.replace(/[^\d.-]/g, '');
@@ -29,7 +38,10 @@ const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
                             <div className="flex">
                                 <div className="item relative w-auto">
                                     <Link to={{
-                                        pathname: `/livestream/detail/${item.id}`
+                                        pathname: `/livestream/detail/${item.id}`,
+                                        query: {
+                                            iframe: iframe
+                                        }
                                     }} className="link-wrapped">
                                         <figure className="item-image-live">
                                             {
@@ -46,20 +58,20 @@ const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
                                                 ) : null
                                             }
                                             {
-                                                Moment(Converter.convertToLocal(item.start_time)).isAfter(new Date()) ? (
+                                                // Moment(Converter.convertToLocal(item.start_time)).isAfter(new Date()) ? (
+                                                //     <>
+                                                //         <div className="upcoming rounded-lg border-2 border-red-600 w-11/12 md:w-full">
+                                                //             <Countdown StartTime={Converter.convertToLocal(item.start_time)} />
+                                                //         </div>
+                                                //         <img style={{ maxWidth: '348px', maxHeight: '222px' }} src={BgUpcoming} alt={item.title} className="thumbnail-live" />
+                                                //     </>
+                                                // ) : (
                                                     <>
-                                                        <div className="upcoming rounded-lg border-2 border-red-600 w-11/12 md:w-full">
-                                                            <Countdown StartTime={Converter.convertToLocal(item.start_time)} />
-                                                        </div>
-                                                        <img style={{ maxWidth: '348px', maxHeight: '222px' }} src={BgUpcoming} alt={item.title} className="thumbnail-live" />
+                                                        <PlayIcon style={{ transition: "all .15s ease" }}
+                                                            onClick={() => openModal(iframe)} className="icon" />
+                                                        <img style={{ maxWidth: '348px', maxHeight: '222px' }} src={item.img_thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={item.title} className="thumbnail-live" />
                                                     </>
-                                                ) : (
-                                                        <>
-                                                            <PlayIcon style={{ transition: "all .15s ease" }}
-                                                                onClick={() => openModal(item.iframe)} className="icon" />
-                                                            <img style={{ maxWidth: '348px', maxHeight: '222px' }} src={item.img_thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={item.title} className="thumbnail-live" />
-                                                        </>
-                                                    )
+                                                // )
                                             }
                                         </figure>
                                     </Link>
@@ -96,14 +108,14 @@ const Livestream = ({ displayToolTip, dataVideos, DisableButton, tipe }) => {
                                         {
                                             Moment(new Date()).isBefore(Converter.convertToLocal(item.end_time)) &&
                                                 Moment(new Date()).isAfter(Converter.convertToLocal(item.start_time)) ? (
-                                                    <h4 className="font-bold text-xl text-red-600">Live Now</h4>
-                                                ) : Moment(new Date()).isAfter(Converter.convertToLocal(item.end_time)) ? (
-                                                    // previous
-                                                    <>
-                                                        <h4 className="font-bold text-xl text-red-600">{angka}</h4>
-                                                        <span className="text-sm text-gray-300 font-light whitespace-no-wrap">{teks}</span>
-                                                    </>
-                                                ) : null
+                                                <h4 className="font-bold text-xl text-red-600">Live Now</h4>
+                                            ) : Moment(new Date()).isAfter(Converter.convertToLocal(item.end_time)) ? (
+                                                // previous
+                                                <>
+                                                    <h4 className="font-bold text-xl text-red-600">{angka}</h4>
+                                                    <span className="text-sm text-gray-300 font-light whitespace-no-wrap">{teks}</span>
+                                                </>
+                                            ) : null
                                         }
                                     </div>
                                     <div className="w-full flex-col flex md:hidden mx-auto mt-2 leading-tight">

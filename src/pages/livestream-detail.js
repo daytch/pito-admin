@@ -21,6 +21,7 @@ const MySwal = withReactContent(Swal)
 
 const LivestreamDetail = ({ location }) => {
 
+    localStorage.setItem('iframe',location.query ?location.query.iframe : localStorage.getItem('iframe'))
     const [query] = useState(location.query)
     const [isLoading, setLoading] = useState(true)
     const [title, setTitle] = useState("")
@@ -39,17 +40,18 @@ const LivestreamDetail = ({ location }) => {
     const [share, setShared] = useState("")
     // const [thumbnail, setThumbnail] = useState("")
     const { id } = useParams();
-    const [iframe, setIframe] = useState('');
+    const [iframe, setIframe] = useState(location.query ? location.query.iframe : localStorage.getItem('iframe'));
     const history = useHistory()
 
     useEffect(() => {
-        
+
         setLoading(true)
         livestream.getLivestreamDetail(id).then((res) => {
             let data = res.data;
-
+            
             if (Object.keys(data).length < 1) {
-                MySwal.fire('Empty data!', 'The selected video is empty or has been deleted', 'warning')
+                // MySwal.fire('Empty data!', 'The selected video is empty or has been deleted', 'warning')
+                console.log('data is null')
             } else {
                 let url_iframe = data.fb_url !== "" ? data.fb_url : data.ig !== null ? data.ig_url : data.tiktok_url;
                 url_iframe = url_iframe.indexOf('iframe') === -1 ? iframe : url_iframe;
@@ -107,10 +109,11 @@ const LivestreamDetail = ({ location }) => {
                         </div>
                     </div>
 
-                    <div className="overflow-auto mt-0 md:mt-10">
-                        <div style={{ marginBottom: '-14rem' }} className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2">
+                    {/* <div className="overflow-auto mt-0 md:mt-10"> */}
+                    <div className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2">
+                        {/* <div style={{ marginBottom: '-14rem' }} className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2"> */}
                             {ReactHtmlParserfrom(iframe ? iframe : query.iframe)}
-                        </div>
+                        {/* </div> */}
                     </div>
                     <div className="flex flex-wrap mt-4 md:mt-2 mx-auto justify-center w-full md:w-1/2">
                         <div className="flex flex-col mr-8 text-center">

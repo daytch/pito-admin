@@ -87,7 +87,7 @@ const MerchantDetail = () => {
     function EnableUser() {
         setLoading(true);
         User.enableUser({ 'user_id': id.id }).then((res) => {
-            
+
             let data = res;
             setLoading(false);
             if (data.isSuccess) {
@@ -210,7 +210,12 @@ const MerchantDetail = () => {
 
                             <Link to={{
                                 pathname: `/merchant/edit/${id.id}`,
-                                query: id
+                                query: {
+                                    id: id,
+                                    category1: category[0]?.name,
+                                    category2: category[1]?.name,
+                                    category3: category[2]?.name,
+                                }
                             }} className="rounded-3xl text-sm md:text-base font-medium mr-2 mb-2 xl:mb-0 md:mr-6 text-white bg-red-600 px-6 py-2 md:px-10 md:py-2" >
                                 Edit Account
                             </Link>

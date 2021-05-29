@@ -15,17 +15,19 @@ import Spinner from 'components/spinner'
 import { useParams, Link } from 'react-router-dom'
 
 const MySwal = withReactContent(Swal)
-const MerchantEdit = () => {
-
+const MerchantEdit = (props) => {
+    
+    localStorage.setItem('cat1',props.location.query ? props.location.query.category1 : localStorage.getItem('cat1'))
+    localStorage.setItem('cat2',props.location.query ? props.location.query.category2 : localStorage.getItem('cat2'))
+    localStorage.setItem('cat3',props.location.query ? props.location.query.category3 : localStorage.getItem('cat3'))
     const [id] = useState(useParams())
     const [data, setData] = useState([]);
     const [category, setCategory] = useState(data.category)
     const [categoryid, setCategoryid] = useState({})
     const [isLoading, setLoading] = useState(true)
-    const [cat1, setCat1] = useState('')
-    const [cat2, setCat2] = useState('')
-    const [cat3, setCat3] = useState('')
-
+    const [cat1, setCat1] = useState(props.location.query ? props.location.query.category1 : localStorage.getItem('cat1'))
+    const [cat2, setCat2] = useState(props.location.query ? props.location.query.category2 : localStorage.getItem('cat2'))
+    const [cat3, setCat3] = useState(props.location.query ? props.location.query.category3 : localStorage.getItem('cat3'))
     function getData() {
 
         users.getMerchantDetail(id.id).then((e) => {
@@ -36,6 +38,7 @@ const MerchantEdit = () => {
             setCat1(categories[0] && categories[0].name ? categories[0].name : 'Category')
             setCat2(categories[1] && categories[1].name ? categories[1].name : 'Category')
             setCat3(categories[2] && categories[2].name ? categories[2].name : 'Category')
+
             let c = e.data.categories.map((item, index) => {
                 return {
                     key: index + 1,
@@ -49,13 +52,13 @@ const MerchantEdit = () => {
             setCategoryid(result)
             setLoading(false);
 
-            livestream.getCategory().then((res) => {
-                const ListCategory = res.data.map((i) => {
-                    return { "id": i.id, "value": i.text }
-                })
-                setCategory(ListCategory);
-                setLoading(false)
-            })
+            // livestream.getCategory().then((res) => {
+            //     const ListCategory = res.data.map((i) => {
+            //         return { "id": i.id, "value": i.text }
+            //     })
+            //     setCategory(ListCategory);
+            //     setLoading(false)
+            // })
         })
     }
 
@@ -66,7 +69,7 @@ const MerchantEdit = () => {
                 return { "id": i.id, "value": i.text }
             })
             setCategory(ListCategory);
-            setLoading(false)
+            setLoading(false);
         })
         getData()
         // eslint-disable-next-line
@@ -77,7 +80,7 @@ const MerchantEdit = () => {
     }
 
     function goBack() {
-        
+
         window.location.href = "/merchant/" + id
     }
 
@@ -142,7 +145,7 @@ const MerchantEdit = () => {
                 <div className="py-10 md:py-10 flex flex-col md:flex-row w-full">
                     <div className="w-full md:w-3/5 xxl:w-1/2 px-4">
                         <div className="flex flex-col xl:flex-row xl:items-center">
-                            <div className="w-4/5 md:w-1/2 flex-row-reverse">
+                            <div className="w-4/5 md:w-1/2 flex-row-reverse justify-items-end">
                                 {
                                     data.img_avatar ?
                                         (<><img src={data.img_avatar ? data.img_avatar : ava} draggable={false} className="merchantedit-img rounded-full border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt={data.name} />
@@ -176,49 +179,49 @@ const MerchantEdit = () => {
                             <h6 className="text-red-600 font-semibold text-lg">Edit Profile</h6>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Display Name</label>
-                                <input type="text" value={data.name} onChange={(e) => {
+                                <input type="text" value={data.name || ''} onChange={(e) => {
                                     handleChange('name', e.target.value)
                                 }} placeholder="Your Display Name" className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" />
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="about" className="w-full md:w-1/4 text-sm text-gray-700">About</label>
-                                <textarea value={data.about} onChange={(e) => {
+                                <textarea value={data.about || ''} onChange={(e) => {
                                     handleChange('about', e.target.value)
                                 }} placeholder="Describe Your Self" className="w-full text-sm md:w-4/6 px-2 py-1 h-32 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-lg" />
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Category 1</label>
                                 <div className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" >
-                                    <Dropdown title={cat1} placeholder="Category 1" items={category} onClick={changeCategoryid} idx={1} />
+                                    <Dropdown title={cat1} placeholder="Category 1" items={category} onClick={changeCategoryid} idx={1} isNeedReset={true} />
                                 </div>
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Category 2</label>
                                 <div className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" >
-                                    <Dropdown title={cat2} placeholder="Category 2" items={category} onClick={changeCategoryid} idx={2} />
+                                    <Dropdown title={cat2} placeholder="Category 2" items={category} onClick={changeCategoryid} idx={2} isNeedReset={true} />
                                 </div>
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Category 3</label>
                                 <div className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" >
-                                    <Dropdown title={cat3} placeholder="Category 3" items={category} onClick={changeCategoryid} idx={3} />
+                                    <Dropdown title={cat3} placeholder="Category 3" items={category} onClick={changeCategoryid} idx={3} isNeedReset={true} />
                                 </div>
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Facebook Page Link</label>
-                                <input type="text" value={data.fb_url} onChange={(e) => {
+                                <input type="text" value={data.fb_url || ''} onChange={(e) => {
                                     handleChange('fb_url', e.target.value)
                                 }} placeholder="https://facebook.com" className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" />
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Instagram Page Link</label>
-                                <input type="text" value={data.ig_url} onChange={(e) => {
+                                <input type="text" value={data.ig_url || ''} onChange={(e) => {
                                     handleChange('ig_url', e.target.value)
                                 }} placeholder="https://instagram.com" className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" />
                             </div>
                             <div className="flex flex-wrap w-full items-start my-2">
                                 <label htmlFor="name" className="w-full md:w-1/4 text-sm text-gray-700">Tiktok Page Link</label>
-                                <input type="text" value={data.tiktok_url} onChange={(e) => {
+                                <input type="text" value={data.tiktok_url || ''} onChange={(e) => {
                                     handleChange('tiktok_url', e.target.value)
                                 }} placeholder="https://tiktok.com" className="w-full text-sm md:w-4/6 px-2 py-1 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-md" />
                             </div>

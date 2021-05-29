@@ -41,7 +41,7 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
     return (
         <div className="px-2 lg:px-6 xxl:px-0">
             <div className="mt-8 flex flex-wrap lg:flex-no-wrap">
-                <div className="flex flex-row lg:flex-no-wrap items-baseline">
+                <div className="md:flex flex-row lg:flex-no-wrap items-baseline">
                     <div className="flex w-full lg:w-1/2 max-w-none">
                         <p>{no}.</p>
                         <div className="item relative w-auto px-4 lg:px-2">

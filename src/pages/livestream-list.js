@@ -59,7 +59,33 @@ const LivestreamList = () => {
     const [totalPrevious, setTotalPreviuos] = useState(1)
     const [totalNext, setTotalNext] = useState(1)
     const [totalAll, setTotalAll] = useState(1)
+    function getDataKeyword(page, keyword) {
+        setLoading(true);
+        if (keyword) {
+            LivestreamApi.getLivestreamByKeyword(keyword, page).then((res) => {
+                // setTipe(param)
+                setVideos(res.data);
 
+                setTotalLive(Math.ceil(res.data.length / 10));
+                setTotalNext(Math.ceil(res.data.length / 10));
+                setTotalPreviuos(Math.ceil(res.data.length / 10));
+                setTotalAll(Math.ceil(res.data.length / 10));
+                // if (param == "live_videos") {
+                // setTotalLive(Math.ceil(res.total_video / 10));
+                // } else if (param == "upcoming_videos") {
+                // setTotalNext(Math.ceil(res.total_video / 10));
+                // } else if (param == "previous_videos") {
+                // setTotalPreviuos(Math.ceil(res.total_video / 10));
+                // } else {
+                // setTotalAll(Math.ceil(res.total_video / 10));
+                // }
+
+                setLoading(false)
+            });
+        } else {
+            getData(1, 'All');
+        }
+    }
     function getData(page, param, keyword) {
         setLoading(true)
         LivestreamApi.getLivestream({
@@ -90,6 +116,7 @@ const LivestreamList = () => {
     };
 
     function submitDelete(id, tp) {
+
         MySwal.fire({
             title: 'Are you sure?',
             text: "Do you really want to disable this livestream schedule? This process cannot be undone.",
@@ -108,6 +135,7 @@ const LivestreamList = () => {
                         'Your data has been disabled.',
                         'success'
                     ).then(() => {
+
                         setLoading(true)
                         getData(tp)
                     })
@@ -136,6 +164,7 @@ const LivestreamList = () => {
                 break;
         }
     }
+
     function changeDropdownFilter(e) {
 
         let vids = [...videos];
@@ -170,7 +199,7 @@ const LivestreamList = () => {
                 <Sidebar />
                 <div className="py-5 md:py-10 px-5 w-full">
                     <div className="flex justify-between items-center">
-                        <Searchbar getData={getData} param={filter} pages={filter == "live_videos" ? totalLive : filter == "upcoming_videos" ? totalNext : filter == "previous_videos" ? totalPrevious : totalAll} />
+                        <Searchbar getDataKeyword={getDataKeyword} param={filter} pages={filter == "live_videos" ? totalLive : filter == "upcoming_videos" ? totalNext : filter == "previous_videos" ? totalPrevious : totalAll} />
                         <div className="text-xs flex justify-end w-full md:w-3/12 mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Filter</h2>
                             <div className="w-full md:w-56 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">

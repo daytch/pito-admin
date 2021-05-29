@@ -1,5 +1,13 @@
-const Pagination = ({ pages, getData, tipe }) => {
-     
+const Pagination = ({ pages, getData, tipe, getDataKeyword, keyword }) => {
+
+    function callParentFunction(i, t) {
+        if (getData) {
+            getData(i, t);
+        } else {
+            getDataKeyword(i, keyword);
+        }
+    }
+
     return (
         <nav className="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
             <a href="#" className="relative inline-flex items-center px-1 py-1 md:px-2 md:py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
@@ -11,7 +19,7 @@ const Pagination = ({ pages, getData, tipe }) => {
             </a>
             {
                 pages && Array(pages).fill().map((x, i) => {
-                    return (<button key={i} onClick={() => getData(i + 1, tipe)} className="relative inline-flex items-center px-3 py-1 md:px-4 md:py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    return (<button key={i} onClick={() => callParentFunction(i + 1, tipe)} className="relative inline-flex items-center px-3 py-1 md:px-4 md:py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
                         {i + 1}
                     </button>
                     )
