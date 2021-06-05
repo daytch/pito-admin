@@ -150,7 +150,8 @@ const Dashboard = () => {
                             toggleView ? mostView && <div className="mostview-dashboard overflow-auto">
                                 {
                                     mostView.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} 
+                                            likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} start_time={item.start_time} />)
                                     })
                                 }
                                 {/* mostfavmerchant */}
@@ -167,7 +168,8 @@ const Dashboard = () => {
                             toggleFav ? mostFav && <div className="mostview-dashboard overflow-auto">
                                 {
                                     mostFav.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views}
+                                            likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} start_time={item.start_time} />)
                                     })
                                 }
                                 <div style={{
@@ -183,7 +185,8 @@ const Dashboard = () => {
                             toggleShared ? mostShared && <div className="mostview-dashboard overflow-auto">
                                 {
                                     mostShared.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} />)
+                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views}
+                                             likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} start_time={item.start_time} />)
                                     })
                                 }
                                 <div style={{

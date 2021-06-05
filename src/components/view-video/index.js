@@ -6,11 +6,14 @@ import DefaultImg from 'assets/images/default.svg'
 import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
 import { ReactComponent as EyeIcon } from 'assets/images/eye-icon.svg'
 import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
+import { ReactComponent as CalendarIcon } from 'assets/images/calendar-icon.svg'
 import ReactHtmlParserfrom from 'react-html-parser'
 import Modal from 'react-modal'
+import Moment from 'moment'
+import Converter from 'configs/moment/DatetimeConverter'
 Modal.setAppElement('*'); // suppresses modal-related test warnings.
 
-const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categories }) => {
+const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categories, start_time }) => {
 
     const [dataModal, setDataModal] = useState('')
     const [modalIsOpen, setIsOpen] = useState(false)
@@ -61,12 +64,18 @@ const MostviewsVideos = ({ id, no, thumbnail, views, likes, title, iframe, categ
                         <div className="flex flex-wrap">
                             <h4 className="break-all font-light xl:text-lg xxl:text-xl text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-4">{title}</h4>
                         </div>
-                        <div className="flex flex-wrap items-center px-4 xl:px-0">
-                            <EyeIcon />
-                            <h4 className="ml-2 text-red-700 xl:text-sm font-semibold">{views} <span className="text-gray-900 xl:text-xs font-medium">Views</span></h4>
-                            <div className="flex ml-4">
-                                <LikeIcon />
+                        <div className="flex flex-wrap items-center px-4 xl:px-0 leading-relaxed">
+                            <div className="flex mr-2 md:mr-4 items-center">
+                                <EyeIcon className="icon-at-user" />
+                                <h4 className="ml-2 text-red-700 xl:text-sm font-semibold">{views} <span className="text-gray-900 xl:text-xs font-medium">Views</span></h4>
+                            </div>
+                            <div className="flex mr-2 md:mr-4 items-center">
+                                <LikeIcon className="icon-at-user" />
                                 <h4 className="ml-2 text-red-700 xl:text-sm font-semibold">{likes} <span className="text-gray-900 xl:text-xs font-medium">Likes</span></h4>
+                            </div>
+                            <div className="flex mr-2 md:mr-4 items-center">
+                                <CalendarIcon className="icon-at-user" />
+                                <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">{Moment(Converter.convertToLocal(start_time)).fromNow()}</h4>
                             </div>
                         </div>
                         {

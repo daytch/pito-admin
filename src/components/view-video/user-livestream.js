@@ -10,6 +10,9 @@ import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
 import { ReactComponent as FbIcon } from 'assets/images/fb-icon.svg'
 import { ReactComponent as IgIcon } from 'assets/images/ig-icon.svg'
 import { ReactComponent as TtIcon } from 'assets/images/tiktok-icon.svg'
+import { ReactComponent as CalendarIcon } from 'assets/images/calendar-icon.svg'
+import Moment from 'moment'
+import Converter from 'configs/moment/DatetimeConverter'
 import Modal from 'react-modal'
 import DefaultImg from 'assets/images/default.svg'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -82,10 +85,10 @@ const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
                                         <LikeIcon className="icon-at-user" />
                                         <h4 className="ml-2 text-gray-900 text-xs md:text-sm  font-medium">{item.likes} Likes</h4>
                                     </div>
-                                    {/* <div className="flex mr-4 items-center">
+                                    <div className="flex mr-4 items-center">
                                         <CalendarIcon className="icon-at-user" />
-                                        <h4 className="ml-2 text-gray-900 text-xs md:text-sm  font-medium">283 Likes</h4>
-                                    </div> */}
+                                        <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">{Moment(Converter.convertToLocal(item.start_time)).fromNow()}</h4>
+                                    </div>
                                 </div>
                                 {
                                     item.categories && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
