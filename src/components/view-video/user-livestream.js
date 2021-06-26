@@ -1,21 +1,20 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import ReactHtmlParserfrom from 'react-html-parser'
-import { ReactComponent as ShareIconMobile } from 'assets/images/share-icon-mobile.svg'
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 //import Component SVG and image
-import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg'
-import { ReactComponent as EyeIcon } from 'assets/images/eye-icon.svg'
-import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg'
-import { ReactComponent as FbIcon } from 'assets/images/fb-icon.svg'
-import { ReactComponent as IgIcon } from 'assets/images/ig-icon.svg'
-import { ReactComponent as TtIcon } from 'assets/images/tiktok-icon.svg'
-import { ReactComponent as CalendarIcon } from 'assets/images/calendar-icon.svg'
-import Moment from 'moment'
-import Converter from 'configs/moment/DatetimeConverter'
-import Modal from 'react-modal'
-import DefaultImg from 'assets/images/default.svg'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { ReactComponent as PlayIcon } from 'assets/images/icon-play.svg';
+import { ReactComponent as EyeIcon } from 'assets/images/eye-icon.svg';
+import { ReactComponent as LikeIcon } from 'assets/images/thumbs-like-icon.svg';
+import { ReactComponent as SharedIcon } from 'assets/images/shared-icon.svg';
+import { ReactComponent as FbIcon } from 'assets/images/fb-rounded.svg';
+import { ReactComponent as IgIcon } from 'assets/images/ig-rounded.svg';
+import { ReactComponent as TiktokIcon } from 'assets/images/tiktok-rounded.svg';
+import { ReactComponent as ShareLinkIcon } from 'assets/images/share-link.svg';
+import Moment from 'moment';
+import Modal from 'react-modal';
+import DefaultImg from 'assets/images/default.svg';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import general from '../../shared/general';
+import { toast } from 'react-toastify';
 
 Modal.setAppElement('*'); // suppresses modal-related test warnings.
 
@@ -36,6 +35,16 @@ const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
         subtitle.style.color = '#f00';
     }
 
+    function goToLink(url) {
+        window.open(url, "_blank");
+    }
+
+    function triggerToast() {
+        toast.info("Copied! 🚀", {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    }
+
     const customStyles = {
         content: {
             top: '50%',
@@ -51,109 +60,78 @@ const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
         <>
             {
                 ListVideo && ListVideo.map((item, index) => {
+                    var ifrem = item.iframe;
                     return (
-                        <div key={index} className="mt-8 flex flex-wrap xl:flex-no-wrap">
-                            <div className="flex">
-                                <div className="item relative">
-                                    <Link // to={`/livestream/detail/${item.id}`}
-                                        to={{
-                                            pathname: `/livestream/detail/${item.id}`,
-                                            query: { iframe: item.iframe }
-                                        }} className="link-wrapped">
-                                        <figure className="item-image-user">
-                                            <div className="minute-user py-2 px-2">
-                                                <p className="font-medium text-sm text-white float-right">30:32</p>
-                                            </div>
-                                            <PlayIcon style={{ transition: "all .15s ease" }}
-                                                onClick={() => openModal(item.iframe)} className="icon" />
-                                            <img src={item.img_thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={item.title} />
+                        <>
+                            <div key={index} className="mb-4 mt-8 flex flex-wrap xl:flex-no-wrap">
+                                <div className="flex max-w-none">
+                                    <div className="item relative w-auto px-4 lg:px-2">
+                                        <figure className="item-image">
+                                            <Link to={{
+                                                pathname: `/livestream/detail/${item.id}`,
+                                                query: { iframe : ifrem }
+                                            }} className="link-wrapped">
+                                                <PlayIcon style={{ transition: "all .15s ease" }}
+                                                    onClick={() => openModal(item.iframe)} className="icon" />
+                                                <img src={item.img_thumbnail} onError={(e) => { e.target.onerror = null; e.target.src = DefaultImg }} alt={item.title} className="thumbnail-live" />
+                                            </Link>
                                         </figure>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item-meta xl:px-4 w-full xl:w-2/3">
-                                <h4 className="font-semibold text-lg md:text-xl text-gray-700 break-all">{item.title}</h4>
-                                <p className="overflow-ellipsis overflow-hidden h-10 break-all font-light mt-2 text-xs md:text-sm text-justify text-gray-700">
-                                    {item.description}
-                                </p>
-                                <div className="icon-controller-user flex flex-wrap items-center py-2">
-                                    <div className="flex mr-4 items-center">
-                                        <EyeIcon className="icon-at-user" />
-                                        <h4 className="ml-2 text-gray-900 text-xs md:text-sm font-medium">{item.views} Views</h4>
-                                    </div>
-                                    <div className="flex mr-4 items-center">
-                                        <LikeIcon className="icon-at-user" />
-                                        <h4 className="ml-2 text-gray-900 text-xs md:text-sm  font-medium">{item.likes} Likes</h4>
-                                    </div>
-                                    <div className="flex mr-4 items-center">
-                                        <CalendarIcon className="icon-at-user" />
-                                        <h4 className="ml-2 text-gray-900 text-sm md:text-sm  font-medium">{Moment(Converter.convertToLocal(item.start_time)).fromNow()}</h4>
                                     </div>
                                 </div>
-                                {
-                                    item.categories && <div className="flex flex-wrap text-sm font-medium text-gray-700 items-center mt-2">
+
+                                <div className="flex flex-grow flex-col ml-2">
+                                    <div className="flex flex-wrap">
+                                        <h6 className="break-all font-bold text-sm text-red-700 py-3 lg:py-0 px-4 lg:px-0">Live on {Moment(item.start_time).format('MMMM Do YYYY, h:mm a')}</h6>
+                                    </div>
+                                    <div className="flex flex-wrap h-12">
+                                        <h5 className="break-all font-semibold text-md text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-2">{item.title}</h5>
+                                    </div>
+                                    <div className="flex flex-wrap">
+                                        <p className="break-all font-light text-sm text-gray-700 py-3 lg:py-0 px-4 lg:px-0">{item.merchant?.name}</p>
+                                    </div>
+                                    <div className="flex flex-wrap items-center px-4 xl:px-0 leading-relaxed">
+                                        <div className="flex mr-2 md:mr-4 items-center">
+                                            <EyeIcon className="icon-at-user" />
+                                            <h5 className="ml-2 text-gray-900 xl:text-xs font-semibold">{general.kFormatter(item.views)} <span className="text-gray-900 xl:text-xs font-medium">Views</span></h5>
+                                        </div>
+                                        <div className="flex mr-2 md:mr-4 items-center">
+                                            <LikeIcon className="icon-at-user" />
+                                            <h5 className="ml-2 text-gray-900 xl:text-xs font-semibold">{general.kFormatter(item.likes)} <span className="text-gray-900 xl:text-xs font-medium">Likes</span></h5>
+                                        </div>
+                                        <div className="flex mr-2 md:mr-4 items-center">
+                                            <SharedIcon className="icon-at-user" />
+                                            <h5 className="ml-2 text-gray-900 xl:text-xs font-semibold">{item.share} <span className="text-gray-900 xl:text-xs font-medium">Shares</span></h5>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-row">
                                         {
-                                            item.categories.map((item, index) => {
-                                                return (<span key={index}><div className="rounded-full inline-block w-2 h-2 bg-gray-700 mx-2"></div><h6 className="text-xs inline-block">{item}</h6></span>)
-                                            })
+                                            item.redirect_fb && (
+                                                <FbIcon onClick={() => goToLink(item.redirect_fb)} className="mt-2 mr-2" />
+                                            )
+                                        }
+                                        {
+                                            item.redirect_ig && (
+                                                <IgIcon onClick={() => goToLink(item.redirect_ig)} className="mt-2 mr-2" />
+                                            )
+                                        }
+                                        {
+                                            item.redirect_tiktok && (
+                                                <TiktokIcon onClick={() => goToLink(item.redirect_tiktok)} className="mt-2 mr-2" />
+                                            )
+                                        }
+                                        {
+                                            item.share_url && (
+
+                                                <CopyToClipboard text={item.share_url}>
+                                                    <ShareLinkIcon onClick={() => triggerToast()} className="mt-2 mr-2" />
+                                                </CopyToClipboard>
+                                            )
                                         }
                                     </div>
-                                }
-                                <div className="merchant-dashboard my-2 flex flex-wrap">
-                                    {/* {
-                                        item.facebook_url && (
-                                            <button style={{ transition: "all .15s ease" }}
-                                                onClick={() => openModal(item.facebook_url)}><FbIcon className="mr-4" />
-                                            </button>)
-                                    }
-                                    {
-                                        item.instagram_url && (<button style={{ transition: "all .15s ease" }}
-                                            onClick={() => openModal(item.instagram_url)}><IgIcon className="mr-4" /></button>)
-                                    }
-                                    {
-                                        item.tiktok_url && (<button style={{ transition: "all .15s ease" }}
-                                            onClick={() => openModal(item.tiktok_url)}><TtIcon className="mr-4" /></button>)
-                                    } */}
-                                    {
-                                        item.facebook_url && (
-                                            <Link target="_blank" to={{ pathname: item.redirect_fb }} style={{ transition: "all .15s ease" }} ><FbIcon className="mr-4" /></Link>)
-                                    }
-                                    {
-                                        item.instagram_url && (<Link target="_blank" to={{ pathname: item.redirect_ig }} style={{ transition: "all .15s ease" }}><IgIcon className="mr-4" /></Link>)
-
-                                    }
-                                    {
-                                        item.tiktok_url && (<Link target="_blank" to={{ pathname: item.redirect_tiktok }} style={{ transition: "all .15s ease" }}><TtIcon className="mr-4" /></Link>)
-                                    }
-                                    <CopyToClipboard text={item.share_url}>
-                                        <button onClick={displayToolTip}><ShareIconMobile className="mr-4" /></button>
-                                    </CopyToClipboard>
                                 </div>
-
-                                <Modal
-                                    isOpen={modalIsOpen}
-                                    onAfterOpen={afterOpenModal}
-                                    onRequestClose={closeModal}
-                                    style={customStyles}
-                                    contentLabel="Livestream Modal"
-                                    shouldCloseOnOverlayClick={false}
-                                >
-                                    <div className="flex items-start justify-between border-b border-solid border-gray-300 rounded-t">
-                                        <h6 ref={_subtitle => (subtitle = _subtitle)}>{item.title}</h6>
-                                        <button
-                                            className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                            onClick={closeModal}  >
-                                            <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
-                                        </button>
-                                    </div>
-                                    {/*body*/}
-                                    <div className="relative p-6 flex-auto">
-                                        {ReactHtmlParserfrom(dataModal)}
-                                    </div>
-                                </Modal>
-
                             </div>
-                        </div>
+                            <hr className="solid" />
+                        </>
                     )
                 })
             }

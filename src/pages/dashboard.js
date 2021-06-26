@@ -136,11 +136,11 @@ const Dashboard = () => {
             <section className="flex flex-col xl:flex-row min-h-screen">
                 <Sidebar />
                 <div className="lg:w-full lg:flex lg:py-5 md:py-10 md:px-5 md:grid-cols-1 lg:grid-cols-5 md:gap-0 lg:gap-4 ">
-                    <section className="w-full lg:border-r-2 lg:border-gray-500 lg:col-span-2">
+                    <section className="w-full md:w-6/12 lg:border-r-2 lg:border-gray-500 lg:col-span-2">
                         <Lines label={labels} data={dataLine} total_user={totalUser} />
                         <Bars label={labelMerchant} data={dataBar} total_merchant={totalMerchant} />
                     </section>
-                    <section className="w-full lg:border-r-2 lg:border-gray-500 lg:col-span-2">
+                    <section className="w-full md:w-6/12 lg:border-r-2 lg:border-gray-500 lg:col-span-2">
                         <SelectForm change={setToggleDropdown} name="most-view">
                             <option value="view" className="text-black">Most Viewed Livestream</option>
                             <option value="fav" className="text-black">Most Favourite</option>
@@ -150,16 +150,12 @@ const Dashboard = () => {
                             toggleView ? mostView && <div className="mostview-dashboard overflow-auto">
                                 {
                                     mostView.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views} 
-                                            likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} start_time={item.start_time} />)
+                                        return (<MostviewsVideos key={index} id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
+                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} />)
                                     })
                                 }
                                 {/* mostfavmerchant */}
-                                <div style={{
-                                    overflowX: 'auto',
-                                    width: '35vw',
-                                    marginTop: '20px'
-                                }}>
+                                <div className="overflow-x-auto w-full mt-3 mb-2">
                                     <Pagination pages={totalMostView} getData={getData} tipe={'mostview'} />
                                 </div>
                             </div> : null
@@ -168,15 +164,11 @@ const Dashboard = () => {
                             toggleFav ? mostFav && <div className="mostview-dashboard overflow-auto">
                                 {
                                     mostFav.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views}
-                                            likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} start_time={item.start_time} />)
+                                        return (<MostviewsVideos key={index} id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
+                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} />)
                                     })
                                 }
-                                <div style={{
-                                    overflowX: 'auto',
-                                    width: '350px',
-                                    marginTop: '20px'
-                                }}>
+                                <div className="overflow-x-auto w-full mt-3 mb-2">
                                     <Pagination pages={totalMostFav} getData={getData} tipe={'mostfav'} />
                                 </div>
                             </div> : null
@@ -185,21 +177,17 @@ const Dashboard = () => {
                             toggleShared ? mostShared && <div className="mostview-dashboard overflow-auto">
                                 {
                                     mostShared.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} no={index + 1} thumbnail={item.img_thumbnail} views={item.views}
-                                             likes={item.likes} title={item.title} iframe={item.iframe} categories={item.categories} start_time={item.start_time} />)
+                                        return (<MostviewsVideos key={index} id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
+                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} />)
                                     })
                                 }
-                                <div style={{
-                                    overflowX: 'auto',
-                                    width: '350px',
-                                    marginTop: '20px'
-                                }}>
+                                <div className="overflow-x-auto w-full mt-3 mb-2">
                                     <Pagination pages={totalMostShared} getData={getData} tipe={'mostshared'} />
                                 </div>
                             </div> : null
                         }
                     </section>
-                    <section className="w-full">
+                    <section className="w-full md:w-1/5">
                         <NumberLivestream live={totalLive} previous={totalCompleted} upcoming={totalUpcoming} />
                         <div className="flex-col py-4 lg:border-b-2 lg:border-gray-500">
                             <SelectForm change={setToggleSearch} name="total-search">

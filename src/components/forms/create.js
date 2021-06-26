@@ -148,11 +148,11 @@ const Create = () => {
                     <form>
                         <div className="flex flex-wrap w-full items-start">
                             <label htmlFor="title" className="w-full md:w-1/5 text-lg text-gray-700">Title <span className="text-red-700">*</span></label>
-                            <input type="text" placeholder="Title" value={title} onChange={titleChange} className="w-full md:w-2/5 px-4 py-2 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-lg" />
+                            <input type="text" placeholder="Title" maxLength="60" value={title} onChange={titleChange} className="w-full md:w-2/5 px-4 py-2 my-2 md:my-0 md:ml-4 border border-gray-300 rounded-lg" />
                         </div>
                         <div className="flex flex-wrap w-full items-start mt-4">
                             <label htmlFor="desc" className="w-full md:w-1/5 text-lg text-gray-700">Description</label>
-                            <textarea placeholder="Description" value={desc} onChange={descChange} className="w-full md:w-2/5 h-32 px-4 py-2 md:ml-4 my-2 md:my-0 border border-gray-300 rounded-lg" />
+                            <textarea placeholder="Description" maxLength="2000" value={desc} onChange={descChange} className="w-full md:w-2/5 h-32 px-4 py-2 md:ml-4 my-2 md:my-0 border border-gray-300 rounded-lg" />
                         </div>
                         <div className="flex flex-wrap w-full items-center mt-4">
                             <div className="md:pr-4">

@@ -198,7 +198,7 @@ const LivestreamList = () => {
             <section className="min-h-screen flex flex-col xl:flex-row">
                 <Sidebar />
                 <div className="py-5 md:py-10 px-5 w-full">
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-wrap  justify-between items-center">
                         <Searchbar getDataKeyword={getDataKeyword} param={filter} pages={filter == "live_videos" ? totalLive : filter == "upcoming_videos" ? totalNext : filter == "previous_videos" ? totalPrevious : totalAll} />
                         <div className="text-xs flex justify-end w-full md:w-3/12 mt-4 md:mt-0 items-center">
                             <h2 className="font-semibold mr-2 text-sm md:text-lg text-gray-700">Filter</h2>
@@ -221,8 +221,9 @@ const LivestreamList = () => {
                                 }
                                 <Livestream dataVideos={videos} tipe={tipe} displayToolTip={displayToolTip} DisableButton={DisableButton} />
                             </div>
-                            <Pagination pages={filter == "live_videos" ? totalLive : filter == "upcoming_videos" ? totalNext : filter == "previous_videos" ? totalPrevious : totalAll} getData={getData} tipe={filter} />
-                        </>) : null
+                            <div className="overflow-x-auto w-full mt-3 mb-2">
+                                <Pagination pages={filter == "live_videos" ? totalLive : filter == "upcoming_videos" ? totalNext : filter == "previous_videos" ? totalPrevious : totalAll} getData={getData} tipe={filter} />
+                            </div></>) : null
                     }
                 </div>
             </section>

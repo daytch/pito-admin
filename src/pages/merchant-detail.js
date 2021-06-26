@@ -159,7 +159,7 @@ const MerchantDetail = () => {
                         <div className="flex flex-col xl:flex-row xl:items-center">
                             {
                                 avatar ?
-                                    <img src={avatar} draggable={false} className="rounded-full w-4/5 xl:w-1/3 border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt="" />
+                                    <Avatar src={avatar} draggable={false} className="rounded-full w-4/5 xl:w-1/3 border-4 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt="" />
                                     : <Avatar name={name} className="w-full mx-auto" round={true} /> // <img src={avatar} draggable={false} className="rounded-full w-4/5 xl:w-1/3 border-8 mb-4 xl:mb-0 xl:mr-4 border-red-600 mx-auto" alt="" />
                             }
 
@@ -236,7 +236,9 @@ const MerchantDetail = () => {
                         <div className="pt-8 flex flex-col px-4">
                             <div className="flex justify-between items-center">
                                 <p className="text-red-600 font-bold text-base">Livestreams History</p>
-                                <Dropdown title="Date" items={MostRecent2} onClick={changeDateid} idx={1} />
+                                <div className="w-full md:w-56 form-categories border border-gray-300 rounded-md px-1 py-1 mr-2 my-2" role="button">
+                                    <Dropdown title="Date" items={MostRecent2} onClick={changeDateid} idx={1} />
+                                </div>
                             </div>
                             <div className="pt-6">
                                 {

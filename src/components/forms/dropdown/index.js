@@ -38,7 +38,7 @@ const Dropdown = ({ title, items = [], onClick, idx, isNeedReset }) => {
         <div ref={innerRef} className="text-sm dd-wrapper border z-30 border-white px-2 py-0">
             <div role="button" onKeyPress={() => toggle(!open)}
                 onClick={() => toggle(!open)} className="dd-header flex justify-between">
-                <div className="text-sm dd-header_title">
+                <div className="text-sm dd-header_title mr-8">
                     <p className="dd-header_title--bold text-red-600">{titles}</p>
                 </div>
                 <div className="dd-header_action">

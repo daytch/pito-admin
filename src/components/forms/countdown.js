@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import Moment from 'moment'
-import Converter from 'configs/moment/DatetimeConverter'
+import React, { useState, useEffect } from 'react';
+import Moment from 'moment';
+import Converter from 'configs/moment/DatetimeConverter';
 
 const Countdown = ({ StartTime, isMini }) => {
 

@@ -22,6 +22,7 @@ const MySwal = withReactContent(Swal)
 const LivestreamDetail = ({ location }) => {
 
     localStorage.setItem('iframe',location.query ?location.query.iframe : localStorage.getItem('iframe'))
+    console.log(localStorage.getItem('iframe'));
     const [query] = useState(location.query)
     const [isLoading, setLoading] = useState(true)
     const [title, setTitle] = useState("")

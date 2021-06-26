@@ -9,7 +9,7 @@ const Pagination = ({ pages, getData, tipe, getDataKeyword, keyword }) => {
     }
 
     return (
-        <nav className="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
+        <nav className="overflow-y-auto relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
             <a href="#" className="relative inline-flex items-center px-1 py-1 md:px-2 md:py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                 <span className="sr-only">Previous</span>
 
