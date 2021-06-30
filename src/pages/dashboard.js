@@ -135,59 +135,59 @@ const Dashboard = () => {
         <Spinner isLoading={isLoading} className="min-h-screen">
             <section className="flex flex-col xl:flex-row min-h-screen">
                 <Sidebar />
-                <div className="lg:w-full lg:flex lg:py-5 md:py-10 md:px-5 md:grid-cols-1 lg:grid-cols-5 md:gap-0 lg:gap-4 ">
-                    <section className="w-full md:w-6/12 lg:border-r-2 lg:border-gray-500 lg:col-span-2">
+                <div className="flex flex-wrap flex-row lg:py-5 md:py-10 md:px-5 md:grid-cols-1 lg:grid-cols-5 md:gap-0 nowrep">
+                    <section className="flex-col lg:border-r-2 lg:border-gray-500 lg:col-span-2 kiri">
                         <Lines label={labels} data={dataLine} total_user={totalUser} />
                         <Bars label={labelMerchant} data={dataBar} total_merchant={totalMerchant} />
                     </section>
-                    <section className="w-full md:w-6/12 lg:border-r-2 lg:border-gray-500 lg:col-span-2">
+                    <section className="flex-col lg:col-span-2 tengah">
                         <SelectForm change={setToggleDropdown} name="most-view">
                             <option value="view" className="text-black">Most Viewed Livestream</option>
                             <option value="fav" className="text-black">Most Favourite</option>
                             <option value="share" className="text-black">Most Shared</option>
                         </SelectForm>
                         {
-                            toggleView ? mostView && <div className="mostview-dashboard overflow-auto">
+                            toggleView ? mostView && <div className="tengah mostview-dashboard overflow-y-auto">
                                 {
                                     mostView.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
-                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} />)
+                                        return (<div key={index}><MostviewsVideos id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
+                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} /></div>)
                                     })
                                 }
                                 {/* mostfavmerchant */}
-                                <div className="overflow-x-auto w-full mt-3 mb-2">
+                                <div className="tengah overflow-x-auto mt-3 mb-2">
                                     <Pagination pages={totalMostView} getData={getData} tipe={'mostview'} />
                                 </div>
                             </div> : null
                         }
                         {
-                            toggleFav ? mostFav && <div className="mostview-dashboard overflow-auto">
+                            toggleFav ? mostFav && <div className="tengah mostview-dashboard overflow-auto">
                                 {
                                     mostFav.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
-                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} />)
+                                        return (<div key={index}><MostviewsVideos id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
+                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} /></div>)
                                     })
                                 }
-                                <div className="overflow-x-auto w-full mt-3 mb-2">
+                                <div className="tengah overflow-x-auto mt-3 mb-2">
                                     <Pagination pages={totalMostFav} getData={getData} tipe={'mostfav'} />
                                 </div>
                             </div> : null
                         }
                         {
-                            toggleShared ? mostShared && <div className="mostview-dashboard overflow-auto">
+                            toggleShared ? mostShared && <div className="tengah mostview-dashboard overflow-auto">
                                 {
                                     mostShared.map((item, index) => {
-                                        return (<MostviewsVideos key={index} id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
-                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} />)
+                                        return (<div key={index}><MostviewsVideos id={item.id} thumbnail={item.img_thumbnail} views={item.views} redirect_fb={item.redirect_fb} redirect_ig={item.redirect_ig} merchant={item.merchant?.name}
+                                            likes={item.likes} title={item.title} iframe={item.iframe} start_time={item.start_time} share={item.share} redirect_tiktok={item.redirect_tiktok} share_url={item.share_url} /></div>)
                                     })
                                 }
-                                <div className="overflow-x-auto w-full mt-3 mb-2">
+                                <div className="overflow-x-auto mt-3 mb-2">
                                     <Pagination pages={totalMostShared} getData={getData} tipe={'mostshared'} />
                                 </div>
                             </div> : null
                         }
                     </section>
-                    <section className="w-full md:w-1/5">
+                    <section className="flex-col kanan lg:border-l-2 lg:border-gray-500 ">
                         <NumberLivestream live={totalLive} previous={totalCompleted} upcoming={totalUpcoming} />
                         <div className="flex-col py-4 lg:border-b-2 lg:border-gray-500">
                             <SelectForm change={setToggleSearch} name="total-search">

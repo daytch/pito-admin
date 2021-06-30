@@ -59,7 +59,7 @@ const MostviewsVideos = ({ key, id, thumbnail, views, likes, title, iframe, star
 
     return (
         <>
-            <div className="px-2 mb-2 lg:px-6 xxl:px-0">
+            <div key={key} className="px-2 mb-2 lg:px-6 xxl:px-0">
                 <div className="mt-8 flex flex-wrap lg:flex-no-wrap">
                     <div className="md:flex flex-row">
                         <div className="flex max-w-none">
@@ -80,11 +80,11 @@ const MostviewsVideos = ({ key, id, thumbnail, views, likes, title, iframe, star
                             <div className="flex flex-wrap">
                                 <h6 className="break-all font-bold text-sm text-red-700 py-3 lg:py-0 px-4 lg:px-0">Live on {Moment(start_time).format('MMMM Do YYYY, h:mm a')}</h6>
                             </div>
-                            <div className="flex flex-wrap h-12">
-                                <h5 className="break-all font-semibold text-md text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-2">{title}</h5>
+                            <div className="flex flex-wrap lg:h-12">
+                                <h5 className="break-all overflow-wrap text-xs md:text-sm font-semibold text-md text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-2">{title}</h5>
                             </div>
                             <div className="flex flex-wrap">
-                                <p className="break-all font-light text-sm text-gray-700 py-3 lg:py-0 px-4 lg:px-0">{merchant}</p>
+                                <p className="break-all overflow-wrap font-light text-xs md:text-sm text-gray-700 py-3 lg:py-0 px-4 lg:px-0">{merchant}</p>
                             </div>
                             <div className="flex flex-wrap items-center px-4 xl:px-0 leading-relaxed">
                                 <div className="flex mr-2 md:mr-4 items-center">

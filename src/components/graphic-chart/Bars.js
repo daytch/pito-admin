@@ -20,8 +20,8 @@ const Bars = ({ label, data, total_merchant }) => {
         ]
     }
     return (
-        <div className="flex-col pt-2 md:pt-6 px-4 xxl:px-8 justify-end">
-            <div className="w-full text-right">
+        <div className="flex flex-col pt-2 md:pt-6 px-4 xxl:px-8 justify-end">
+            <div className="flex flex-col text-right">
                 <h2 className="font-semibold text-3xl md:text-5xl text-gray-300">MERCHANT</h2>
                 <span className="font-semibold text-md md:text-xl text-gray-300">GRAPH</span>
             </div>
