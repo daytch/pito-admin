@@ -74,6 +74,7 @@ const MerchantDetail = () => {
                     let data = res;
                     setLoading(false);
                     if (data.isSuccess) {
+                        setIsactive(0);
                         MySwal.fire('Success!', data.message, 'success');
                     } else {
                         MySwal.fire('Error!', data.message, 'warning');
@@ -91,6 +92,7 @@ const MerchantDetail = () => {
             let data = res;
             setLoading(false);
             if (data.isSuccess) {
+                setIsactive(1);
                 MySwal.fire('Success!', data.message, 'success');
             } else {
                 MySwal.fire('Error!', data.message, 'warning');

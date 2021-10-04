@@ -78,7 +78,7 @@ const MostviewsVideos = ({ key, id, thumbnail, views, likes, title, iframe, star
                         </div>
                         <div className="flex flex-col ml-2">
                             <div className="flex flex-wrap">
-                                <h6 className="break-all font-bold text-sm text-red-700 py-3 lg:py-0 px-4 lg:px-0">Live on {Moment(start_time).format('MMMM Do YYYY, h:mm a')}</h6>
+                                <h6 className="break-all font-bold text-sm text-red-700 py-3 lg:py-0 px-4 lg:px-0">Live on {Moment(start_time).format('LLL')}</h6>
                             </div>
                             <div className="flex flex-wrap lg:h-12">
                                 <h5 className="break-all overflow-wrap text-xs md:text-sm font-semibold text-md text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-2">{title}</h5>

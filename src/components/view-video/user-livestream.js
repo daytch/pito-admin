@@ -62,14 +62,14 @@ const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
                 ListVideo && ListVideo.map((item, index) => {
                     var ifrem = item.iframe;
                     return (
-                        <>
-                            <div key={index} className="mb-4 mt-8 flex flex-wrap xl:flex-no-wrap">
+                        <div key={index} >
+                            <div className="mb-4 mt-8 flex flex-wrap xl:flex-no-wrap">
                                 <div className="flex max-w-none">
                                     <div className="item relative w-auto px-4 lg:px-2">
                                         <figure className="item-image">
                                             <Link to={{
                                                 pathname: `/livestream/detail/${item.id}`,
-                                                query: { iframe : ifrem }
+                                                query: { iframe: ifrem }
                                             }} className="link-wrapped">
                                                 <PlayIcon style={{ transition: "all .15s ease" }}
                                                     onClick={() => openModal(item.iframe)} className="icon" />
@@ -81,7 +81,7 @@ const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
 
                                 <div className="flex flex-grow flex-col ml-2">
                                     <div className="flex flex-wrap">
-                                        <h6 className="break-all font-bold text-sm text-red-700 py-3 lg:py-0 px-4 lg:px-0">Live on {Moment(item.start_time).format('MMMM Do YYYY, h:mm a')}</h6>
+                                        <h6 className="break-all font-bold text-sm text-red-700 py-3 lg:py-0 px-4 lg:px-0">Live on {Moment(item.start_time).format('LLL')}</h6>
                                     </div>
                                     <div className="flex flex-wrap h-12">
                                         <h5 className="break-all font-semibold text-md text-gray-700 py-3 lg:py-0 px-4 lg:px-0 lg:mb-2">{item.title}</h5>
@@ -131,7 +131,7 @@ const UserLivestreamVideos = ({ displayToolTip, ListVideo }) => {
                                 </div>
                             </div>
                             <hr className="solid" />
-                        </>
+                        </div>
                     )
                 })
             }
